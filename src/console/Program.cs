@@ -40,6 +40,10 @@ internal class Program
             {
                 case JsonValueKind.String:
                     valueKind = "String";
+                    if(DateTime.TryParse(element.Value.ToString(), out var _))
+                    {
+                        valueKind = "DateTime";
+                    }
                     break;
                 case JsonValueKind.Array:
                     valueKind = "Array";
