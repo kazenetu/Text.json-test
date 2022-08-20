@@ -35,22 +35,23 @@ internal class Program
         foreach (var element in rootElement.EnumerateObject())
         {
             // 型を特定する
-            var valueKind = "none...";
-            switch(element.Value.ValueKind)
+            var propertyData = GetPropertyNameAndKind(element.Value);
+
+            // 追加の処理を入れる
+            switch(propertyData.valueKind)
             {
                 case JsonValueKind.String:
-                    valueKind = "String";
                     if(DateTime.TryParse(element.Value.ToString(), out var _))
                     {
-                        valueKind = "DateTime";
+                        propertyData.kindName = "DateTime";
                     }
                     break;
                 case JsonValueKind.Array:
-                    valueKind = "Array";
-                    
                     var arrayType = string.Empty;
                     var arrayIndex = 0;
-                    while(arrayIndex < element.Value.GetArrayLength()){
+                    while(arrayIndex < element.Value.GetArrayLength())
+                    {
+                        var item = GetPropertyNameAndKind(element.Value[arrayIndex]);
                         if(string.IsNullOrEmpty(arrayType) || arrayType == element.Value[arrayIndex].ValueKind.ToString())
                         {
                             arrayType = element.Value[arrayIndex].ValueKind.ToString();
@@ -65,29 +66,49 @@ internal class Program
                     {
                         arrayType = "noting...";
                     }
-                    valueKind += $"({arrayType})";
-
-                    break;
-                case JsonValueKind.Number:
-                    valueKind = "Number";
-                    break;
-                case JsonValueKind.Object:
-                    valueKind = "Object";
-                    break;
-                case JsonValueKind.Undefined:
-                    valueKind = "Undefined";
-                    break;
-                case JsonValueKind.True:
-                    valueKind = "True";
-                    break;
-                case JsonValueKind.False:
-                    valueKind = "False";
-                    break;
-                case JsonValueKind.Null:
-                    valueKind = "Null";
+                    propertyData.kindName += $"({arrayType})";
                     break;
             }
-            Console.WriteLine($"{valueKind} {element.Name}");
+            Console.WriteLine($"{propertyData.kindName} {element.Name}");
         }
+    }
+
+    /// <summary>
+    /// JsonElementの型名とJsonValueKindを取得する
+    /// </summary>    
+    /// <param name="src">対象インスタンス</param>
+    /// <returns>型名とJsonValueKindのタプル</returns>
+    private static (string kindName, JsonValueKind valueKind) GetPropertyNameAndKind(JsonElement src)
+    {
+        // 型を特定する
+        var valueKind = "none...";
+        switch(src.ValueKind)
+        {
+            case JsonValueKind.String:
+                valueKind = "String";
+                break;
+            case JsonValueKind.Array:
+                valueKind = "Array";
+                break;
+            case JsonValueKind.Number:
+                valueKind = "Number";
+                break;
+            case JsonValueKind.Object:
+                valueKind = "Object";
+                break;
+            case JsonValueKind.Undefined:
+                valueKind = "Undefined";
+                break;
+            case JsonValueKind.True:
+                valueKind = "True";
+                break;
+            case JsonValueKind.False:
+                valueKind = "False";
+                break;
+            case JsonValueKind.Null:
+                valueKind = "Null";
+                break;
+        }
+        return (valueKind, src.ValueKind);
     }
 }
