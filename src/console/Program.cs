@@ -47,6 +47,26 @@ internal class Program
                     break;
                 case JsonValueKind.Array:
                     valueKind = "Array";
+                    
+                    var arrayType = string.Empty;
+                    var arrayIndex = 0;
+                    while(arrayIndex < element.Value.GetArrayLength()){
+                        if(string.IsNullOrEmpty(arrayType) || arrayType == element.Value[arrayIndex].ValueKind.ToString())
+                        {
+                            arrayType = element.Value[arrayIndex].ValueKind.ToString();
+                        }
+                        else
+                        {
+                            arrayType = "etc";
+                        }
+                        arrayIndex++;
+                    }
+                    if(string.IsNullOrEmpty(arrayType))
+                    {
+                        arrayType = "noting...";
+                    }
+                    valueKind += $"({arrayType})";
+
                     break;
                 case JsonValueKind.Number:
                     valueKind = "Number";
