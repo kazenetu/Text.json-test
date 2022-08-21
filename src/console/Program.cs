@@ -22,6 +22,15 @@ internal class Program
 
         Console.WriteLine("--単純なJSON文字列--");
         ProcessJsonDocument(json);
+        // 出力：
+        // --単純なJSON文字列--
+        // String propString
+        // Number propNumber
+        // DateTime propDate
+        // True propTrue
+        // False propFalse
+        // Null propNull
+        // Array(Number) propArray
     }
 
     /// <summary>
