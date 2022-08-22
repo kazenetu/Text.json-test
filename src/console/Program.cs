@@ -31,6 +31,21 @@ internal class Program
         // False propFalse
         // Null propNull
         // Array(Number) propArray
+
+        // Objectが含まれるJSON文字列作成
+        json = @"{
+            ""propObjct"" : 
+            {
+                ""propObjString"":""propObjString""
+            }
+            , ""propNumber"":10
+        }";
+
+        Console.WriteLine("--Objectが含まれるJSON文字列--");
+        ProcessJsonDocument(json);
+        // --Objectが含まれるJSON文字列--
+        // Object propObjct
+        // Number propNumber
     }
 
     /// <summary>
