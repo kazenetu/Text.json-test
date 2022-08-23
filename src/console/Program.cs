@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 
 internal class Program
@@ -45,6 +46,8 @@ internal class Program
         ProcessJsonDocument(json);
         // --Objectが含まれるJSON文字列--
         // Object propObjct
+        //   String propObjString
+        //   
         // Number propNumber
     }
 
@@ -54,6 +57,7 @@ internal class Program
     /// <param name="json">JSON文字列</param>
     private static void ProcessJsonDocument(string json)
     {
+        var innerProperties = new StringBuilder();
         var jsonDocument = JsonDocument.Parse(json);
         var rootElement = jsonDocument.RootElement;
         foreach (var element in rootElement.EnumerateObject())
@@ -92,8 +96,20 @@ internal class Program
                     }
                     propertyData.kindName += $"({arrayType})";
                     break;
+                case JsonValueKind.Object:
+                    foreach (var objElement in element.Value.EnumerateObject())
+                    {
+                        var (kindName,ValueKind) = GetPropertyNameAndKind(objElement.Value);
+                        innerProperties.AppendLine($"  {kindName} {objElement.Name}");
+                    }
+                    break;
             }
             Console.WriteLine($"{propertyData.kindName} {element.Name}");
+            if(innerProperties.Length > 0)
+            {
+                Console.WriteLine(innerProperties.ToString());
+            }
+            innerProperties.Clear();
         }
     }
 
