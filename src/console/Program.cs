@@ -49,6 +49,22 @@ internal class Program
         //   String propObjString
         //   
         // Number propNumber
+
+        // Object配列が含まれるJSON文字列作成
+        json = @"{
+            ""propObjcts"" : 
+            [
+                    {
+                        ""propObjString"":""propObjString""
+                    }
+                    ,{
+                        ""propObjString"":""propObjString""
+                    }
+            ]
+        }";
+
+        Console.WriteLine("--Object配列が含まれるJSON文字列--");
+        ProcessJsonDocument(json);
     }
 
     /// <summary>
