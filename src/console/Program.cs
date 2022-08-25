@@ -91,14 +91,29 @@ internal class Program
                     }
                     break;
                 case JsonValueKind.Array:
+                    var addedItem = new List<string>();
                     var arrayType = string.Empty;
                     var arrayIndex = 0;
                     while(arrayIndex < element.Value.GetArrayLength())
                     {
-                        var item = GetPropertyNameAndKind(element.Value[arrayIndex]);
                         if(string.IsNullOrEmpty(arrayType) || arrayType == element.Value[arrayIndex].ValueKind.ToString())
                         {
-                            arrayType = element.Value[arrayIndex].ValueKind.ToString();
+                            var (kindName,ValueKind) = GetPropertyNameAndKind(element.Value[arrayIndex]);
+                            arrayType = kindName;
+
+                            if(ValueKind == JsonValueKind.Object)
+                            {
+                                if(!addedItem.Contains(element.Value[arrayIndex].ToString()))
+                                {
+                                    foreach (var objElement in element.Value[arrayIndex].EnumerateObject())
+                                    {
+                                        var (ekindName,eValueKind) = GetPropertyNameAndKind(objElement.Value);
+                                        innerProperties.AppendLine($"  {ekindName} {objElement.Name}");
+                                    }
+
+                                    addedItem.Add(element.Value[arrayIndex].ToString());
+                                }
+                            }
                         }
                         else
                         {
