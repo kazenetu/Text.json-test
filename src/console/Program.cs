@@ -55,10 +55,10 @@ internal class Program
             ""propObjcts"" : 
             [
                     {
-                        ""propObjString"":""propObjString""
+                        ""propObjString"":""propObjString1""
                     }
                     ,{
-                        ""propObjString"":""propObjString""
+                        ""propObjString"":""propObjString2""
                     }
             ]
         }";
@@ -103,15 +103,17 @@ internal class Program
 
                             if(ValueKind == JsonValueKind.Object)
                             {
-                                if(!addedItem.Contains(element.Value[arrayIndex].ToString()))
+                                foreach (var objElement in element.Value[arrayIndex].EnumerateObject())
                                 {
-                                    foreach (var objElement in element.Value[arrayIndex].EnumerateObject())
+                                    var (ekindName,eValueKind) = GetPropertyNameAndKind(objElement.Value);
+                                    var prop = $"  {ekindName} {objElement.Name}";
+                                    if(addedItem.Contains(prop))
                                     {
-                                        var (ekindName,eValueKind) = GetPropertyNameAndKind(objElement.Value);
-                                        innerProperties.AppendLine($"  {ekindName} {objElement.Name}");
+                                        continue;
                                     }
+                                    innerProperties.AppendLine(prop);
 
-                                    addedItem.Add(element.Value[arrayIndex].ToString());
+                                    addedItem.Add(prop);
                                 }
                             }
                         }
