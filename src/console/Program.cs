@@ -65,6 +65,9 @@ internal class Program
 
         Console.WriteLine("--Object配列が含まれるJSON文字列--");
         ProcessJsonDocument(json);
+        // --Object配列が含まれるJSON文字列--
+        // Array(Object) propObjcts
+        //   String propObjString
     }
 
     /// <summary>
