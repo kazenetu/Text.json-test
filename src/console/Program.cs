@@ -23,6 +23,10 @@ internal class Program
 
         Console.WriteLine("--単純なJSON文字列--");
         ProcessJsonDocument(json);
+        Console.WriteLine("--------------------");
+        ShowJsonResult(json);
+        Console.WriteLine("--------------------");
+
         // 出力：
         // --単純なJSON文字列--
         // String propString
@@ -44,6 +48,9 @@ internal class Program
 
         Console.WriteLine("--Objectが含まれるJSON文字列--");
         ProcessJsonDocument(json);
+        Console.WriteLine("--------------------");
+        ShowJsonResult(json);
+        Console.WriteLine("--------------------");
         // --Objectが含まれるJSON文字列--
         // Object propObjct
         //   String propObjString
@@ -65,9 +72,18 @@ internal class Program
 
         Console.WriteLine("--Object配列が含まれるJSON文字列--");
         ProcessJsonDocument(json);
+        Console.WriteLine("--------------------");
+        ShowJsonResult(json);
+        Console.WriteLine("--------------------");
         // --Object配列が含まれるJSON文字列--
         // Array(Object) propObjcts
         //   String propObjString
+    }
+
+    private static void ShowJsonResult(string json)
+    {
+        var result = new JsonParser(json);
+        Console.WriteLine(result.Result);
     }
 
     /// <summary>
