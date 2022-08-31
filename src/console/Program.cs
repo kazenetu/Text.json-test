@@ -70,6 +70,27 @@ internal class Program
         // --Object配列が含まれるJSON文字列--
         // Array(Object) propObjcts
         //   String propObjString
+
+        // Objectのネストを含むJSON文字列作成
+        json = @"{
+            ""propObjct"" : 
+            {
+                ""propSubObjct"":
+                {
+                    ""propString"" : ""string1""
+                    , ""propNumber"":10
+                    , ""propDate"":""2022/01/01 10:11:12""
+                    , ""propTrue"":true
+                    , ""propFalse"":false
+                    , ""propNull"":null
+                    , ""propArray"":[1,2,3]
+                }
+            }
+        }";
+        Console.WriteLine("--Objectのネストを含むJSON文字列作成--");
+        ShowJsonResult(json);
+        Console.WriteLine("--------------------");
+
     }
 
     private static void ShowJsonResult(string json)
