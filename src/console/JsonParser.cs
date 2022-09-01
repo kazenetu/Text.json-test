@@ -83,6 +83,12 @@ class JsonParser
                     {
                         var (kindName, ValueKind) = GetPropertyNameAndKind(objElement.Value);
                         innerProperties.Add($"  {kindName} {objElement.Name}{Environment.NewLine}");
+
+                        if (ValueKind == JsonValueKind.Object)
+                        {
+                            innerProperties.Add(new JsonParser(objElement.Value.ToString(), level + 2).Result);
+                            break;
+                        }
                     }
                     break;
             }
