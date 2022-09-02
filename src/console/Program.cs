@@ -77,7 +77,7 @@ internal class Program
             {
                 ""propSubObjct"":
                 {
-                    ""propString"" : ""string1""
+                    ""propString"" : ""string""
                     , ""propNumber"":10
                     , ""propDate"":""2022/01/01 10:11:12""
                     , ""propTrue"":true
@@ -90,6 +90,16 @@ internal class Program
         Console.WriteLine("--Objectのネストを含むJSON文字列作成--");
         ShowJsonResult(json);
         Console.WriteLine("--------------------");
+        // --Objectのネストを含むJSON文字列作成--
+        // Object propObjct
+        //   Object propSubObjct
+        //     String propString
+        //     Number propNumber
+        //     DateTime propDate
+        //     True propTrue
+        //     False propFalse
+        //     Null propNull
+        //     Array(Number) propArray
 
     }
 
