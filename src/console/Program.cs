@@ -24,7 +24,7 @@ internal class Program
         Console.WriteLine("--単純なJSON文字列--");
         ShowJsonResult(json);
         Console.WriteLine("--------------------");
-        // 出力：
+        // 出力結果：
         // --単純なJSON文字列--
         // String propString
         // Number propNumber
@@ -46,6 +46,7 @@ internal class Program
         Console.WriteLine("--Objectが含まれるJSON文字列--");
         ShowJsonResult(json);
         Console.WriteLine("--------------------");
+        // 出力結果：
         // --Objectが含まれるJSON文字列--
         // Object propObjct
         //   String propObjString
@@ -67,6 +68,7 @@ internal class Program
         Console.WriteLine("--Object配列が含まれるJSON文字列--");
         ShowJsonResult(json);
         Console.WriteLine("--------------------");
+        // 出力結果：
         // --Object配列が含まれるJSON文字列--
         // Array(Object) propObjcts
         //   String propObjString
@@ -90,6 +92,7 @@ internal class Program
         Console.WriteLine("--Objectのネストを含むJSON文字列作成--");
         ShowJsonResult(json);
         Console.WriteLine("--------------------");
+        // 出力結果：
         // --Objectのネストを含むJSON文字列作成--
         // Object propObjct
         //   Object propSubObjct
