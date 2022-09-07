@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
     /// プロパティリスト
     /// </summary>
     /// <returns>プロパティリスト</returns>
-    public ReadOnlyCollection<Property> Properties { get; init; }
+    public List<Property> Properties { get; init; }
 
     /// <summary>
     /// インナークラスリスト
@@ -36,6 +36,8 @@ using System.Collections.ObjectModel;
     {
         Name = string.Empty;
         Comment = string.Empty;
+        Properties = new List<Property>();
+        InnerClass = new List<Class>();
     }
 
     /// <summary>
@@ -47,11 +49,13 @@ using System.Collections.ObjectModel;
     /// <returns>クラスエンティティ インスタンス</returns>
     public static Class Create(string name, string comment, ReadOnlyCollection<Property> properties)
     {
-      return new Class()
+      var result = new Class()
       {
         Name = name,
-        Comment = comment,
-        Properties = properties
+        Comment = comment
       };
+      result.Properties.AddRange(properties);
+
+      return result;
     }
   }
