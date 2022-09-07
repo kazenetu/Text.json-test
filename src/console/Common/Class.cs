@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 
-  /// <summary>
-  /// クラス情報
-  /// </summary>
-  public class Class
-  {
+/// <summary>
+/// クラス情報
+/// </summary>
+public class Class
+{
     /// <summary>
     /// 名称
     /// </summary>
@@ -49,13 +49,13 @@ using System.Collections.ObjectModel;
     /// <returns>クラスエンティティ インスタンス</returns>
     public static Class Create(string name, string comment, ReadOnlyCollection<Property> properties)
     {
-      var result = new Class()
-      {
-        Name = name,
-        Comment = comment
-      };
-      result.Properties.AddRange(properties);
+        var result = new Class()
+        {
+            Name = name,
+            Comment = comment
+        };
+        result.Properties.AddRange(properties);
 
-      return result;
+        return result;
     }
-  }
+}
