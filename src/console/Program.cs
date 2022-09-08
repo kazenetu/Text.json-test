@@ -34,6 +34,9 @@ internal class Program
         // Null propNull
         // Array(Number) propArray
 
+        var result = JsonSerializer.Deserialize<SimpleJson>(json);
+        Console.WriteLine(result.ToString());
+
         // Objectが含まれるJSON文字列作成
         json = @"{
             ""propObjct"" : 
