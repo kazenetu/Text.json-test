@@ -23,7 +23,6 @@ internal class Program
 
         Console.WriteLine("--単純なJSON文字列--");
         ShowJsonResult(json);
-        Console.WriteLine("--------------------");
         // 出力結果：
         // --単純なJSON文字列--
         // String propString
@@ -34,8 +33,10 @@ internal class Program
         // Null propNull
         // Array(Number) propArray
 
-        var result = JsonSerializer.Deserialize<SimpleJson>(json);
-        Console.WriteLine(result.ToString());
+        var simpleJsonResult = JsonSerializer.Deserialize<SimpleJson>(json);
+        Console.WriteLine("----Deserialize結果----");
+        Console.WriteLine(simpleJsonResult?.ToString());
+        Console.WriteLine("--------------------");
 
         // Objectが含まれるJSON文字列作成
         json = @"{
