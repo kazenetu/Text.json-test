@@ -37,6 +37,15 @@ internal class Program
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(simpleJsonResult?.ToString());
         Console.WriteLine("--------------------");
+        //出力結果：
+        // ----Deserialize結果----
+        // propString:string
+        // propNumber:10
+        // propDate:2022/01/01 10:11:12
+        // propTrue:True
+        // propFalse:False
+        // propNull:
+        // propArray:[1,2,3]
 
         // Objectが含まれるJSON文字列作成
         json = @"{
