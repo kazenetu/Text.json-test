@@ -58,12 +58,17 @@ internal class Program
 
         Console.WriteLine("--Objectが含まれるJSON文字列--");
         ShowJsonResult(json);
-        Console.WriteLine("--------------------");
         // 出力結果：
         // --Objectが含まれるJSON文字列--
         // Object propObjct
         //   String propObjString
         // Number propNumber
+
+        var innerClassJsonResult = JsonSerializer.Deserialize<InnerClassJson>(json);
+        Console.WriteLine("----Deserialize結果----");
+        Console.WriteLine(innerClassJsonResult?.ToString());
+        Console.WriteLine("--------------------");
+
 
         // Object配列が含まれるJSON文字列作成
         json = @"{
