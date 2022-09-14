@@ -68,7 +68,11 @@ internal class Program
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(innerClassJsonResult?.ToString());
         Console.WriteLine("--------------------");
-
+        // 出力結果：
+        // ----Deserialize結果----
+        // propObjct:InnerClass
+        //   propObjString:propObjString
+        // propNumber:10        
 
         // Object配列が含まれるJSON文字列作成
         json = @"{
