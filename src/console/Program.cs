@@ -89,11 +89,15 @@ internal class Program
 
         Console.WriteLine("--Object配列が含まれるJSON文字列--");
         ShowJsonResult(json);
-        Console.WriteLine("--------------------");
         // 出力結果：
         // --Object配列が含まれるJSON文字列--
         // Array(Object) propObjcts
         //   String propObjString
+
+        var classArrayJson = JsonSerializer.Deserialize<ClassArrayJson>(json);
+        Console.WriteLine("----Deserialize結果----");
+        Console.WriteLine(classArrayJson?.ToString());
+        Console.WriteLine("--------------------");
 
         // Objectのネストを含むJSON文字列作成
         json = @"{
