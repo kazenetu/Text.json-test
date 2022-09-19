@@ -122,7 +122,6 @@ internal class Program
         }";
         Console.WriteLine("--Objectのネストを含むJSON文字列作成--");
         ShowJsonResult(json);
-        Console.WriteLine("--------------------");
         // 出力結果：
         // --Objectのネストを含むJSON文字列作成--
         // Object propObjct
@@ -134,6 +133,11 @@ internal class Program
         //     False propFalse
         //     Null propNull
         //     Array(Number) propArray
+
+        var innerNestClassJson = JsonSerializer.Deserialize<InnerNestClassJson>(json);
+        Console.WriteLine("----Deserialize結果----");
+        Console.WriteLine(innerNestClassJson?.ToString());
+        Console.WriteLine("--------------------");
 
     }
 
