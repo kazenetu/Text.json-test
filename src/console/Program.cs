@@ -138,7 +138,16 @@ internal class Program
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(innerNestClassJson?.ToString());
         Console.WriteLine("--------------------");
-
+        // 出力結果：
+        // ----Deserialize結果----
+        // propObjct:  InnerClass...
+        //   propSubObjct:    propString:string
+        //     propNumber:10
+        //     propDate:2022/01/01 10:11:12
+        //     propTrue:True
+        //     propFalse:False
+        //     propNull:
+        //     propArray:[1,2,3]
     }
 
     private static void ShowJsonResult(string json)
