@@ -17,7 +17,7 @@ public class SimpleJson
 
     public object propNull { set; get; }  = string.Empty;
 
-    public List<decimal> propArray { set; get; } = new List<decimal> ();
+    public List<decimal>? propArray { set; get; }
 
     public override string ToString()
     {
@@ -29,7 +29,13 @@ public class SimpleJson
         result.AppendLine($"propTrue:{propTrue}");
         result.AppendLine($"propFalse:{propFalse}");
         result.AppendLine($"propNull:{propNull}");
-        result.AppendLine($"propArray:[{string.Join(",",propArray)}]");
+        if(propArray is null){
+            result.AppendLine("propArray:none");
+        }
+        else
+        {
+            result.AppendLine($"propArray:[{string.Join(",",propArray)}]");
+        }
 
         return result.ToString();
     }
