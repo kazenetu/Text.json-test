@@ -10,7 +10,7 @@ public class InnerNestClassJson
     /// </summary>
     public class InnerClass
     {
-        public SimpleJson? propSubObjct{set;get;}
+        public SimpleJson? propSubObjct { set; get; }
 
         public override string ToString()
         {
@@ -38,7 +38,7 @@ public class InnerNestClassJson
 
         public bool propFalse { set; get; }
 
-        public object propNull { set; get; }  = string.Empty;
+        public object propNull { set; get; } = string.Empty;
 
         public List<decimal>? propArray { set; get; }
 
@@ -52,29 +52,32 @@ public class InnerNestClassJson
             result.AppendLine($"    propTrue:{propTrue}");
             result.AppendLine($"    propFalse:{propFalse}");
             result.AppendLine($"    propNull:{propNull}");
-            if(propArray is null)
+            if (propArray is null)
             {
                 result.AppendLine($"    propArray:none...");
             }
-            else{
-                result.AppendLine($"    propArray:[{string.Join(",",propArray)}]");
+            else
+            {
+                result.AppendLine($"    propArray:[{string.Join(",", propArray)}]");
             }
 
             return result.ToString();
         }
-    }    
+    }
 
-    public InnerClass? propObjct {set;get;}
+    public InnerClass? propObjct { set; get; }
 
     public override string ToString()
     {
         var result = new StringBuilder();
 
-        if(propObjct is null){
+        if (propObjct is null)
+        {
             result.AppendLine($"propObjct is null");
             return result.ToString();
         }
-        else{
+        else
+        {
             result.Append($"propObjct:{propObjct}");
         }
 

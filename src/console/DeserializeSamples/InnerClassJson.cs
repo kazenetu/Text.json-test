@@ -9,7 +9,7 @@ public class InnerClassJson
     /// </summary>
     public class InnerClass
     {
-        public string propObjString{set;get;}=string.Empty;
+        public string propObjString { set; get; } = string.Empty;
 
         public override string ToString()
         {
@@ -22,9 +22,9 @@ public class InnerClassJson
         }
     }
 
-    public InnerClass? propObjct {set;get;}
+    public InnerClass? propObjct { set; get; }
 
-    public Decimal propNumber{set;get;}
+    public Decimal propNumber { set; get; }
 
     public override string ToString()
     {

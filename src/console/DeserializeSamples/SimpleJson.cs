@@ -15,7 +15,7 @@ public class SimpleJson
 
     public bool propFalse { set; get; }
 
-    public object propNull { set; get; }  = string.Empty;
+    public object propNull { set; get; } = string.Empty;
 
     public List<decimal>? propArray { set; get; }
 
@@ -29,12 +29,13 @@ public class SimpleJson
         result.AppendLine($"propTrue:{propTrue}");
         result.AppendLine($"propFalse:{propFalse}");
         result.AppendLine($"propNull:{propNull}");
-        if(propArray is null){
+        if (propArray is null)
+        {
             result.AppendLine("propArray:none");
         }
         else
         {
-            result.AppendLine($"propArray:[{string.Join(",",propArray)}]");
+            result.AppendLine($"propArray:[{string.Join(",", propArray)}]");
         }
 
         return result.ToString();

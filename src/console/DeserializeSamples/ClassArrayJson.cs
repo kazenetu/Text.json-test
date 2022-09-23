@@ -10,7 +10,7 @@ public class ClassArrayJson
     /// </summary>
     public class InnerClass
     {
-        public string propObjString{set;get;}=string.Empty;
+        public string propObjString { set; get; } = string.Empty;
 
         public override string ToString()
         {
@@ -23,13 +23,14 @@ public class ClassArrayJson
         }
     }
 
-    public List<InnerClass>? propObjcts {set;get;}
+    public List<InnerClass>? propObjcts { set; get; }
 
     public override string ToString()
     {
         var result = new StringBuilder();
 
-        if(propObjcts is null){
+        if (propObjcts is null)
+        {
             result.AppendLine($"propObjcts is null");
             return result.ToString();
         }
