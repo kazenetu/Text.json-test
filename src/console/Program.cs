@@ -8,10 +8,8 @@ internal class Program
     /// </summary>    
     private static void Main(string[] args)
     {
-        var json = string.Empty;
-
         // 単純なJSON文字列作成
-        json = @"{
+        var simpleJson = @"{
             ""propString"" : ""string""
             , ""propNumber"":10
             , ""propDate"":""2022/01/01 10:11:12""
@@ -22,7 +20,7 @@ internal class Program
         }";
 
         Console.WriteLine("--単純なJSON文字列--");
-        ShowJsonResult(json);
+        ShowJsonResult(simpleJson);
         // 出力結果：
         // --単純なJSON文字列--
         // String propString
@@ -33,7 +31,7 @@ internal class Program
         // Null propNull
         // Array(Number) propArray
 
-        var simpleJsonResult = JsonSerializer.Deserialize<SimpleJson>(json);
+        var simpleJsonResult = JsonSerializer.Deserialize<SimpleJson>(simpleJson);
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(simpleJsonResult?.ToString());
         Console.WriteLine("--------------------");
@@ -48,7 +46,7 @@ internal class Program
         // propArray:[1,2,3]
 
         // Objectが含まれるJSON文字列作成
-        json = @"{
+        var innerClassJson = @"{
             ""propObjct"" : 
             {
                 ""propObjString"":""propObjString""
@@ -57,14 +55,14 @@ internal class Program
         }";
 
         Console.WriteLine("--Objectが含まれるJSON文字列--");
-        ShowJsonResult(json);
+        ShowJsonResult(innerClassJson);
         // 出力結果：
         // --Objectが含まれるJSON文字列--
         // Object propObjct
         //   String propObjString
         // Number propNumber
 
-        var innerClassJsonResult = JsonSerializer.Deserialize<InnerClassJson>(json);
+        var innerClassJsonResult = JsonSerializer.Deserialize<InnerClassJson>(innerClassJson);
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(innerClassJsonResult?.ToString());
         Console.WriteLine("--------------------");
@@ -75,7 +73,7 @@ internal class Program
         // propNumber:10        
 
         // Object配列が含まれるJSON文字列作成
-        json = @"{
+        var arrayJson = @"{
             ""propObjcts"" : 
             [
                     {
@@ -88,13 +86,13 @@ internal class Program
         }";
 
         Console.WriteLine("--Object配列が含まれるJSON文字列--");
-        ShowJsonResult(json);
+        ShowJsonResult(arrayJson);
         // 出力結果：
         // --Object配列が含まれるJSON文字列--
         // Array(Object) propObjcts
         //   String propObjString
 
-        var classArrayJson = JsonSerializer.Deserialize<ClassArrayJson>(json);
+        var classArrayJson = JsonSerializer.Deserialize<ClassArrayJson>(arrayJson);
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(classArrayJson?.ToString());
         Console.WriteLine("--------------------");
@@ -105,7 +103,7 @@ internal class Program
         //   InnerClass...  propObjString:propObjString2
 
         // Objectのネストを含むJSON文字列作成
-        json = @"{
+        var innerNestJson = @"{
             ""propObjct"" : 
             {
                 ""propSubObjct"":
@@ -121,7 +119,7 @@ internal class Program
             }
         }";
         Console.WriteLine("--Objectのネストを含むJSON文字列作成--");
-        ShowJsonResult(json);
+        ShowJsonResult(innerNestJson);
         // 出力結果：
         // --Objectのネストを含むJSON文字列作成--
         // Object propObjct
@@ -134,7 +132,7 @@ internal class Program
         //     Null propNull
         //     Array(Number) propArray
 
-        var innerNestClassJson = JsonSerializer.Deserialize<InnerNestClassJson>(json);
+        var innerNestClassJson = JsonSerializer.Deserialize<InnerNestClassJson>(innerNestJson);
         Console.WriteLine("----Deserialize結果----");
         Console.WriteLine(innerNestClassJson?.ToString());
         Console.WriteLine("--------------------");
