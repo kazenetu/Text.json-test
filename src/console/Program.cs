@@ -45,6 +45,7 @@ internal class Program
         // propNull:
         // propArray:[1,2,3]
 
+        // --------------------------------------------------------------
         // Objectが含まれるJSON文字列作成
         var innerClassJson = @"{
             ""propObjct"" : 
@@ -72,6 +73,7 @@ internal class Program
         //   propObjString:propObjString
         // propNumber:10        
 
+        // --------------------------------------------------------------
         // Object配列が含まれるJSON文字列作成
         var arrayJson = @"{
             ""propObjcts"" : 
@@ -102,6 +104,7 @@ internal class Program
         //   InnerClass...  propObjString:propObjString1
         //   InnerClass...  propObjString:propObjString2
 
+        // --------------------------------------------------------------
         // Objectのネストを含むJSON文字列作成
         var innerNestJson = @"{
             ""propObjct"" : 
