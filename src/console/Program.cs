@@ -151,6 +151,10 @@ internal class Program
         //     propArray:[1,2,3]
     }
 
+    /// <summary>
+    /// 構想解析結果の表示
+    /// </summary>    
+    /// <param name="json">JSON文字列</param>
     private static void ShowJsonResult(string json)
     {
         var result = new JsonParser(json);
