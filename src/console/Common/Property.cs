@@ -16,19 +16,12 @@ public class Property
     public string TypeName { get; init; }
 
     /// <summary>
-    /// コメント
-    /// </summary>
-    /// <value>コメント文字列</value>
-    public string Comment { get; init; }
-
-    /// <summary>
     /// 非公開コンストラクタ
     /// </summary>
     private Property()
     {
         Name = string.Empty;
         TypeName = string.Empty;
-        Comment = string.Empty;
     }
 
     /// <summary>
@@ -36,15 +29,13 @@ public class Property
     /// </summary>
     /// <param name="name">クラス名称</param>
     /// <param name="typeName">型名称</param>
-    /// <param name="comment">コメント文字列</param>
     /// <returns>プロパティエンティティ インスタンス</returns>
-    public static Property Create(string name, string typeName, string comment)
+    public static Property Create(string name, string typeName)
     {
         return new Property()
         {
             Name = name,
             TypeName = typeName,
-            Comment = comment
         };
     }
 }

@@ -12,12 +12,6 @@ public class Class
     public string Name { get; init; }
 
     /// <summary>
-    /// コメント
-    /// </summary>
-    /// <value>コメント文字列</value>
-    public string Comment { get; init; }
-
-    /// <summary>
     /// プロパティリスト
     /// </summary>
     /// <returns>プロパティリスト</returns>
@@ -35,7 +29,6 @@ public class Class
     private Class()
     {
         Name = string.Empty;
-        Comment = string.Empty;
         Properties = new List<Property>();
         InnerClass = new List<Class>();
     }
@@ -44,17 +37,13 @@ public class Class
     /// インスタンス生成
     /// </summary>
     /// <param name="name">クラス名称</param>
-    /// <param name="comment">コメント文字列</param>
-    /// <param name="properties">プロパティリスト</param>
     /// <returns>クラスエンティティ インスタンス</returns>
-    public static Class Create(string name, string comment, ReadOnlyCollection<Property> properties)
+    public static Class Create(string name)
     {
         var result = new Class()
         {
             Name = name,
-            Comment = comment
         };
-        result.Properties.AddRange(properties);
 
         return result;
     }
