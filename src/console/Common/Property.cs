@@ -1,3 +1,4 @@
+using System.Text;
 /// <summary>
 /// プロパティ情報
 /// </summary>
@@ -24,6 +25,25 @@ public class Property
         TypeName = string.Empty;
     }
 
+    /// <summary>
+    /// 構成情報を返す
+    /// </summary>
+    /// <param name="level">インデックスレベル</param>
+    public string ToString(int level)
+    {
+        var result = new StringBuilder();
+
+        var levelSpace = string.Empty;
+        var levelIndex = 0;
+        while(levelIndex < level)
+        {
+            levelSpace += "  ";
+        }
+        result.AppendLine($"{levelSpace}{TypeName} {Name}");
+
+        return result.ToString();
+    }
+    
     /// <summary>
     /// インスタンス生成
     /// </summary>
