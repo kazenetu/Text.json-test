@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Text;
 
 /// <summary>
 /// クラス情報
@@ -31,6 +32,35 @@ public class Class
         Name = string.Empty;
         Properties = new List<Property>();
         InnerClass = new List<Class>();
+    }
+
+    /// <summary>
+    /// 構成情報を返す
+    /// </summary>
+    /// <param name="level">インデックスレベル</param>
+    public string ToString(int level)
+    {
+        var result = new StringBuilder();
+
+        var levelSpace = string.Empty;
+        var levelIndex = 0;
+        while(levelIndex < level)
+        {
+            levelSpace += "  ";
+        }
+
+        // クラス
+        foreach (var classInstance in InnerClass)
+        {
+            result.AppendLine($"{levelSpace}{classInstance.ToString(level + 1)}");
+        }
+
+        // プロパティ
+        foreach(var property in Properties){
+            result. Append($"{levelSpace}{property.ToString(level + 1)}");
+        }
+
+        return result.ToString();
     }
 
     /// <summary>
