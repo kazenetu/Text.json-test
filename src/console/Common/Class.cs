@@ -47,6 +47,7 @@ public class Class
         while(levelIndex < level)
         {
             levelSpace += "  ";
+            levelIndex++;
         }
 
         // クラス
