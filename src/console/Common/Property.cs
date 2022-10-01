@@ -38,6 +38,7 @@ public class Property
         while(levelIndex < level)
         {
             levelSpace += "  ";
+            levelIndex++;
         }
         result.AppendLine($"{levelSpace}{TypeName} {Name}");
 
