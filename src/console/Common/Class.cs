@@ -1,5 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Text;
+using System.Text.Json;
 
 /// <summary>
 /// クラス情報
@@ -42,6 +42,8 @@ public class Class
     {
         var result = new StringBuilder();
 
+        result.AppendLine($"public class {Name} {{");
+
         var levelSpace = string.Empty;
         var levelIndex = 0;
         while(levelIndex < level)
@@ -61,21 +63,128 @@ public class Class
             result. Append($"{levelSpace}{property.ToString(level + 1)}");
         }
 
+        result.AppendLine($"}}");
+
         return result.ToString();
     }
 
     /// <summary>
     /// インスタンス生成
     /// </summary>
-    /// <param name="name">クラス名称</param>
+    /// <param name="json">JSON文字列</param>
+    /// <param name="className">クラス名</param>
     /// <returns>クラスエンティティ インスタンス</returns>
-    public static Class Create(string name)
+    public static Class JsonParse(string json, string className = "RootClass")
     {
         var result = new Class()
         {
-            Name = name,
+            Name = className
         };
+        result.ProcessJsonDocument(json);
 
+        return result;
+    }
+
+    /// <summary>
+    /// JsonDocumentで構造を解析する
+    /// </summary>    
+    /// <param name="json">JSON文字列</param>
+    /// <returns>解析結果</returns>
+    private void ProcessJsonDocument(string json)
+    {
+        var jsonDocument = JsonDocument.Parse(json);
+        var rootElement = jsonDocument.RootElement;
+        foreach (var element in rootElement.EnumerateObject())
+        {
+            // C# 値型を取得する
+            var  propertyType = GetPropertyName(element.Value); 
+
+            // 追加の処理を入れる
+            switch (element.Value.ValueKind)
+            {
+                case JsonValueKind.Undefined:
+                    // TODO 例外エラー
+                    break;
+
+                case JsonValueKind.Object:
+                    // インナークラス名を取得
+                    propertyType = getInnerClassName();
+
+                    // インナークラス生成
+                    InnerClass.Add(Class.JsonParse(propertyType, element.Value.ToString()));
+
+                    // nullableに設定
+                    propertyType += "?";
+                    break;
+
+                case JsonValueKind.Array:
+                    var arrayIndex = 0;
+                    while (arrayIndex < element.Value.GetArrayLength())
+                    {
+                        var ValueKind = element.Value[arrayIndex].ValueKind;
+
+                        // クラス作成
+                        if (ValueKind == JsonValueKind.Object)
+                        {
+                            // インナークラス名を取得
+                            propertyType = getInnerClassName();
+
+                            // インナークラス生成
+                            InnerClass.Add(Class.JsonParse(propertyType, element.Value[arrayIndex].ToString()));
+
+                            // nullableなList設定
+                            propertyType = $"List<{propertyType}>?";
+                            break;
+                        }
+
+                        // 値型のリストを作成
+                        propertyType = $"List<{GetPropertyName(element.Value[arrayIndex])}>?";
+                        break;
+                    }
+                    break;
+            }
+
+            // プロパティ追加
+            Properties.Add(Property.Create(element.Name, propertyType));
+        }
+
+        string getInnerClassName()
+        {
+            var innerClassName ="innerClass";
+            if(InnerClass.Any()){
+                innerClassName += (InnerClass.Count + 1);
+            }
+            return innerClassName;
+        }
+    }
+
+    /// <summary>
+    /// C#の型を取得する
+    /// </summary>    
+    /// <param name="src">対象インスタンス</param>
+    /// <returns>C#の型</returns>
+    private string GetPropertyName(JsonElement src)
+    {
+        // 型を特定する
+        string result = string.Empty;
+        switch (src.ValueKind)
+        {
+            case JsonValueKind.String:
+                result = "string";
+                break;
+            case JsonValueKind.Number:
+                result = "decimal";
+                break;
+            case JsonValueKind.True:
+                result = "bool";
+                break;
+            case JsonValueKind.False:
+                result = "bool";
+                break;
+            case JsonValueKind.Null:
+                result = "object";
+                break;
+        }
         return result;
     }
 }
