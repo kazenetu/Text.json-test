@@ -42,8 +42,6 @@ public class Class
     {
         var result = new StringBuilder();
 
-        result.AppendLine($"public class {Name} {{");
-
         var levelSpace = string.Empty;
         var levelIndex = 0;
         while(levelIndex < level)
@@ -51,6 +49,8 @@ public class Class
             levelSpace += "  ";
             levelIndex++;
         }
+
+        result.AppendLine($"{levelSpace}public class {Name} {{");
 
         // クラス
         foreach (var classInstance in InnerClass)
@@ -63,7 +63,7 @@ public class Class
             result. Append($"{levelSpace}{property.ToString(level + 1)}");
         }
 
-        result.AppendLine($"}}");
+        result.AppendLine($"{levelSpace}}}");
 
         return result.ToString();
     }

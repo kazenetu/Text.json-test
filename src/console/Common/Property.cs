@@ -40,7 +40,7 @@ public class Property
             levelSpace += "  ";
             levelIndex++;
         }
-        result.AppendLine($"public {levelSpace}{TypeName} {Name}{{set;get;}}");
+        result.AppendLine($"{levelSpace}public {TypeName} {Name}{{set; get;}}");
 
         return result.ToString();
     }
