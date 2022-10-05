@@ -42,14 +42,7 @@ public class Class
     {
         var result = new StringBuilder();
 
-        var levelSpace = string.Empty;
-        var levelIndex = 0;
-        while(levelIndex < level)
-        {
-            levelSpace += "  ";
-            levelIndex++;
-        }
-
+        var levelSpace = new string('S' , level).Replace("S","  ");
         result.AppendLine($"{levelSpace}public class {Name} {{");
 
         // クラス

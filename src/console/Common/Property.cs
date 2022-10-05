@@ -33,13 +33,7 @@ public class Property
     {
         var result = new StringBuilder();
 
-        var levelSpace = string.Empty;
-        var levelIndex = 0;
-        while(levelIndex < level)
-        {
-            levelSpace += "  ";
-            levelIndex++;
-        }
+        var levelSpace = new string('S' , level).Replace("S","  ");
         result.AppendLine($"{levelSpace}public {TypeName} {Name}{{set; get;}}");
 
         return result.ToString();
