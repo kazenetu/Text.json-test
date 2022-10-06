@@ -45,6 +45,11 @@ internal class Program
         // propNull:
         // propArray:[1,2,3]
 
+        Console.WriteLine("----Class解析結果----");
+        Console.WriteLine(Class.JsonParse(simpleJson).ToString(0));
+        Console.WriteLine("--------------------");
+
+
         // --------------------------------------------------------------
         // Objectが含まれるJSON文字列作成
         var innerClassJson = @"{
