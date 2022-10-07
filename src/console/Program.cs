@@ -48,7 +48,16 @@ internal class Program
         Console.WriteLine("----Class解析結果----");
         Console.WriteLine(Class.JsonParse(simpleJson).ToString(0));
         Console.WriteLine("--------------------");
-
+        //出力結果：
+        // public class RootClass {
+        //   public string propString{set; get;}
+        //   public decimal propNumber{set; get;}
+        //   public string propDate{set; get;}
+        //   public bool propTrue{set; get;}
+        //   public bool propFalse{set; get;}
+        //   public object propNull{set; get;}
+        //   public List<decimal>? propArray{set; get;}
+        // }
 
         // --------------------------------------------------------------
         // Objectが含まれるJSON文字列作成
