@@ -104,7 +104,7 @@ public class Class
                     propertyType = getInnerClassName();
 
                     // インナークラス生成
-                    InnerClass.Add(Class.JsonParse(propertyType, element.Value.ToString()));
+                    InnerClass.Add(Class.JsonParse(element.Value.ToString(), propertyType));
 
                     // nullableに設定
                     propertyType += "?";
@@ -123,7 +123,7 @@ public class Class
                             propertyType = getInnerClassName();
 
                             // インナークラス生成
-                            InnerClass.Add(Class.JsonParse(propertyType, element.Value[arrayIndex].ToString()));
+                            InnerClass.Add(Class.JsonParse(element.Value[arrayIndex].ToString(), propertyType));
 
                             // nullableなList設定
                             propertyType = $"List<{propertyType}>?";
