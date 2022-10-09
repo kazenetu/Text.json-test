@@ -143,7 +143,7 @@ public class Class
 
         string getInnerClassName()
         {
-            var innerClassName ="innerClass";
+            var innerClassName ="InnerClass";
             if(InnerClass.Any()){
                 innerClassName += (InnerClass.Count + 1);
             }
