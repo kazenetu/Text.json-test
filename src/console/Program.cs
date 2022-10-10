@@ -87,6 +87,11 @@ internal class Program
         //   propObjString:propObjString
         // propNumber:10        
 
+        Console.WriteLine("----Class解析結果----");
+        Console.WriteLine(Class.JsonParse(innerClassJson).ToString(0));
+        Console.WriteLine("--------------------");
+
+
         // --------------------------------------------------------------
         // Object配列が含まれるJSON文字列作成
         var arrayJson = @"{
