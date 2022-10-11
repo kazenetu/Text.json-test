@@ -90,7 +90,15 @@ internal class Program
         Console.WriteLine("----Class解析結果----");
         Console.WriteLine(Class.JsonParse(innerClassJson).ToString(0));
         Console.WriteLine("--------------------");
+        // ----Class解析結果----
+        // public class RootClass {
+        //   public class InnerClass {
+        //       public string propObjString{set; get;}
+        //   }
 
+        //   public InnerClass? propObjct{set; get;}
+        //   public decimal propNumber{set; get;}
+        // }
 
         // --------------------------------------------------------------
         // Object配列が含まれるJSON文字列作成
