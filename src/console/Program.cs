@@ -131,6 +131,10 @@ internal class Program
         //   InnerClass...  propObjString:propObjString1
         //   InnerClass...  propObjString:propObjString2
 
+        Console.WriteLine("----Class解析結果----");
+        Console.WriteLine(Class.JsonParse(arrayJson).ToString(0));
+        Console.WriteLine("--------------------");
+
         // --------------------------------------------------------------
         // Objectのネストを含むJSON文字列作成
         var innerNestJson = @"{
