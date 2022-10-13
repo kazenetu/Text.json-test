@@ -134,6 +134,14 @@ internal class Program
         Console.WriteLine("----Class解析結果----");
         Console.WriteLine(Class.JsonParse(arrayJson).ToString(0));
         Console.WriteLine("--------------------");
+        // ----Class解析結果----
+        // public class RootClass {
+        //   public class InnerClass {
+        //       public string propObjString{set; get;}
+        //   }
+        //
+        //   public List<InnerClass>? propObjcts{set; get;}
+        // }
 
         // --------------------------------------------------------------
         // Objectのネストを含むJSON文字列作成
