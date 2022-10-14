@@ -188,6 +188,10 @@ internal class Program
         //     propFalse:False
         //     propNull:
         //     propArray:[1,2,3]
+
+        Console.WriteLine("----Class解析結果----");
+        Console.WriteLine(Class.JsonParse(innerNestJson).ToString(0));
+        Console.WriteLine("--------------------");
     }
 
     /// <summary>
