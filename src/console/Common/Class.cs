@@ -69,11 +69,31 @@ public class Class
     /// <returns>クラスエンティティ インスタンス</returns>
     public static Class JsonParse(string json, string className = "RootClass")
     {
+        return JsonParse(json, className, null, 0);
+    }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="json">JSON文字列</param>
+    /// <param name="className">クラス名</param>
+    /// <param name="innerClass">インナークラスリスト(nullの場合は自身のインスタンスを利用)</param>
+    /// <param name="innerClassNo">インナークラス番号</param>
+    /// <returns>クラスエンティティ インスタンス</returns>
+    private static Class JsonParse(string json, string className ,List<Class>? innerClass, int innerClassNo)
+    {
         var result = new Class()
         {
             Name = className
         };
-        result.ProcessJsonDocument(json);
+
+        // インナークラスがnullの場合は自身のインスタンスを設定
+        if(innerClass is null)
+        {
+            innerClass = result.InnerClass;
+        }
+
+        result.ProcessJsonDocument(json, innerClass, innerClassNo);
 
         return result;
     }
@@ -82,8 +102,9 @@ public class Class
     /// JsonDocumentで構造を解析する
     /// </summary>    
     /// <param name="json">JSON文字列</param>
-    /// <returns>解析結果</returns>
-    private void ProcessJsonDocument(string json)
+    /// <param name="innerClass">インナークラスリスト</param>
+    /// <param name="innerClassNo">インナークラス番号</param>
+    private void ProcessJsonDocument(string json, List<Class> innerClass, int innerClassNo)
     {
         var jsonDocument = JsonDocument.Parse(json);
         var rootElement = jsonDocument.RootElement;
@@ -100,11 +121,14 @@ public class Class
                     break;
 
                 case JsonValueKind.Object:
+                    // インナークラス番号をインクリメント
+                    innerClassNo++;
+
                     // インナークラス名を取得
-                    propertyType = getInnerClassName();
+                    propertyType = getInnerClassName(innerClassNo);
 
                     // インナークラス生成
-                    InnerClass.Add(Class.JsonParse(element.Value.ToString(), propertyType));
+                    innerClass.Add(Class.JsonParse(element.Value.ToString(), propertyType, innerClass, innerClassNo));
 
                     // nullableに設定
                     propertyType += "?";
@@ -119,11 +143,14 @@ public class Class
                         // クラス作成
                         if (ValueKind == JsonValueKind.Object)
                         {
+                            // インナークラス番号をインクリメント
+                            innerClassNo++;
+
                             // インナークラス名を取得
-                            propertyType = getInnerClassName();
+                            propertyType = getInnerClassName(innerClassNo);
 
                             // インナークラス生成
-                            InnerClass.Add(Class.JsonParse(element.Value[arrayIndex].ToString(), propertyType));
+                            innerClass.Add(Class.JsonParse(element.Value[arrayIndex].ToString(), propertyType, innerClass, innerClassNo));
 
                             // nullableなList設定
                             propertyType = $"List<{propertyType}>?";
@@ -141,11 +168,11 @@ public class Class
             Properties.Add(Property.Create(element.Name, propertyType));
         }
 
-        string getInnerClassName()
+        string getInnerClassName(int innerClassNo)
         {
             var innerClassName ="InnerClass";
-            if(InnerClass.Any()){
-                innerClassName += (InnerClass.Count + 1);
+            if(innerClassNo > 1){
+                innerClassName += $"{innerClassNo}";
             }
             return innerClassName;
         }
