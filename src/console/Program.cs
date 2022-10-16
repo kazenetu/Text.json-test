@@ -192,6 +192,24 @@ internal class Program
         Console.WriteLine("----Class解析結果----");
         Console.WriteLine(Class.JsonParse(innerNestJson).ToString(0));
         Console.WriteLine("--------------------");
+        // ----Class解析結果----
+        // public class RootClass {
+        //   public class InnerClass2 {
+        //       public string propString{set; get;}
+        //       public decimal propNumber{set; get;}
+        //       public string propDate{set; get;}
+        //       public bool propTrue{set; get;}
+        //       public bool propFalse{set; get;}
+        //       public object propNull{set; get;}
+        //       public List<decimal>? propArray{set; get;}
+        //   }
+        //
+        //   public class InnerClass {
+        //       public InnerClass2? propSubObjct{set; get;}
+        //   }
+        //
+        //   public InnerClass? propObjct{set; get;}
+        // }
     }
 
     /// <summary>
