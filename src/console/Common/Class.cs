@@ -172,7 +172,7 @@ public class Class
         {
             var innerClassName ="InnerClass";
             if(innerClassNo > 1){
-                innerClassName += $"{innerClassNo}";
+                innerClassName += $"{Convert.ToChar('A' + (innerClassNo - 2))}";
             }
             return innerClassName;
         }
