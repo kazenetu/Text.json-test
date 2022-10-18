@@ -171,7 +171,7 @@ public class Class
         string getInnerClassName(int innerClassNo)
         {
             var innerClassName ="InnerClass";
-            if(innerClassNo > 1){
+            if(innerClassNo >= 2){
                 innerClassName += $"{Convert.ToChar('A' + (innerClassNo - 2))}";
             }
             return innerClassName;
