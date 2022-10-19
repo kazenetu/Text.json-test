@@ -17,6 +17,12 @@ public class Property
     public string TypeName { get; init; }
 
     /// <summary>
+    /// 初期値
+    /// </summary>
+    /// <value>初期値</value>
+    public string DefaultValue {get; init;} = string.Empty;
+
+    /// <summary>
     /// 非公開コンストラクタ
     /// </summary>
     private Property()
@@ -34,7 +40,12 @@ public class Property
         var result = new StringBuilder();
 
         var levelSpace = new string('S' , level).Replace("S","  ");
-        result.AppendLine($"{levelSpace}public {TypeName} {Name}{{set; get;}}");
+        result.Append($"{levelSpace}public {TypeName} {Name}{{set; get;}}");
+        if(!string.IsNullOrEmpty(DefaultValue))
+        {
+            result.Append($" = {DefaultValue};");
+        }
+        result.AppendLine();
 
         return result.ToString();
     }
@@ -47,10 +58,17 @@ public class Property
     /// <returns>プロパティエンティティ インスタンス</returns>
     public static Property Create(string name, string typeName)
     {
+        var defaultValue = string.Empty; 
+        if(typeName == "string" || typeName == "object")
+        {
+            defaultValue = "string.Empty";
+        }
+
         return new Property()
         {
             Name = name,
             TypeName = typeName,
+            DefaultValue = defaultValue
         };
     }
 }
