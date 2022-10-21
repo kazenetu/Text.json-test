@@ -42,7 +42,7 @@ public class Class
     {
         var result = new StringBuilder();
 
-        var levelSpace = new string('S' , level).Replace("S","  ");
+        var levelSpace = new string('S', level).Replace("S", "  ");
         result.AppendLine($"{levelSpace}public class {Name} {{");
 
         // クラス
@@ -52,8 +52,9 @@ public class Class
         }
 
         // プロパティ
-        foreach(var property in Properties){
-            result. Append($"{levelSpace}{property.ToString(level + 1)}");
+        foreach (var property in Properties)
+        {
+            result.Append($"{levelSpace}{property.ToString(level + 1)}");
         }
 
         result.AppendLine($"{levelSpace}}}");
@@ -80,7 +81,7 @@ public class Class
     /// <param name="innerClass">インナークラスリスト(nullの場合は自身のインスタンスを利用)</param>
     /// <param name="innerClassNo">インナークラス番号</param>
     /// <returns>クラスエンティティ インスタンス</returns>
-    private static Class JsonParse(string json, string className ,List<Class>? innerClass, int innerClassNo)
+    private static Class JsonParse(string json, string className, List<Class>? innerClass, int innerClassNo)
     {
         var result = new Class()
         {
@@ -88,7 +89,7 @@ public class Class
         };
 
         // インナークラスがnullの場合は自身のインスタンスを設定
-        if(innerClass is null)
+        if (innerClass is null)
         {
             innerClass = result.InnerClass;
         }
@@ -111,7 +112,7 @@ public class Class
         foreach (var element in rootElement.EnumerateObject())
         {
             // C# 値型を取得する
-            var  propertyType = GetPropertyName(element.Value); 
+            var propertyType = GetPropertyName(element.Value);
 
             // 追加の処理を入れる
             switch (element.Value.ValueKind)
@@ -170,8 +171,9 @@ public class Class
 
         string getInnerClassName(int innerClassNo)
         {
-            var innerClassName ="InnerClass";
-            if(innerClassNo >= 2){
+            var innerClassName = "InnerClass";
+            if (innerClassNo >= 2)
+            {
                 innerClassName += $"{Convert.ToChar('A' + (innerClassNo - 2))}";
             }
             return innerClassName;
