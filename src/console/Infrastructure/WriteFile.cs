@@ -1,3 +1,5 @@
+using System.Text;
+
 /// <summary>
 /// ファイル出力クラス
 /// </summary>
@@ -12,7 +14,18 @@ public class WriteFile : IOutput
     /// <returns>出力結果</returns>
     public bool OutputFile(String outputData, String filePath, String nameSpace = "")
     {
-        //TODO ファイル出力
+        // フォルダの存在確認とフォルダ作成
+        if (!Directory.Exists(filePath))
+        {
+            Directory.CreateDirectory(filePath);
+        }
+
+        // ファイル出力
+        using (FileStream fs = File.OpenWrite(filePath))
+        {
+            Byte[] info = new UTF8Encoding(true).GetBytes(outputData);
+            fs.Write(info, 0, info.Length);
+        }
 
         return false;
     }
