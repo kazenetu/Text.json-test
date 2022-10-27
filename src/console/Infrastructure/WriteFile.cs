@@ -14,6 +14,10 @@ public class WriteFile : IOutput
     /// <returns>出力結果</returns>
     public bool Output(Class classInstance, String? rootPath= null, String? nameSpace = null)
     {
+        //必須パラメータチェック
+        if(classInstance is null) return false;
+        if(rootPath is null) return false;
+
         // フォルダの存在確認とフォルダ作成
         if (!Directory.Exists(rootPath))
         {
@@ -28,6 +32,6 @@ public class WriteFile : IOutput
             fs.Write(info, 0, info.Length);
         }
 
-        return false;
+        return true;
     }
 }
