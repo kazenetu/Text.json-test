@@ -25,10 +25,26 @@ public class WriteFile : IOutput
         }
         var filePath = Path.Combine(rootPath,$"{classInstance.Name}.cs");
 
+        var fileData = new StringBuilder();
+        var nameSpaceNone = string.IsNullOrEmpty(nameSpace);
+        var initialSpaceIndex = 0;
+
+        if(!nameSpaceNone)
+        {
+            initialSpaceIndex = 1;
+            fileData.AppendLine($"namespace {nameSpace}{{");
+        }
+        fileData.Append(classInstance.ToString(initialSpaceIndex));
+        if(!nameSpaceNone)
+        {
+            fileData.AppendLine("}");
+        }
+
+
         // ファイル出力
         using (FileStream fs = File.OpenWrite(filePath))
         {
-            Byte[] info = new UTF8Encoding(true).GetBytes(classInstance.ToString(0));
+            Byte[] info = new UTF8Encoding(true).GetBytes(fileData.ToString());
             fs.Write(info, 0, info.Length);
         }
 
