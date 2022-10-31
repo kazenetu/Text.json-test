@@ -211,6 +211,16 @@ internal class Program
         //   public InnerClass? propObjct{set; get;}
         // }
         
+        // -----------------------------------------------------
+        // Json解析Class解析結果 ファイル出力
+        // -----------------------------------------------------
+        var rootPath = "CSOutputs";
+        var nameSpace = "Domain.Entity";
+        IOutputRepository repository = new WriteFile();
+        repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), rootPath);
+        repository.Output(Class.JsonParse(innerClassJson, "InnerClassJsonClass"), rootPath);
+        repository.Output(Class.JsonParse(arrayJson, "ArrayJsonClass") ,rootPath);
+        repository.Output(Class.JsonParse(innerNestJson, "InnerNestJsonClass") ,rootPath);
     }
 
     /// <summary>

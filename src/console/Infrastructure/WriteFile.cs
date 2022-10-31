@@ -3,7 +3,7 @@ using System.Text;
 /// <summary>
 /// ファイル出力クラス
 /// </summary>
-public class WriteFile : IOutput
+public class WriteFile : IOutputRepository
 {
     /// <summary>
     /// ファイルを出力する
