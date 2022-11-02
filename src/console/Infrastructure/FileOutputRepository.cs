@@ -1,9 +1,9 @@
 using System.Text;
 
 /// <summary>
-/// ファイル出力クラス
+/// ファイル出力リポジトリクラス
 /// </summary>
-public class WriteFileRepository : IOutputRepository
+public class FileOutputRepository : IOutputRepository
 {
     /// <summary>
     /// ファイルを出力する
