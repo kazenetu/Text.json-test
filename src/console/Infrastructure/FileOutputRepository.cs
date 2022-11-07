@@ -32,7 +32,8 @@ public class FileOutputRepository : IOutputRepository
         if(!nameSpaceNone)
         {
             initialSpaceIndex = 1;
-            fileData.AppendLine($"namespace {nameSpace}{{");
+            fileData.AppendLine($"namespace {nameSpace}");
+            fileData.AppendLine("{");
         }
         fileData.Append(ClassEntityToStringUtil.GetClassString(classInstance, initialSpaceIndex));
         if(!nameSpaceNone)

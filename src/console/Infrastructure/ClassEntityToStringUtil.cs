@@ -17,7 +17,8 @@ public static class ClassEntityToStringUtil
 
         // インデント設定
         var levelSpace = new string('S', indentLevel).Replace("S", "  ");
-        result.AppendLine($"{levelSpace}public class {classEntity.Name} {{");
+        result.AppendLine($"{levelSpace}public class {classEntity.Name}");
+        result.AppendLine($"{levelSpace}{{");
 
         // クラス文字列作成
         foreach (var classInstance in classEntity.InnerClass)
