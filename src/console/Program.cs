@@ -217,7 +217,7 @@ internal class Program
         var rootPath = "CSOutputs";
         var nameSpace = "Domain.Entity";
         IOutputRepository repository = new FileOutputRepository();
-        repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), rootPath);
+        repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), rootPath, nameSpace);
         repository.Output(Class.JsonParse(innerClassJson, "InnerClassJsonClass"), rootPath);
         repository.Output(Class.JsonParse(arrayJson, "ArrayJsonClass") ,rootPath);
         repository.Output(Class.JsonParse(innerNestJson, "InnerNestJsonClass") ,rootPath);
