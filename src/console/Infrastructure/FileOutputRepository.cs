@@ -1,38 +1,38 @@
 using System.Text;
+using System.Linq;
 
 /// <summary>
 /// ファイル出力リポジトリクラス
 /// </summary>
-public class FileOutputRepository : IOutputRepository
+public class FileOutputRepository : IFileOutputRepository
 {
     /// <summary>
     /// ファイルを出力する
     /// </summary>
     /// <param name="classInstance">クラスエンティティ</param>
-    /// <param name="filePath">出力ファイルパス</param>
-    /// <param name="nameSpace">名前空間</param>
+    /// <param name="command">コマンドパラメータ</param>
     /// <returns>出力結果</returns>
-    public bool Output(Class classInstance, String? rootPath= null, String? nameSpace = null)
+    public bool Output(Class classInstance, FileOutputCommand command)
     {
         //必須パラメータチェック
         if(classInstance is null) return false;
-        if(rootPath is null) return false;
+        if(command.RootPath is null) return false;
 
         // フォルダの存在確認とフォルダ作成
-        if (!Directory.Exists(rootPath))
+        if (!Directory.Exists(command.RootPath))
         {
-            Directory.CreateDirectory(rootPath);
+            Directory.CreateDirectory(command.RootPath);
         }
-        var filePath = Path.Combine(rootPath,$"{classInstance.Name}.cs");
+        var filePath = Path.Combine(command.RootPath, $"{classInstance.Name}.cs");
 
         var fileData = new StringBuilder();
-        var nameSpaceNone = string.IsNullOrEmpty(nameSpace);
+        var nameSpaceNone = string.IsNullOrEmpty(command.NameSpace);
         var initialSpaceIndex = 0;
 
         if(!nameSpaceNone)
         {
             initialSpaceIndex = 1;
-            fileData.AppendLine($"namespace {nameSpace}");
+            fileData.AppendLine($"namespace {command.NameSpace}");
             fileData.AppendLine("{");
         }
         fileData.Append(ClassEntityToStringUtil.GetClassString(classInstance, initialSpaceIndex));
@@ -40,7 +40,6 @@ public class FileOutputRepository : IOutputRepository
         {
             fileData.AppendLine("}");
         }
-
 
         // ファイル出力
         using (FileStream fs = File.OpenWrite(filePath))
