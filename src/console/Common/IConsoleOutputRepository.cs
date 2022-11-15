@@ -8,5 +8,5 @@ public interface IConsoleOutputRepository
     /// </summary>
     /// <param name="classInstance">クラスエンティティ</param>
     /// <returns>出力結果</returns>
-    bool Output(Class classInstance);
+    void Output(Class classInstance);
 }
