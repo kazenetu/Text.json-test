@@ -8,6 +8,9 @@ internal class Program
     /// </summary>    
     private static void Main(string[] args)
     {
+        // コンソール出力リポジトリを生成
+        IConsoleOutputRepository consoleRepository = new ConsoleOutputRepository();
+
         // 単純なJSON文字列作成
         var simpleJson = @"{
             ""propString"" : ""string""
@@ -46,7 +49,7 @@ internal class Program
         // propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        Console.WriteLine(Class.JsonParse(simpleJson).ToString(0));
+        consoleRepository.Output(Class.JsonParse(simpleJson));
         Console.WriteLine("--------------------");
         //出力結果：
         // public class RootClass {
@@ -88,7 +91,7 @@ internal class Program
         // propNumber:10        
 
         Console.WriteLine("----Class解析結果----");
-        Console.WriteLine(Class.JsonParse(innerClassJson).ToString(0));
+        consoleRepository.Output(Class.JsonParse(innerClassJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass {
@@ -132,7 +135,7 @@ internal class Program
         //   InnerClass...  propObjString:propObjString2
 
         Console.WriteLine("----Class解析結果----");
-        Console.WriteLine(Class.JsonParse(arrayJson).ToString(0));
+        consoleRepository.Output(Class.JsonParse(arrayJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass {
@@ -190,7 +193,7 @@ internal class Program
         //     propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        Console.WriteLine(Class.JsonParse(innerNestJson).ToString(0));
+        consoleRepository.Output(Class.JsonParse(innerNestJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass {
