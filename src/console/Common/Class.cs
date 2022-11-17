@@ -35,34 +35,6 @@ public class Class
     }
 
     /// <summary>
-    /// 構成情報を返す
-    /// </summary>
-    /// <param name="level">インデックスレベル</param>
-    public string ToString(int level)
-    {
-        var result = new StringBuilder();
-
-        var levelSpace = new string('S', level).Replace("S", "  ");
-        result.AppendLine($"{levelSpace}public class {Name} {{");
-
-        // クラス
-        foreach (var classInstance in InnerClass)
-        {
-            result.AppendLine($"{levelSpace}{classInstance.ToString(level + 1)}");
-        }
-
-        // プロパティ
-        foreach (var property in Properties)
-        {
-            result.Append($"{levelSpace}{property.ToString(level + 1)}");
-        }
-
-        result.AppendLine($"{levelSpace}}}");
-
-        return result.ToString();
-    }
-
-    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="json">JSON文字列</param>

@@ -32,25 +32,6 @@ public class Property
     }
 
     /// <summary>
-    /// 構成情報を返す
-    /// </summary>
-    /// <param name="level">インデックスレベル</param>
-    public string ToString(int level)
-    {
-        var result = new StringBuilder();
-
-        var levelSpace = new string('S', level).Replace("S", "  ");
-        result.Append($"{levelSpace}public {TypeName} {Name}{{set; get;}}");
-        if (!string.IsNullOrEmpty(DefaultValue))
-        {
-            result.Append($" = {DefaultValue};");
-        }
-        result.AppendLine();
-
-        return result.ToString();
-    }
-
-    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="name">クラス名称</param>
