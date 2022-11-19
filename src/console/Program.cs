@@ -52,7 +52,8 @@ internal class Program
         consoleRepository.Output(Class.JsonParse(simpleJson));
         Console.WriteLine("--------------------");
         //出力結果：
-        // public class RootClass {
+        // public class RootClass
+        // {
         //   public string propString{set; get;} = string.Empty;
         //   public decimal propNumber{set; get;}
         //   public string propDate{set; get;} = string.Empty;
@@ -94,7 +95,8 @@ internal class Program
         consoleRepository.Output(Class.JsonParse(innerClassJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass {
+        // public class RootClass
+        // {
         //   public class InnerClass {
         //       public string propObjString{set; get;} = string.Empty;
         //   }
@@ -138,7 +140,8 @@ internal class Program
         consoleRepository.Output(Class.JsonParse(arrayJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass {
+        // public class RootClass
+        // {
         //   public class InnerClass {
         //       public string propObjString{set; get;}
         //   }
@@ -196,7 +199,8 @@ internal class Program
         consoleRepository.Output(Class.JsonParse(innerNestJson));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass {
+        // public class RootClass
+        // {
         //   public class InnerClassA {
         //       public string propString{set; get;} = string.Empty;
         //       public decimal propNumber{set; get;}
