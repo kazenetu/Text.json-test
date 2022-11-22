@@ -8,12 +8,12 @@ public interface IJsonRepository
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
     /// <returns>Classエンティティ</returns>
-    Class ReadFromFile(string filePath);
+    Class CreateClassEntityFromFile(string filePath);
 
     /// <summary>
     /// JSON文字列を読み込んでClass情報を返す
     /// </summary>
     /// <param name="filePath">JSO文字列</param>
     /// <returns>Classエンティティ</returns>
-    Class ReadFromString(string json);
+    Class CreateClassEntityFromString(string json);
 }
