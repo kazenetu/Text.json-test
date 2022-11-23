@@ -25,9 +25,9 @@ public class Class
     public List<Class> InnerClass { get; init; }
 
     /// <summary>
-    /// 非公開コンストラクタ
+    /// コンストラクタ
     /// </summary>
-    private Class()
+    public Class()
     {
         Name = string.Empty;
         Properties = new List<Property>();
