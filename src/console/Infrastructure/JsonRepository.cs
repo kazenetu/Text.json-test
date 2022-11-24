@@ -1,3 +1,5 @@
+using System.IO;
+
 /// <summary>
 /// JSON読み込みリポジトリ
 /// </summary>
@@ -12,7 +14,8 @@ public class JsonRepository : IJsonRepository
     {
         var result = string.Empty;
 
-        // TODO ファイル読み込み
+        // ファイル読み込み
+        result = File.ReadAllText(filePath);
 
         // 文字列として読み取り
         return CreateClassEntityFromString(result);
