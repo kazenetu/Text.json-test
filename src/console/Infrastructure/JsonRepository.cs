@@ -24,7 +24,7 @@ public class JsonRepository : IJsonRepository
     /// <summary>
     /// JSON文字列を読み込んでClass情報を返す
     /// </summary>
-    /// <param name="filePath">JSO文字列</param>
+    /// <param name="json">JSO文字列</param>
     /// <returns>Classエンティティ</returns>
     public Class CreateClassEntityFromString(string json)
     {
