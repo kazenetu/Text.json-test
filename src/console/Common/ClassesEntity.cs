@@ -21,7 +21,7 @@ public class ClassesEntity
     /// </summary>
     /// <param name="innerClasses">インナークラスリスト</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
-    public ClassesEntity Create(ReadOnlyList<Class> innerClasses)
+    public static ClassesEntity Create(ReadOnlyList<Class> innerClasses)
     {
         // 入力チェック
         if(innerClasses is null) new ArgumentNullException($"{innerClasses} is null");
