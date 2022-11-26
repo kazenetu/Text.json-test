@@ -7,7 +7,7 @@ public class ClassesEntity
     /// インナークラスリスト
     /// </summary>
     /// <returns>インナークラスリスト</returns>
-    public ReadOnlyList<Class> InnerClasses { get; private set; } = null;
+    public IReadOnlyList<Class>? InnerClasses { get; private set; } = null;
 
     /// <summary>
     /// 非公開コンストラクタ
@@ -21,13 +21,15 @@ public class ClassesEntity
     /// </summary>
     /// <param name="innerClasses">インナークラスリスト</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
-    public static ClassesEntity Create(ReadOnlyList<Class> innerClasses)
+    public static ClassesEntity Create(IReadOnlyList<Class> innerClasses)
     {
         // 入力チェック
-        if(innerClasses is null) new ArgumentNullException($"{innerClasses} is null");
-        if(!innerClasses.Any()) new ArgumentException($"{innerClasses} is zero");
+        if(!innerClasses.Any()) new ArgumentException($"{nameof(innerClasses)} count is zero");
 
-        // パラメータ設定
-        InnerClasses = innerClasses;
+        // インスタンスを返す
+        return new ClassesEntity()
+        {
+            InnerClasses = innerClasses
+        };
     }
 }
