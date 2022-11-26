@@ -37,6 +37,26 @@ public class Class
     /// <summary>
     /// インスタンス生成
     /// </summary>
+    /// <param name="properties">プロパティリスト</param>
+    /// <param name="className">クラス名</param>
+    /// <returns>クラスエンティティ インスタンス</returns>
+    public static Class Create(List<Property> properties, string className)
+    {
+        // 入力チェック
+        if(!properties.Any()) new ArgumentException($"{nameof(properties)} count is zero");
+        if(string.IsNullOrEmpty(className)) new ArgumentException($"{nameof(className)} is null");
+
+        // インスタンスを返す
+        return new Class()
+        {
+            Name = className,
+            Properties = properties
+        };
+    }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
     /// <param name="json">JSON文字列</param>
     /// <param name="className">クラス名</param>
     /// <returns>クラスエンティティ インスタンス</returns>
