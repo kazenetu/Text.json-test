@@ -31,7 +31,10 @@ public class JsonRepository : IJsonRepository
     {
         List<Class> classes = new ();
         // HACK クラスエンティティを作成
-        return JsonParse(json,"RootClass", classes, 0);
+        var rootClass = JsonParse(json,"RootClass", classes, 0);
+        rootClass.InnerClass.AddRange(classes);
+
+        return rootClass;
     }
 
     /// <summary>
