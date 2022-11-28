@@ -14,6 +14,7 @@ public interface IJsonRepository
     /// JSON文字列を読み込んでClass情報を返す
     /// </summary>
     /// <param name="filePath">JSO文字列</param>
+    /// <param name="rootClassName">ルートクラス名</param>
     /// <returns>Classエンティティ</returns>
-    Class CreateClassEntityFromString(string json);
+    Class CreateClassEntityFromString(string json, string rootClassName);
 }

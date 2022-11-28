@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using System.Text.Json;
 
 /// <summary>
@@ -19,7 +20,9 @@ public class JsonRepository : IJsonRepository
         result = File.ReadAllText(filePath);
 
         // 文字列として読み取り
-        return CreateClassEntityFromString(result);
+        var rootClassName = Path.GetFileNameWithoutExtension(filePath);
+        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
+        return CreateClassEntityFromString(result, rootClassName);
     }
 
     /// <summary>
@@ -27,11 +30,13 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="json">JSO文字列</param>
     /// <returns>Classエンティティ</returns>
-    public Class CreateClassEntityFromString(string json)
+    /// <param name="rootClassName">ルートクラス名</param>
+    public Class CreateClassEntityFromString(string json, string rootClassName)
     {
         List<Class> classes = new ();
         // HACK クラスエンティティを作成
-        var rootClass = JsonParse(json,"RootClass", classes, 0);
+        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
+        var rootClass = JsonParse(json, rootClassName, classes, 0);
         rootClass.InnerClass.AddRange(classes);
 
         return rootClass;
