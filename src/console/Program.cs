@@ -221,14 +221,15 @@ internal class Program
         // -----------------------------------------------------
         // Json解析Class解析結果 ファイル出力
         // -----------------------------------------------------
-        // var rootPath = "CSOutputs";
-        // var nameSpace = "Domain.Entity";
-        // IFileOutputRepository repository = new FileOutputRepository();
-        // var command = new FileOutputCommand(rootPath, nameSpace);
-        // repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), command);
-        // repository.Output(Class.JsonParse(innerClassJson, "InnerClassJsonClass"), command);
-        // repository.Output(Class.JsonParse(arrayJson, "ArrayJsonClass") ,command);
-        // repository.Output(Class.JsonParse(innerNestJson, "InnerNestJsonClass") ,command);
+        var rootPath = "CSOutputs";
+        var nameSpace = "Domain.Entity";
+        IFileOutputRepository repository = new FileOutputRepository();
+        IJsonRepository jsonRepository = new JsonRepository();
+        var command = new FileOutputCommand(rootPath, nameSpace);
+        repository.Output(jsonRepository.CreateClassEntityFromString(simpleJson, "SimpleJsonClass"), command);
+        repository.Output(jsonRepository.CreateClassEntityFromString(innerClassJson, "InnerClassJsonClass"), command);
+        repository.Output(jsonRepository.CreateClassEntityFromString(arrayJson, "ArrayJsonClass") ,command);
+        repository.Output(jsonRepository.CreateClassEntityFromString(innerNestJson, "InnerNestJsonClass") ,command);
     }
 
     /// <summary>
