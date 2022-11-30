@@ -49,7 +49,7 @@ internal class Program
         // propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(Class.JsonParse(simpleJson));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(simpleJson,"roootClass"));
         Console.WriteLine("--------------------");
         //出力結果：
         // public class RootClass
@@ -92,7 +92,7 @@ internal class Program
         // propNumber:10        
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(Class.JsonParse(innerClassJson));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerClassJson,"roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -137,7 +137,7 @@ internal class Program
         //   InnerClass...  propObjString:propObjString2
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(Class.JsonParse(arrayJson));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(arrayJson,"roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -196,7 +196,7 @@ internal class Program
         //     propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(Class.JsonParse(innerNestJson));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerNestJson,"roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -221,14 +221,14 @@ internal class Program
         // -----------------------------------------------------
         // Json解析Class解析結果 ファイル出力
         // -----------------------------------------------------
-        var rootPath = "CSOutputs";
-        var nameSpace = "Domain.Entity";
-        IFileOutputRepository repository = new FileOutputRepository();
-        var command = new FileOutputCommand(rootPath, nameSpace);
-        repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), command);
-        repository.Output(Class.JsonParse(innerClassJson, "InnerClassJsonClass"), command);
-        repository.Output(Class.JsonParse(arrayJson, "ArrayJsonClass") ,command);
-        repository.Output(Class.JsonParse(innerNestJson, "InnerNestJsonClass") ,command);
+        // var rootPath = "CSOutputs";
+        // var nameSpace = "Domain.Entity";
+        // IFileOutputRepository repository = new FileOutputRepository();
+        // var command = new FileOutputCommand(rootPath, nameSpace);
+        // repository.Output(Class.JsonParse(simpleJson, "SimpleJsonClass"), command);
+        // repository.Output(Class.JsonParse(innerClassJson, "InnerClassJsonClass"), command);
+        // repository.Output(Class.JsonParse(arrayJson, "ArrayJsonClass") ,command);
+        // repository.Output(Class.JsonParse(innerNestJson, "InnerNestJsonClass") ,command);
     }
 
     /// <summary>
