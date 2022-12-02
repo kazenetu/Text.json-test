@@ -4,12 +4,9 @@ using System.Text;
 /// </summary>
 public class InnerClassJson
 {
-    /// <summary>
-    /// Object用クラス
-    /// </summary>
     public class InnerClass
     {
-        public string propObjString { set; get; } = string.Empty;
+        public string propObjString{set; get;} = string.Empty;
 
         public override string ToString()
         {
@@ -22,9 +19,8 @@ public class InnerClassJson
         }
     }
 
-    public InnerClass? propObjct { set; get; }
-
-    public Decimal propNumber { set; get; }
+    public InnerClass? propObjct{set; get;}
+    public decimal propNumber{set; get;}
 
     public override string ToString()
     {

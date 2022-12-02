@@ -5,12 +5,9 @@ using System.Text;
 /// </summary>
 public class ClassArrayJson
 {
-    /// <summary>
-    /// Object用クラス
-    /// </summary>
     public class InnerClass
     {
-        public string propObjString { set; get; } = string.Empty;
+        public string propObjString{set; get;} = string.Empty;
 
         public override string ToString()
         {
@@ -23,7 +20,7 @@ public class ClassArrayJson
         }
     }
 
-    public List<InnerClass>? propObjcts { set; get; }
+    public List<InnerClass>? propObjcts{set; get;}
 
     public override string ToString()
     {
