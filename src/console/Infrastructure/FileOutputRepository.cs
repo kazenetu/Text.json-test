@@ -42,11 +42,7 @@ public class FileOutputRepository : IFileOutputRepository
         }
 
         // ファイル出力
-        using (FileStream fs = File.OpenWrite(filePath))
-        {
-            Byte[] info = new UTF8Encoding(true).GetBytes(fileData.ToString());
-            fs.Write(info, 0, info.Length);
-        }
+        File.WriteAllText(filePath, fileData.ToString());
 
         return true;
     }
