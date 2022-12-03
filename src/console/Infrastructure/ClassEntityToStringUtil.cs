@@ -23,13 +23,13 @@ public static class ClassEntityToStringUtil
         // クラス文字列作成
         foreach (var classInstance in classEntity.InnerClass)
         {
-            result.AppendLine($"{levelSpace}{GetClassString(classInstance, indentLevel + 1)}");
+            result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
         }
 
         // プロパティ文字列作成
         foreach (var property in classEntity.Properties)
         {
-            result.Append($"{levelSpace}{GetPropertyString(property, indentLevel + 1)}");
+            result.Append($"{GetPropertyString(property, indentLevel + 1)}");
         }
 
         result.AppendLine($"{levelSpace}}}");
