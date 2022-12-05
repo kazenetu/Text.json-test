@@ -18,6 +18,14 @@ public class ClassesEntity
     public Class? RootClass { get; private set; } = null;
 
     /// <summary>
+    /// ルートクラスのクラス名を返す
+    /// </summary>
+    /// <returns>ルートクラス</returns>
+    public string Name{
+        get => RootClass.Name;
+    }
+
+    /// <summary>
     /// 非公開コンストラクタ
     /// </summary>
     private ClassesEntity()
