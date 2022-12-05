@@ -85,10 +85,13 @@ public class ClassesEntity
         result.AppendLine($"{levelSpace}public class {classEntity.Name}");
         result.AppendLine($"{levelSpace}{{");
 
-        // クラス文字列作成
-        foreach (var classInstance in InnerClasses)
+        if(classEntity == RootClass)
         {
-            result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
+            // インナークラスのクラス文字列作成
+            foreach (var classInstance in InnerClasses)
+            {
+                result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
+            }
         }
 
         // プロパティ文字列作成
