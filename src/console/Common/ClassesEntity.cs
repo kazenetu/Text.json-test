@@ -57,14 +57,16 @@ public class ClassesEntity
     /// <summary>
     /// class文字列生成して返す
     /// </summary>
-    public string GetClassString()
+    /// <param name="indentLevel">インデントレベル</param>
+    /// <returns>class文字列</returns>
+    public string GetClassString(int indentLevel = 0)
     {
         var result = string.Empty;
 
         //HACK 名前空間の設定
 
         // ルートクラスを出力
-        result += GetClassString(RootClass, 0);
+        result += GetClassString(RootClass, indentLevel);
 
 
         return result;
