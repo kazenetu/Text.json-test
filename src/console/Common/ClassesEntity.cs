@@ -22,7 +22,7 @@ public class ClassesEntity
     /// </summary>
     /// <returns>ルートクラス</returns>
     public string Name{
-        get => RootClass.Name;
+        get => RootClass?.Name ?? "RootClass";
     }
 
     /// <summary>
@@ -61,6 +61,11 @@ public class ClassesEntity
     /// <returns>class文字列</returns>
     public string GetClassString(int indentLevel = 0)
     {
+        //必須パラメータチェック
+        if(RootClass is null){
+            throw new Exception("RootClassが設定されていません");
+        };
+
         var result = string.Empty;
 
         //HACK 名前空間の設定
@@ -89,6 +94,11 @@ public class ClassesEntity
 
         if(classEntity == RootClass)
         {
+            //必須パラメータチェック
+            if(InnerClasses is null){
+                throw new Exception("InnerClassesが設定されていません");
+            };
+
             // インナークラスのクラス文字列作成
             foreach (var classInstance in InnerClasses)
             {
