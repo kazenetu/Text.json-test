@@ -12,7 +12,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
     /// <returns>Classエンティティ</returns>
-    public Class CreateClassEntityFromFile(string filePath)
+    public ClassesEntity CreateClassEntityFromFile(string filePath)
     {
         var result = string.Empty;
 
@@ -31,15 +31,14 @@ public class JsonRepository : IJsonRepository
     /// <param name="json">JSO文字列</param>
     /// <returns>Classエンティティ</returns>
     /// <param name="rootClassName">ルートクラス名</param>
-    public Class CreateClassEntityFromString(string json, string rootClassName)
+    public ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
     {
-        List<Class> classes = new ();
-        // HACK クラスエンティティを作成
-        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
-        var rootClass = JsonParse(json, rootClassName, classes, 0);
-        rootClass.InnerClass.AddRange(classes);
+        List<Class> innerClasses = new ();
 
-        return rootClass;
+        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
+        var rootClass = JsonParse(json, rootClassName, innerClasses, 0);
+
+        return ClassesEntity.Create(rootClass, innerClasses);
     }
 
     /// <summary>

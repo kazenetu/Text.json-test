@@ -6,9 +6,9 @@ public class ConsoleOutputRepository : IConsoleOutputRepository
     /// <summary>
     /// コンソール出力する
     /// </summary>
-    /// <param name="classInstance">クラスエンティティ</param>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
     /// <returns>出力結果</returns>
-    public void Output(Class classInstance)
+    public void Output(ClassesEntity classInstance)
     {
         //必須パラメータチェック
         if(classInstance is null){
@@ -16,6 +16,6 @@ public class ConsoleOutputRepository : IConsoleOutputRepository
         };
 
         // コンソール出力
-        Console.WriteLine(ClassEntityToStringUtil.GetClassString(classInstance, 0));
+        Console.WriteLine(classInstance.GetClassString());
     }
 }

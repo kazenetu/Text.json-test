@@ -8,7 +8,7 @@ public interface IJsonRepository
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
     /// <returns>Classエンティティ</returns>
-    Class CreateClassEntityFromFile(string filePath);
+    ClassesEntity CreateClassEntityFromFile(string filePath);
 
     /// <summary>
     /// JSON文字列を読み込んでClass情報を返す
@@ -16,5 +16,5 @@ public interface IJsonRepository
     /// <param name="filePath">JSO文字列</param>
     /// <param name="rootClassName">ルートクラス名</param>
     /// <returns>Classエンティティ</returns>
-    Class CreateClassEntityFromString(string json, string rootClassName);
+    ClassesEntity CreateClassEntityFromString(string json, string rootClassName);
 }

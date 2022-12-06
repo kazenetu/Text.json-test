@@ -9,10 +9,10 @@ public class FileOutputRepository : IFileOutputRepository
     /// <summary>
     /// ファイルを出力する
     /// </summary>
-    /// <param name="classInstance">クラスエンティティ</param>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
     /// <param name="command">コマンドパラメータ</param>
     /// <returns>出力結果</returns>
-    public bool Output(Class classInstance, FileOutputCommand command)
+    public bool Output(ClassesEntity classInstance, FileOutputCommand command)
     {
         //必須パラメータチェック
         if(classInstance is null) return false;
@@ -35,7 +35,7 @@ public class FileOutputRepository : IFileOutputRepository
             fileData.AppendLine($"namespace {command.NameSpace}");
             fileData.AppendLine("{");
         }
-        fileData.Append(ClassEntityToStringUtil.GetClassString(classInstance, initialSpaceIndex));
+        fileData.Append(classInstance.GetClassString(initialSpaceIndex));
         if(!nameSpaceNone)
         {
             fileData.AppendLine("}");
