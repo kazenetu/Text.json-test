@@ -9,13 +9,13 @@ public class ClassesEntity
     /// インナークラスリスト
     /// </summary>
     /// <returns>インナークラスリスト</returns>
-    public IReadOnlyList<Class>? InnerClasses { get; private set; } = null;
+    private IReadOnlyList<Class>? InnerClasses = null;
 
     /// <summary>
     /// ルートクラス
     /// </summary>
     /// <returns>ルートクラス</returns>
-    public Class? RootClass { get; private set; } = null;
+    private Class? RootClass = null;
 
     /// <summary>
     /// ルートクラスのクラス名を返す
