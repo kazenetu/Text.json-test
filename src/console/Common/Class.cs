@@ -19,19 +19,12 @@ public class Class
     public List<Property> Properties { get; init; }
 
     /// <summary>
-    /// インナークラスリスト
-    /// </summary>
-    /// <returns>プロパティリスト</returns>
-    public List<Class> InnerClass { get; init; }
-
-    /// <summary>
     /// コンストラクタ
     /// </summary>
     public Class()
     {
         Name = string.Empty;
         Properties = new List<Property>();
-        InnerClass = new List<Class>();
     }
 
     /// <summary>
