@@ -12,13 +12,20 @@ dotnet run --project src/console/console.csproj
 # フォルダ構成
 * src/console
   * Common  
-    Jsonデシアライズクラス作成のための解析クラス(作成中)
+    * ClassesEntity.cs
     * Class.cs
     * Property.cs
-
-  * DeserializeSamples
-    サンプルJson文字列デシアライズクラス  
-    Commonの解析クラスで目指すクラス
+    * IJsonRepository.cs
+    * IConsoleOutputRepository.cs
+    * IFileOutputRepository.cs
+    * FileOutputCommand.cs
+  * Infrastructure
+    * ConsoleOutputRepository.cs
+    * ConsoleOutputRepository.cs
+    * FileOutputRepository.cs
+    * JsonRepository.cs
+  * DeserializeSamples  
+    サンプルJson文字列デシアライズクラス
     * SimpleJson.cs
     * InnerClassJson.cs
     * ClassArrayJson.cs
