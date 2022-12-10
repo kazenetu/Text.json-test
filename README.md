@@ -2,7 +2,7 @@
 System.Text.Jsonを使った解析機能のテスト
 
 # 実行環境
-* .MET6
+* .NET6
 
 # 実行方法
 ```sh
