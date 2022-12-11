@@ -32,9 +32,9 @@ dotnet run --project src/console/console.csproj
     * InnerNestClassJson.cs
 
   * JsonParser.cs  
+    JSON文字列をパースする処理のプロトタイプ版  
     JsonDocumentを利用してJson構造を解析するクラス  
-    現在の実装では解析結果を出力用文字列を出力する  
-    将来的にはCommonのクラス群を作成する予定
+    スペースでクラスやプロパティを簡易的に表す文字列を返す  
 
   * Program.cs  
     Json文字列とJson解析を実施するエントリクラス
