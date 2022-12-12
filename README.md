@@ -12,6 +12,8 @@ dotnet run --project src/console/console.csproj
 # フォルダ構成
 * src/console
   * Common  
+    Domain層の試作  
+    EntityとRepositoryのインターフェイス
     * ClassesEntity.cs
     * Class.cs
     * Property.cs
@@ -19,7 +21,8 @@ dotnet run --project src/console/console.csproj
     * IConsoleOutputRepository.cs
     * IFileOutputRepository.cs
     * FileOutputCommand.cs
-  * Infrastructure
+  * Infrastructure  
+    インフラ層の試作  
     * ConsoleOutputRepository.cs
     * ConsoleOutputRepository.cs
     * FileOutputRepository.cs
