@@ -16,7 +16,7 @@ public class Class
     /// プロパティリスト
     /// </summary>
     /// <returns>プロパティリスト</returns>
-    public List<Property> Properties { get; init; }
+    public IReadOnlyList<Property> Properties { get; init; }
 
     /// <summary>
     /// 非公開コンストラクタ
