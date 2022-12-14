@@ -19,9 +19,9 @@ public class Class
     public List<Property> Properties { get; init; }
 
     /// <summary>
-    /// コンストラクタ
+    /// 非公開コンストラクタ
     /// </summary>
-    public Class()
+    private Class()
     {
         Name = string.Empty;
         Properties = new List<Property>();
