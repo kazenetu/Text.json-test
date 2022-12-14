@@ -43,7 +43,7 @@ public class Class
         return new Class()
         {
             Name = className,
-            Properties = properties
+            Properties = new List<Property>(properties)
         };
    }
 }
