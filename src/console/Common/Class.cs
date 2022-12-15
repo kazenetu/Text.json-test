@@ -9,7 +9,7 @@ public class Class
     /// <summary>
     /// 名称
     /// </summary>
-    /// <value>プロパティ名</value>
+    /// <value>クラス名</value>
     public string Name { get; init; }
 
     /// <summary>
