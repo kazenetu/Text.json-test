@@ -46,4 +46,23 @@ public class Class
             Properties = new List<Property>(properties)
         };
    }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="src">ディープコピー元のクラスエンティティ インスタンス</param>
+    /// <returns>クラスエンティティ インスタンス</returns>
+    public static Class Create(Class src)
+    {
+        // 入力チェック
+        if(!src.Properties.Any()) new ArgumentException($"{nameof(Properties)} count is zero");
+        if(string.IsNullOrEmpty(src.Name)) new ArgumentException($"{nameof(Name)} is null");
+
+        // インスタンスを返す
+        return new Class()
+        {
+            Name = src.Name,
+            Properties = new List<Property>(src.Properties)
+        };
+   }
 }
