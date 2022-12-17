@@ -47,8 +47,8 @@ public class ClassesEntity
         // インスタンスを返す
         return new ClassesEntity()
         {
-            RootClass = rootClass,
-            InnerClasses = innerClasses
+            RootClass = Class.Create(rootClass),
+            InnerClasses = new List<Class>(innerClasses)
         };
     }
 
