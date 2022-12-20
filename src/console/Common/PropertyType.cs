@@ -11,7 +11,8 @@ public class PropertyType
         String,
         Decimal,
         Bool,
-        Class
+        Class,
+        Null
     }
 
     /// <summary>
