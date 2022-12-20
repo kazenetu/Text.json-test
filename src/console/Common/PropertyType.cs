@@ -66,7 +66,7 @@ public class PropertyType
     /// </summary>    
     /// <param name="srcTypeName">type名</param>
     /// <returns>型情報</returns>
-    private Kinds GetKind(string srcTypeName)
+    private static Kinds GetKind(string srcTypeName)
     {
         // 型を特定する
         switch (srcTypeName.ToLower())
