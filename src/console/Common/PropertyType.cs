@@ -51,15 +51,38 @@ public class PropertyType
     /// <returns>プロパティ型インスタンス</returns>
     public static PropertyType Create(string srcTypeName, bool isList = false)
     {
-        // TODO Type名を列挙型に変換
-
         return new PropertyType()
         {
-            // HACK 種別設定
-            Kind = Kinds.String,
+            // 型種別設定
+            Kind = GetKind(srcTypeName),
 
             // 配列か否かの設定
             IsList = isList,
         };
+    }
+
+    /// <summary>
+    /// 型種別を取得する
+    /// </summary>    
+    /// <param name="srcTypeName">type名</param>
+    /// <returns>型情報</returns>
+    private Kinds GetKind(string srcTypeName)
+    {
+        // 型を特定する
+        switch (srcTypeName.ToLower())
+        {
+            case "string":
+                return Kinds.String;
+            case "number":
+                return Kinds.Decimal;
+            case "true":
+                return Kinds.Bool;
+            case "false":
+                return Kinds.Bool;
+            case "null":
+                return Kinds.Null;
+        }
+        // それ以外は例外エラー
+        throw new Exception($"{srcTypeName} has no type set");
     }
 }
