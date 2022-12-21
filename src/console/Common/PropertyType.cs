@@ -75,6 +75,34 @@ public class PropertyType
     }
 
     /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="classNo">クラス名用No</param>
+    /// <param name="isList">配列か否か</param>
+    /// <returns>プロパティ型インスタンス</returns>
+    public static PropertyType Create(int classNo, bool isList = false)
+    {
+        // クラス名を設定
+        var className = "InnerClass";
+        if (classNo >= 2)
+        {
+            className += $"{Convert.ToChar('A' + (classNo - 2))}";
+        }
+
+        return new PropertyType()
+        {
+            // 型種別設定
+            Kind = GetKind(string.Empty, className),
+
+            // クラス名
+            ClassName = className,
+
+            // 配列か否かの設定
+            IsList = isList,
+        };
+    }
+
+    /// <summary>
     /// 型種別を取得する
     /// </summary>    
     /// <param name="srcTypeName">type名</param>
