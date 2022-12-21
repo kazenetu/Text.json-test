@@ -44,6 +44,19 @@ public class PropertyType
     }
 
     /// <summary>
+    /// C#型情報を返す
+    /// </summary>
+    /// <returns>C#型情報</returns>
+    public override string ToString()
+    {
+        var csTypeName = ToPropertyType();
+        if(IsList){
+            return $"List<{csTypeName}>?";
+        }
+        return csTypeName;
+    }
+
+    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="srcTypeName">type名</param>
@@ -84,5 +97,28 @@ public class PropertyType
         }
         // それ以外は例外エラー
         throw new Exception($"{srcTypeName} has no type set");
+    }
+
+    /// <summary>
+    /// C#の型に変換
+    /// </summary>
+    /// <returns></returns>
+    private string ToPropertyType()
+    {
+        switch (Kind)
+        {
+            case Kinds.String:
+                return "string";
+            case Kinds.Decimal:
+                return "decimal";
+            case Kinds.Bool:
+                return "bool";
+            case Kinds.Null:
+                return "object";
+            case Kinds.Class:
+                return ClassName;
+        }
+        // それ以外は例外エラー
+        throw new Exception($"{Kind} has no type set");
     }
 }
