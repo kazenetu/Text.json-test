@@ -67,7 +67,7 @@ public class PropertyType
         return new PropertyType()
         {
             // 型種別設定
-            Kind = GetKind(srcTypeName),
+            Kind = GetKind(srcTypeName, string.Empty),
 
             // 配列か否かの設定
             IsList = isList,
@@ -78,8 +78,9 @@ public class PropertyType
     /// 型種別を取得する
     /// </summary>    
     /// <param name="srcTypeName">type名</param>
+    /// <param name="className">クラス名</param>
     /// <returns>型情報</returns>
-    private static Kinds GetKind(string srcTypeName)
+    private static Kinds GetKind(string srcTypeName, string className)
     {
         // 型を特定する
         switch (srcTypeName.ToLower())
@@ -95,8 +96,13 @@ public class PropertyType
             case "null":
                 return Kinds.Null;
         }
-        // それ以外は例外エラー
-        throw new Exception($"{srcTypeName} has no type set");
+        // クラス名が存在しない場合は例外エラー
+        if (string.IsNullOrEmpty(className))
+        {
+            throw new Exception($"{srcTypeName} has no type set");
+        }
+
+        return Kinds.Class;
     }
 
     /// <summary>
