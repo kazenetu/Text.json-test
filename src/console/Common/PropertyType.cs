@@ -150,7 +150,7 @@ public class PropertyType
             case Kinds.Null:
                 return "object";
             case Kinds.Class:
-                return ClassName;
+                return $"{ClassName}?";
         }
         // それ以外は例外エラー
         throw new Exception($"{Kind} has no type set");
