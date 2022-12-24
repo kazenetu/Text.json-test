@@ -1,7 +1,13 @@
 /// <summary>
-/// プロパティ型
+/// 基底プロパティ
 /// </summary>
-public class PropertyType
+/// <param name="IsList">配列か否か</param>
+public abstract record BasePropertyType(bool IsList);
+
+/// <summary>
+/// プロパティ
+/// </summary>
+public record PropertyType : BasePropertyType
 {
     /// <summary>
     /// 型種別
@@ -18,29 +24,46 @@ public class PropertyType
     /// <summary>
     /// 型種別
     /// </summary>
-    private Kinds Kind;
+    private Kinds Kind{get;set;}
 
     /// <summary>
     /// クラス名
     /// </summary>
     /// <value>クラス名(デフォルトはstring.Empty)</value>
-    public string ClassName {get; init;}
+    public string ClassName {get;} = string.Empty;
 
     /// <summary>
-    /// 配列か否か
+    /// インスタンス生成
     /// </summary>
-    private bool IsList;
-
-    /// <summary>
-    /// 非公開コンストラクタ
-    /// </summary>
-    private PropertyType()
+    /// <param name="srcTypeName">type名</param>
+    /// <param name="isList">配列か否か</param>
+    /// <returns>プロパティ型インスタンス</returns>
+    public PropertyType(string srcTypeName, bool isList) : base(isList)
     {
-        // クラス名はstring.Emptyがデフォルト
-        ClassName = string.Empty;
+        // 型種別設定
+        Kind = GetKind(srcTypeName, string.Empty);
+    }
 
-        // 配列なし
-        IsList = false;
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="classNo">クラス名用No</param>
+    /// <param name="isList">配列か否か</param>
+    /// <returns>プロパティ型インスタンス</returns>
+    public PropertyType(int classNo, bool isList) : base(isList)
+    {
+        // クラス名を設定
+        var className = "InnerClass";
+        if (classNo >= 2)
+        {
+            className += $"{Convert.ToChar('A' + (classNo - 2))}";
+        }
+
+        // 型種別設定
+        Kind = GetKind(string.Empty, className);
+
+        // クラス名
+        ClassName = className;
     }
 
     /// <summary>
@@ -57,58 +80,12 @@ public class PropertyType
     }
 
     /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="srcTypeName">type名</param>
-    /// <param name="isList">配列か否か</param>
-    /// <returns>プロパティ型インスタンス</returns>
-    public static PropertyType Create(string srcTypeName, bool isList = false)
-    {
-        return new PropertyType()
-        {
-            // 型種別設定
-            Kind = GetKind(srcTypeName, string.Empty),
-
-            // 配列か否かの設定
-            IsList = isList,
-        };
-    }
-
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="classNo">クラス名用No</param>
-    /// <param name="isList">配列か否か</param>
-    /// <returns>プロパティ型インスタンス</returns>
-    public static PropertyType Create(int classNo, bool isList = false)
-    {
-        // クラス名を設定
-        var className = "InnerClass";
-        if (classNo >= 2)
-        {
-            className += $"{Convert.ToChar('A' + (classNo - 2))}";
-        }
-
-        return new PropertyType()
-        {
-            // 型種別設定
-            Kind = GetKind(string.Empty, className),
-
-            // クラス名
-            ClassName = className,
-
-            // 配列か否かの設定
-            IsList = isList,
-        };
-    }
-
-    /// <summary>
     /// 型種別を取得する
     /// </summary>    
     /// <param name="srcTypeName">type名</param>
     /// <param name="className">クラス名</param>
     /// <returns>型情報</returns>
-    private static Kinds GetKind(string srcTypeName, string className)
+    private Kinds GetKind(string srcTypeName, string className)
     {
         // 型を特定する
         switch (srcTypeName.ToLower())
