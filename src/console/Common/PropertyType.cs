@@ -40,6 +40,9 @@ public record PropertyType : BasePropertyType
     /// <returns>プロパティ型インスタンス</returns>
     public PropertyType(string srcTypeName, bool isList) : base(isList)
     {
+        // パラメータチェック
+        if(string.IsNullOrEmpty(srcTypeName)) throw new ArgumentException($"{nameof(srcTypeName)} is null");
+
         // 型種別設定
         Kind = GetKind(srcTypeName, string.Empty);
     }
@@ -52,6 +55,9 @@ public record PropertyType : BasePropertyType
     /// <returns>プロパティ型インスタンス</returns>
     public PropertyType(int classNo, bool isList) : base(isList)
     {
+        // パラメータチェック
+        if(classNo < 0) throw new ArgumentException($"{nameof(classNo)} is negative value");
+
         // クラス名を設定
         var className = "InnerClass";
         if (classNo >= 2)
