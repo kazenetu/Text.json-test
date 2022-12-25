@@ -1,11 +1,11 @@
 /// <summary>
-/// 基底プロパティ
+/// 基底プロパティ型ValueObject
 /// </summary>
 /// <param name="IsList">配列か否か</param>
 public abstract record BasePropertyType(bool IsList);
 
 /// <summary>
-/// プロパティ
+/// プロパティ型ValueObject
 /// </summary>
 public record PropertyType : BasePropertyType
 {
