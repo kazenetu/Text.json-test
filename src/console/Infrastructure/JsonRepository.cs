@@ -69,6 +69,9 @@ public class JsonRepository : IJsonRepository
         var rootElement = jsonDocument.RootElement;
         foreach (var element in rootElement.EnumerateObject())
         {
+            var classJson = string.Empty;
+            var isList = false;
+
             // C# 値型を取得する
             var propertyType = GetPropertyType(element.Value);
 
@@ -83,17 +86,14 @@ public class JsonRepository : IJsonRepository
                     // インナークラス番号をインクリメント
                     innerClassNo++;
 
-                    // インナークラス　C# 値型を取得する
-                    propertyType = getInnerClassName(innerClassNo);
+                    // インナークラス用JSON文字列を格納
+                    classJson = element.Value.ToString();
 
-                    // インナークラス生成
-                    innerClass.Add(JsonParse(element.Value.ToString(), propertyType, innerClass, innerClassNo));
-
-                    // nullableに設定
-                    propertyType += "?";
                     break;
 
                 case JsonValueKind.Array:
+                    isList = true;
+
                     var arrayIndex = 0;
                     while (arrayIndex < element.Value.GetArrayLength())
                     {
@@ -105,40 +105,34 @@ public class JsonRepository : IJsonRepository
                             // インナークラス番号をインクリメント
                             innerClassNo++;
 
-                            // インナークラス名を取得
-                            propertyType = getInnerClassName(innerClassNo);
+                            // インナークラス用JSON文字列を格納
+                            classJson = element.Value[arrayIndex].ToString();
 
-                            // インナークラス生成
-                            innerClass.Add(JsonParse(element.Value[arrayIndex].ToString(), propertyType, innerClass, innerClassNo));
-
-                            // nullableなList設定
-                            propertyType = $"List<{propertyType}>?";
                             break;
                         }
-
-                        // 値型のリストを作成
-                        propertyType = $"List<{GetPropertyType(element.Value[arrayIndex])}>?";
+                        propertyType = GetPropertyType(element.Value[arrayIndex]);
                         break;
                     }
                     break;
             }
 
             // プロパティ追加
-            properties.Add(Property.Create(element.Name, propertyType));
+            if(string.IsNullOrEmpty(classJson))
+            {
+                properties.Add(Property.Create(element.Name, new PropertyType(propertyType, isList)));
+            }
+            else
+            {
+                var type = new PropertyType(innerClassNo, isList);
+                properties.Add(Property.Create(element.Name, type));
+
+                // インナークラス生成
+                innerClass.Add(JsonParse(classJson, type.ClassName, innerClass, innerClassNo));
+            }
         }
         // HACK Classいスタンス作成
         //return Class.Create(properties.AsReadOnly(), className);
         return Class.Create(properties, className);
-
-        string getInnerClassName(int innerClassNo)
-        {
-            var innerClassName = "InnerClass";
-            if (innerClassNo >= 2)
-            {
-                innerClassName += $"{Convert.ToChar('A' + (innerClassNo - 2))}";
-            }
-            return innerClassName;
-        }
     }
 
     /// <summary>
@@ -156,16 +150,16 @@ public class JsonRepository : IJsonRepository
                 result = "string";
                 break;
             case JsonValueKind.Number:
-                result = "decimal";
+                result = "number";
                 break;
             case JsonValueKind.True:
-                result = "bool";
+                result = "true";
                 break;
             case JsonValueKind.False:
-                result = "bool";
+                result = "true";
                 break;
             case JsonValueKind.Null:
-                result = "object";
+                result = "null";
                 break;
         }
         return result;

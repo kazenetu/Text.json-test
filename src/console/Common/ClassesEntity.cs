@@ -127,22 +127,11 @@ public class ClassesEntity
     {
         var result = new StringBuilder();
 
-        // デフォルト設定
-        var defaultValue = string.Empty;
-        if (propertyEntity.TypeName == "string" || propertyEntity.TypeName == "object")
-        {
-            defaultValue = "string.Empty";
-        }
-
         // インデント設定
         var levelSpace = new string('S', indentLevel).Replace("S", "  ");
 
         // プロパティ文字列作成
-        result.Append($"{levelSpace}public {propertyEntity.TypeName} {propertyEntity.Name}{{set; get;}}");
-        if (!string.IsNullOrEmpty(defaultValue))
-        {
-            result.Append($" = {defaultValue};");
-        }
+        result.Append($"{levelSpace}public {propertyEntity}");
         result.AppendLine();
 
         return result.ToString();
