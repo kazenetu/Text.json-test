@@ -1,8 +1,8 @@
 using System.Text;
 /// <summary>
-/// プロパティ情報
+/// プロパティValueObject
 /// </summary>
-public class Property
+public record Property
 {
     /// <summary>
     /// 名称
@@ -34,7 +34,7 @@ public class Property
     /// </summary>
     /// <param name="name">クラス名称</param>
     /// <param name="propertyType">型クラス インスタンス</param>
-    /// <returns>プロパティエンティティ インスタンス</returns>
+    /// <returns>プロパティValueObject インスタンス</returns>
     public static Property Create(string name, PropertyType propertyType)
     {
         var defaultValue = string.Empty;
