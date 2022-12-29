@@ -5,6 +5,18 @@ using System.Text;
 public record Property
 {
     /// <summary>
+    /// Class型名を返す
+    /// </summary>
+    /// <value>Class型名(未設定の場合はstring.Empty)</value>
+    public string PropertyTypeClassName
+    {
+        get
+        {
+            return Type?.ClassName ?? string.Empty;
+        }
+    }
+
+    /// <summary>
     /// 名称
     /// </summary>
     /// <value>プロパティ名</value>
