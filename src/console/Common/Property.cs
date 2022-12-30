@@ -49,6 +49,10 @@ public record Property
     /// <returns>プロパティValueObject インスタンス</returns>
     public static Property Create(string name, PropertyType propertyType)
     {
+        // パラメータチェック
+        if(string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
+
+        // デフォルト値設定
         var defaultValue = string.Empty;
         if (propertyType.ToString() is "string" or "object")
         {
