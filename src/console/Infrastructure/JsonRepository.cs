@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Linq;
 
 /// <summary>
 /// JSON読み込みリポジトリ
@@ -123,11 +124,11 @@ public class JsonRepository : IJsonRepository
             }
             else
             {
-                var type = new PropertyType(innerClassNo, isList);
-                properties.Add(Property.Create(element.Name, type));
+                properties.Add(Property.Create(element.Name, new PropertyType(innerClassNo, isList)));
 
                 // インナークラス生成
-                innerClass.Add(JsonParse(classJson, type.ClassName, innerClass, innerClassNo));
+                var targetProperty = properties.Last();
+                innerClass.Add(JsonParse(classJson, targetProperty.PropertyTypeClassName, innerClass, innerClassNo));
             }
         }
         // HACK Classいスタンス作成
