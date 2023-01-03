@@ -28,6 +28,25 @@ public class Class
     }
 
     /// <summary>
+    /// 非公開プロパティリスト
+    /// </summary>
+    /// <returns>非公開プロパティリスト</returns>
+    private List<Property> propertyies = new ();
+
+    /// <summary>
+    /// プロパティ追加
+    /// </summary>
+    /// <param name="Property">追加対象</param>
+    public void AddProperty(Property Property)
+    {
+        // 入力チェック
+        if(Property is null) new ArgumentException($"{nameof(Property)} is null");
+
+        // プロパティリスト追加
+        propertyies.Add(Property);
+    }
+
+    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="properties">プロパティリスト</param>
