@@ -16,7 +16,7 @@ public class Class
     /// プロパティリスト
     /// </summary>
     /// <returns>プロパティリスト</returns>
-    public IReadOnlyList<Property> Properties { get; init; }
+    public IReadOnlyList<Property> Properties { get{return propertyies;} }
 
     /// <summary>
     /// 非公開コンストラクタ
@@ -24,7 +24,6 @@ public class Class
     private Class()
     {
         Name = string.Empty;
-        Properties = new List<Property>();
     }
 
     /// <summary>
@@ -59,10 +58,30 @@ public class Class
         if(string.IsNullOrEmpty(className)) new ArgumentException($"{nameof(className)} is null");
 
         // インスタンスを返す
+        var result = Create(className);
+        var props = new List<Property>(properties);
+        foreach(var property in props)
+        {
+            result.AddProperty(property);
+        }
+
+        return result;
+   }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="className">クラス名</param>
+    /// <returns>クラスエンティティ インスタンス</returns>
+    public static Class Create(string className)
+    {
+        // 入力チェック
+        if(string.IsNullOrEmpty(className)) new ArgumentException($"{nameof(className)} is null");
+
+        // インスタンスを返す
         return new Class()
         {
-            Name = className,
-            Properties = new List<Property>(properties)
+            Name = className
         };
    }
 
@@ -78,10 +97,12 @@ public class Class
         if(string.IsNullOrEmpty(src.Name)) new ArgumentException($"{nameof(Name)} is null");
 
         // インスタンスを返す
-        return new Class()
+        var result = Create(src.Name);
+        foreach(var property in src.Properties)
         {
-            Name = src.Name,
-            Properties = new List<Property>(src.Properties)
-        };
+            result.AddProperty(property);
+        }
+
+        return result;
    }
 }
