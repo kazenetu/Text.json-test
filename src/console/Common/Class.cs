@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.Json;
 
@@ -51,6 +52,7 @@ public class Class
     /// <param name="properties">プロパティリスト</param>
     /// <param name="className">クラス名</param>
     /// <returns>クラスエンティティ インスタンス</returns>
+    [Obsolete]
     public static Class Create(List<Property> properties, string className)
     {
         // 入力チェック
