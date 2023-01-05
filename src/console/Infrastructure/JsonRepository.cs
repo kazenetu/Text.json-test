@@ -64,7 +64,8 @@ public class JsonRepository : IJsonRepository
     /// <param name="innerClassNo">インナークラス番号</param>
     private Class ProcessJsonDocument(string json, string className, List<Class> innerClass, int innerClassNo)
     {
-        var properties = new List<Property>();
+        // Classインスタンス作成
+        var classEntity =  Class.Create(className);
 
         var jsonDocument = JsonDocument.Parse(json);
         var rootElement = jsonDocument.RootElement;
@@ -120,20 +121,19 @@ public class JsonRepository : IJsonRepository
             // プロパティ追加
             if(string.IsNullOrEmpty(classJson))
             {
-                properties.Add(Property.Create(element.Name, new PropertyType(propertyType, isList)));
+                classEntity.AddProperty(Property.Create(element.Name, new PropertyType(propertyType, isList)));
             }
             else
             {
-                properties.Add(Property.Create(element.Name, new PropertyType(innerClassNo, isList)));
+                classEntity.AddProperty(Property.Create(element.Name, new PropertyType(innerClassNo, isList)));
 
                 // インナークラス生成
-                var targetProperty = properties.Last();
+                var targetProperty = classEntity.Properties.Last();
                 innerClass.Add(JsonParse(classJson, targetProperty.PropertyTypeClassName, innerClass, innerClassNo));
             }
         }
-        // HACK Classいスタンス作成
-        //return Class.Create(properties.AsReadOnly(), className);
-        return Class.Create(properties, className);
+
+        return classEntity;
     }
 
     /// <summary>
