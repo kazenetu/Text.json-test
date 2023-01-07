@@ -43,7 +43,7 @@ public class Class
         if(Property is null) new ArgumentException($"{nameof(Property)} is null");
 
         // プロパティリスト追加
-        propertyies.Add(Property);
+        propertyies.Add(Property!);
     }
 
     /// <summary>
