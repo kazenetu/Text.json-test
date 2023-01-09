@@ -12,6 +12,12 @@ public class ClassesEntity
     private IReadOnlyList<Class>? InnerClasses = null;
 
     /// <summary>
+    /// 非公開インナークラスリスト
+    /// </summary>
+    /// <returns>非公開インナークラスリスト</returns>
+    private List<Class>? InnerClasses = new();
+
+    /// <summary>
     /// ルートクラス
     /// </summary>
     /// <returns>ルートクラス</returns>
