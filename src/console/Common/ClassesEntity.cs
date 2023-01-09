@@ -15,7 +15,7 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
-    private List<Class>? InnerClasses = new();
+    private List<Class>? innerClasses = new();
 
     /// <summary>
     /// ルートクラス
