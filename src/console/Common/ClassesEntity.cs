@@ -39,6 +39,19 @@ public class ClassesEntity
     }
 
     /// <summary>
+    /// インナークラスの追加
+    /// </summary>
+    /// <param name="innerClass">追加対象</param>
+    public void AddInnerClass(Class innerClass)
+    {
+        // 入力チェック
+        if(innerClass is null) new ArgumentException($"{nameof(innerClass)} is null");
+
+        // インナークラスリストに追加
+        innerClasses.Add(innerClass!);
+    }
+
+    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="rootClass">ルートクラス</param>
