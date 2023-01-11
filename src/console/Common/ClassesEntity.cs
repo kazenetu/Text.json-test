@@ -64,11 +64,16 @@ public class ClassesEntity
         if(innerClasses?.Count <= 0) new ArgumentException($"{nameof(innerClasses)} count is zero");
 
         // インスタンスを返す
-        return new ClassesEntity()
+        var result = new ClassesEntity()
         {
-            RootClass = Class.Create(rootClass),
-            InnerClasses = new List<Class>(innerClasses)
+            RootClass = Class.Create(rootClass)
         };
+        foreach(var classInstance in innerClasses)
+        {
+            result.AddInnerClass(classInstance);
+        }
+
+        return result;
     }
 
     #region class文字列作成
@@ -113,13 +118,8 @@ public class ClassesEntity
 
         if(classEntity == RootClass)
         {
-            //必須パラメータチェック
-            if(InnerClasses is null){
-                throw new Exception("InnerClassesが設定されていません");
-            };
-
             // インナークラスのクラス文字列作成
-            foreach (var classInstance in InnerClasses)
+            foreach (var classInstance in innerClasses)
             {
                 result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
             }
