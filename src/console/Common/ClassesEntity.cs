@@ -6,12 +6,6 @@ using System.Text;
 public class ClassesEntity
 {
     /// <summary>
-    /// インナークラスリスト
-    /// </summary>
-    /// <returns>インナークラスリスト</returns>
-    private IReadOnlyList<Class>? InnerClasses = null;
-
-    /// <summary>
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
