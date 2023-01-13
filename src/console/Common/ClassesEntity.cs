@@ -70,6 +70,22 @@ public class ClassesEntity
         return result;
     }
 
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="className">クラス名</param>
+    /// <returns>クラス集約エンティティ インスタンス</returns>
+    public static ClassesEntity Create(string className)
+    {
+        // インスタンスを返す
+        var result = new ClassesEntity()
+        {
+            RootClass = Class.Create(className)
+        };
+
+        return result;
+    }
+
     #region class文字列作成
 
     /// <summary>
