@@ -51,6 +51,7 @@ public class ClassesEntity
     /// <param name="rootClass">ルートクラス</param>
     /// <param name="innerClasses">インナークラスリスト</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
+    [System.Obsolete]
     public static ClassesEntity Create(Class rootClass, IReadOnlyList<Class> innerClasses)
     {
         // 入力チェック
