@@ -73,14 +73,14 @@ public class ClassesEntity
     /// <summary>
     /// インスタンス生成
     /// </summary>
-    /// <param name="className">クラス名</param>
+    /// <param name="rootClass">ルートクラス</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
-    public static ClassesEntity Create(string className)
+    public static ClassesEntity Create(Class rootClass)
     {
         // インスタンスを返す
         var result = new ClassesEntity()
         {
-            RootClass = Class.Create(className)
+            RootClass = Class.Create(rootClass)
         };
 
         return result;
