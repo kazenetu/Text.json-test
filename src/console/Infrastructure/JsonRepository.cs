@@ -39,7 +39,13 @@ public class JsonRepository : IJsonRepository
         rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
         var rootClass = JsonParse(json, rootClassName, innerClasses, 0);
 
-        return ClassesEntity.Create(rootClass, innerClasses);
+        var result = ClassesEntity.Create(rootClass);
+        foreach(var innerClass in innerClasses)
+        {
+            result.AddInnerClass(innerClass);
+        }
+
+        return result;
     }
 
     /// <summary>
