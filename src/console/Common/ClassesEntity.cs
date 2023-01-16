@@ -49,32 +49,6 @@ public class ClassesEntity
     /// インスタンス生成
     /// </summary>
     /// <param name="rootClass">ルートクラス</param>
-    /// <param name="innerClasses">インナークラスリスト</param>
-    /// <returns>クラス集約エンティティ インスタンス</returns>
-    [System.Obsolete]
-    public static ClassesEntity Create(Class rootClass, IReadOnlyList<Class> innerClasses)
-    {
-        // 入力チェック
-        if(innerClasses is null) new NullReferenceException($"{nameof(innerClasses)} is null");
-        if(innerClasses?.Count <= 0) new ArgumentException($"{nameof(innerClasses)} count is zero");
-
-        // インスタンスを返す
-        var result = new ClassesEntity()
-        {
-            RootClass = Class.Create(rootClass)
-        };
-        foreach(var classInstance in innerClasses)
-        {
-            result.AddInnerClass(classInstance);
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="rootClass">ルートクラス</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
     public static ClassesEntity Create(Class rootClass)
     {
