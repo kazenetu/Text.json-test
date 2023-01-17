@@ -33,6 +33,16 @@ public class ClassesEntity
     }
 
     /// <summary>
+    /// ルートクラスの設定
+    /// </summary>
+    /// <param name="rootClass">ルートクラスインスタンス</param>
+    public void SetRootClass(Class rootClass)
+    {
+        // ルートクラスの設定
+        RootClass = Class.Create(rootClass);
+    }
+
+    /// <summary>
     /// インナークラスの追加
     /// </summary>
     /// <param name="innerClass">追加対象</param>
