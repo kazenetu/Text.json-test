@@ -58,6 +58,25 @@ public class ClassesEntity
     /// <summary>
     /// インスタンス生成
     /// </summary>
+    /// <param name="rootClassName">ルートクラス名</param>
+    /// <returns>クラス集約エンティティ インスタンス</returns>
+    public static ClassesEntity Create(string rootClassName)
+    {
+        // 入力チェック
+        if(rootClassName is null) new ArgumentException($"{nameof(rootClassName)} is null");
+
+        // インスタンスを返す
+        var result = new ClassesEntity()
+        {
+            RootClass = Class.Create(rootClassName)
+        };
+
+        return result;
+    }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
     /// <param name="rootClass">ルートクラス</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
     public static ClassesEntity Create(Class rootClass)
