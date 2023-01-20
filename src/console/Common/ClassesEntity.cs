@@ -83,6 +83,7 @@ public class ClassesEntity
     /// </summary>
     /// <param name="rootClass">ルートクラス</param>
     /// <returns>クラス集約エンティティ インスタンス</returns>
+    [System.Obsolete]
     public static ClassesEntity Create(Class rootClass)
     {
         // インスタンスを返す
