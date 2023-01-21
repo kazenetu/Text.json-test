@@ -34,18 +34,13 @@ public class JsonRepository : IJsonRepository
     /// <param name="rootClassName">ルートクラス名</param>
     public ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
     {
-        List<Class> innerClasses = new ();
-
         rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
-        var rootClass = JsonParse(json, rootClassName, innerClasses, 0);
+        var classesEntity = ClassesEntity.Create(rootClassName);
 
-        var result = ClassesEntity.Create(rootClass);
-        foreach(var innerClass in innerClasses)
-        {
-            result.AddInnerClass(innerClass);
-        }
+        // ルートクラスの設定
+        classesEntity.SetRootClass(JsonParse(json, rootClassName, ref classesEntity, 0));
 
-        return result;
+        return classesEntity;
     }
 
     /// <summary>
@@ -53,12 +48,11 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="json">JSON文字列</param>
     /// <param name="className">クラス名</param>
-    /// <param name="innerClass">インナークラスリスト(nullの場合は自身のインスタンスを利用)</param>
-    /// <param name="innerClassNo">インナークラス番号</param>
+    /// <param name="classesEntity">集約エンティティ</param>
     /// <returns>クラスエンティティ インスタンス</returns>
-    private Class JsonParse(string json, string className, List<Class> innerClass, int innerClassNo)
+    private Class JsonParse(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
-        return ProcessJsonDocument(json, className, innerClass, innerClassNo);
+        return ProcessJsonDocument(json, className, ref classesEntity, innerClassNo);
     }
 
     /// <summary>
@@ -66,9 +60,9 @@ public class JsonRepository : IJsonRepository
     /// </summary>    
     /// <param name="json">JSON文字列</param>
     /// <param name="className">クラス名</param>
-    /// <param name="innerClass">インナークラスリスト</param>
+    /// <param name="classesEntity">集約エンティティ</param>
     /// <param name="innerClassNo">インナークラス番号</param>
-    private Class ProcessJsonDocument(string json, string className, List<Class> innerClass, int innerClassNo)
+    private Class ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
         // Classインスタンス作成
         var classEntity =  Class.Create(className);
@@ -133,9 +127,9 @@ public class JsonRepository : IJsonRepository
             {
                 classEntity.AddProperty(Property.Create(element.Name, new PropertyType(innerClassNo, isList)));
 
-                // インナークラス生成
+                // インナークラス追加
                 var targetProperty = classEntity.Properties.Last();
-                innerClass.Add(JsonParse(classJson, targetProperty.PropertyTypeClassName, innerClass, innerClassNo));
+                classesEntity.AddInnerClass(JsonParse(classJson, targetProperty.PropertyTypeClassName, ref classesEntity, innerClassNo));
             }
         }
 
