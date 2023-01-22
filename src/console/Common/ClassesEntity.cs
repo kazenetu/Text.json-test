@@ -78,23 +78,6 @@ public class ClassesEntity
         return result;
     }
 
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="rootClass">ルートクラス</param>
-    /// <returns>クラス集約エンティティ インスタンス</returns>
-    [System.Obsolete]
-    public static ClassesEntity Create(Class rootClass)
-    {
-        // インスタンスを返す
-        var result = new ClassesEntity()
-        {
-            RootClass = Class.Create(rootClass)
-        };
-
-        return result;
-    }
-
     #region class文字列作成
 
     /// <summary>
