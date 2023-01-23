@@ -72,7 +72,7 @@ public class ClassesEntity
         // インスタンスを返す
         var result = new ClassesEntity()
         {
-            RootClass = Class.Create(rootClassName)
+            RootClass = Class.Create(rootClassName!)
         };
 
         return result;
