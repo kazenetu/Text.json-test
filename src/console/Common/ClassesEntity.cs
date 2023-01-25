@@ -56,7 +56,7 @@ public class ClassesEntity
         if(RootClass is null) new Exception($"{nameof(RootClass)} is null");
 
         // プロパティ追加
-        RootClass?.AddProperty(Property));
+        RootClass?.AddProperty(Property);
     }
 
     /// <summary>
