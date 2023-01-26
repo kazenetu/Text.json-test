@@ -36,6 +36,7 @@ public class ClassesEntity
     /// ルートクラスの設定
     /// </summary>
     /// <param name="rootClass">ルートクラスインスタンス</param>
+    [Obsolete]
     public void SetRootClass(Class rootClass)
     {
         // 入力チェック
