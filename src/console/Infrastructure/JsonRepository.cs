@@ -1,7 +1,6 @@
 using System.IO;
 using System.Text;
 using System.Text.Json;
-using System.Linq;
 
 /// <summary>
 /// JSON読み込みリポジトリ
@@ -37,8 +36,8 @@ public class JsonRepository : IJsonRepository
         rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
         var classesEntity = ClassesEntity.Create(rootClassName);
 
-        // ルートクラスの設定
-        classesEntity.SetRootClass(JsonParse(json, rootClassName, ref classesEntity, 0));
+        // JSON文字列読み込み
+        JsonParse(json, rootClassName, ref classesEntity, 0);
 
         return classesEntity;
     }
@@ -64,8 +63,8 @@ public class JsonRepository : IJsonRepository
     /// <param name="innerClassNo">インナークラス番号</param>
     private Class ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
-        // Classインスタンス作成
-        var classEntity =  Class.Create(className);
+        // Classインスタンス設定
+        var classEntity = Class.Create(className);
 
         var jsonDocument = JsonDocument.Parse(json);
         var rootElement = jsonDocument.RootElement;
@@ -118,22 +117,37 @@ public class JsonRepository : IJsonRepository
                     break;
             }
 
-            // プロパティ追加
+            // プロパティ生成
+            var createInnerClass = false;
+            Property prop;
             if(string.IsNullOrEmpty(classJson))
             {
-                classEntity.AddProperty(Property.Create(element.Name, new PropertyType(propertyType, isList)));
+                prop = Property.Create(element.Name, new PropertyType(propertyType, isList));
             }
             else
             {
-                classEntity.AddProperty(Property.Create(element.Name, new PropertyType(innerClassNo, isList)));
+                prop = Property.Create(element.Name, new PropertyType(innerClassNo, isList));
+                createInnerClass = true;
+            }
 
-                // インナークラス追加
-                var targetProperty = classEntity.Properties.Last();
-                classesEntity.AddInnerClass(JsonParse(classJson, targetProperty.PropertyTypeClassName, ref classesEntity, innerClassNo));
+            // プロパティ追加
+            if (className == classesEntity.Name)
+            {
+                classesEntity.AddRootProperty(prop);
+            }
+            else
+            {
+                classEntity.AddProperty(prop);
+            }
+
+            // インナークラス追加
+            if (!string.IsNullOrEmpty(classJson) && createInnerClass)
+            {
+                classesEntity.AddInnerClass(JsonParse(classJson, prop.PropertyTypeClassName, ref classesEntity, innerClassNo));
             }
         }
 
-        return classEntity;
+        return  classEntity;
     }
 
     /// <summary>
