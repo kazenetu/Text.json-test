@@ -33,21 +33,6 @@ public class ClassesEntity
     }
 
     /// <summary>
-    /// ルートクラスの設定
-    /// </summary>
-    /// <param name="rootClass">ルートクラスインスタンス</param>
-    [Obsolete]
-    public void SetRootClass(Class rootClass)
-    {
-        // 入力チェック
-        if(rootClass is null) new ArgumentException($"{nameof(rootClass)} is null");
-        if(rootClass!.Name != RootClass?.Name) new ArgumentException($"{rootClass!.Name} != {RootClass?.Name}");
-
-        // ルートクラスの設定
-        RootClass = Class.Create(rootClass);
-    }
-
-    /// <summary>
     /// ルートクラスのプロパティ追加
     /// </summary>
     /// <param name="Property">追加対象</param>
