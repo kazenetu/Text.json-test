@@ -40,7 +40,7 @@ public class Class
     public void AddProperty(Property Property)
     {
         // 入力チェック
-        if(Property is null) new ArgumentException($"{nameof(Property)} is null");
+        if(Property is null) throw new ArgumentException($"{nameof(Property)} is null");
 
         // プロパティリスト追加
         propertyies.Add(Property!);
@@ -54,7 +54,7 @@ public class Class
     public static Class Create(string className)
     {
         // 入力チェック
-        if(string.IsNullOrEmpty(className)) new ArgumentException($"{nameof(className)} is null");
+        if(string.IsNullOrEmpty(className)) throw new ArgumentException($"{nameof(className)} is null");
 
         // インスタンスを返す
         return new Class()
@@ -71,8 +71,8 @@ public class Class
     public static Class Create(Class src)
     {
         // 入力チェック
-        if(!src.Properties.Any()) new ArgumentException($"{nameof(Properties)} count is zero");
-        if(string.IsNullOrEmpty(src.Name)) new ArgumentException($"{nameof(Name)} is null");
+        if(!src.Properties.Any()) throw new ArgumentException($"{nameof(Properties)} count is zero");
+        if(string.IsNullOrEmpty(src.Name)) throw new ArgumentException($"{nameof(Name)} is null");
 
         // インスタンスを返す
         var result = Create(src.Name);
