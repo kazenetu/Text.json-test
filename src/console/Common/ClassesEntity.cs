@@ -39,7 +39,7 @@ public class ClassesEntity
     public void AddRootProperty(Property Property)
     {
         // HACK ルートクラス存在チェック
-        if(RootClass is null) new Exception($"{nameof(RootClass)} is null");
+        if(RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
 
         // プロパティ追加
         RootClass?.AddProperty(Property);
@@ -52,7 +52,7 @@ public class ClassesEntity
     public void AddInnerClass(Class innerClass)
     {
         // 入力チェック
-        if(innerClass is null) new ArgumentException($"{nameof(innerClass)} is null");
+        if(innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
 
         // インナークラスリストに追加
         innerClasses.Add(innerClass!);
@@ -66,7 +66,7 @@ public class ClassesEntity
     public static ClassesEntity Create(string rootClassName)
     {
         // 入力チェック
-        if(rootClassName is null) new ArgumentException($"{nameof(rootClassName)} is null");
+        if(rootClassName is null) throw new ArgumentException($"{nameof(rootClassName)} is null");
 
         // インスタンスを返す
         var result = new ClassesEntity()
@@ -87,9 +87,7 @@ public class ClassesEntity
     public string GetClassString(int indentLevel = 0)
     {
         //必須パラメータチェック
-        if(RootClass is null){
-            throw new Exception("RootClassが設定されていません");
-        };
+        if(RootClass is null) throw new Exception("RootClassが設定されていません");;
 
         var result = string.Empty;
 
