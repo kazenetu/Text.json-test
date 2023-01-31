@@ -86,8 +86,8 @@ public class ClassesEntity
     /// <returns>class文字列</returns>
     public string GetClassString(int indentLevel = 0)
     {
-        //必須パラメータチェック
-        if(RootClass is null) throw new Exception("RootClassが設定されていません");;
+        // 必須パラメータチェック
+        if(RootClass is null) throw new NullReferenceException("RootClassが設定されていません");;
 
         var result = string.Empty;
 
