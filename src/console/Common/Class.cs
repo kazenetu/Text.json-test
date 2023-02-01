@@ -62,25 +62,4 @@ public class Class
             Name = className
         };
    }
-
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="src">ディープコピー元のクラスエンティティ インスタンス</param>
-    /// <returns>クラスエンティティ インスタンス</returns>
-    public static Class Create(Class src)
-    {
-        // 入力チェック
-        if(!src.Properties.Any()) throw new ArgumentException($"{nameof(Properties)} count is zero");
-        if(string.IsNullOrEmpty(src.Name)) throw new ArgumentException($"{nameof(Name)} is null");
-
-        // インスタンスを返す
-        var result = Create(src.Name);
-        foreach(var property in src.Properties)
-        {
-            result.AddProperty(property);
-        }
-
-        return result;
-   }
 }
