@@ -1,7 +1,3 @@
-using System;
-using System.Text;
-using System.Text.Json;
-
 /// <summary>
 /// クラス情報
 /// </summary>
