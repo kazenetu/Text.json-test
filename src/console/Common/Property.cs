@@ -1,4 +1,3 @@
-using System.Text;
 /// <summary>
 /// プロパティValueObject
 /// </summary>
