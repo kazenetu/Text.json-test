@@ -49,7 +49,7 @@ public record Property
     public static Property Create(string name, PropertyType propertyType)
     {
         // パラメータチェック
-        if(string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
+        if (string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
 
         // デフォルト値設定
         var defaultValue = string.Empty;
@@ -73,7 +73,7 @@ public record Property
     public override string ToString()
     {
         var defualt = string.Empty;
-        if(DefaultValue is not "")
+        if (DefaultValue is not "")
         {
             defualt = $" = {DefaultValue};";
         }

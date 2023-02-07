@@ -24,13 +24,13 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// 型種別
     /// </summary>
-    private Kinds Kind{get;set;}
+    private Kinds Kind { get; set; }
 
     /// <summary>
     /// クラス名
     /// </summary>
     /// <value>クラス名(デフォルトはstring.Empty)</value>
-    public string ClassName {get;} = string.Empty;
+    public string ClassName { get; } = string.Empty;
 
     /// <summary>
     /// インスタンス生成
@@ -41,7 +41,7 @@ public record PropertyType : BasePropertyType
     public PropertyType(string srcTypeName, bool isList) : base(isList)
     {
         // パラメータチェック
-        if(string.IsNullOrEmpty(srcTypeName)) throw new ArgumentException($"{nameof(srcTypeName)} is null");
+        if (string.IsNullOrEmpty(srcTypeName)) throw new ArgumentException($"{nameof(srcTypeName)} is null");
 
         // 型種別設定
         Kind = GetKind(srcTypeName, string.Empty);
@@ -56,7 +56,7 @@ public record PropertyType : BasePropertyType
     public PropertyType(int classNo, bool isList) : base(isList)
     {
         // パラメータチェック
-        if(classNo < 0) throw new ArgumentException($"{nameof(classNo)} is negative value");
+        if (classNo < 0) throw new ArgumentException($"{nameof(classNo)} is negative value");
 
         // クラス名を設定
         var className = "InnerClass";
@@ -79,7 +79,8 @@ public record PropertyType : BasePropertyType
     public override string ToString()
     {
         var csTypeName = ToPropertyType();
-        if(IsList){
+        if (IsList)
+        {
             return $"List<{csTypeName}>?";
         }
         return csTypeName;
