@@ -21,7 +21,8 @@ public class ClassesEntity
     /// ルートクラスのクラス名を返す
     /// </summary>
     /// <returns>ルートクラス</returns>
-    public string Name{
+    public string Name
+    {
         get => RootClass?.Name ?? "RootClass";
     }
 
@@ -39,7 +40,7 @@ public class ClassesEntity
     public void AddRootProperty(Property Property)
     {
         // HACK ルートクラス存在チェック
-        if(RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
+        if (RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
 
         // プロパティ追加
         RootClass?.AddProperty(Property);
@@ -52,7 +53,7 @@ public class ClassesEntity
     public void AddInnerClass(Class innerClass)
     {
         // 入力チェック
-        if(innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
+        if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
 
         // インナークラスリストに追加
         innerClasses.Add(innerClass!);
@@ -66,7 +67,7 @@ public class ClassesEntity
     public static ClassesEntity Create(string rootClassName)
     {
         // 入力チェック
-        if(rootClassName is null) throw new ArgumentException($"{nameof(rootClassName)} is null");
+        if (rootClassName is null) throw new ArgumentException($"{nameof(rootClassName)} is null");
 
         // インスタンスを返す
         var result = new ClassesEntity()
@@ -87,7 +88,7 @@ public class ClassesEntity
     public string GetClassString(int indentLevel = 0)
     {
         // 必須パラメータチェック
-        if(RootClass is null) throw new NullReferenceException("RootClassが設定されていません");;
+        if (RootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
 
         var result = string.Empty;
 
@@ -115,7 +116,7 @@ public class ClassesEntity
         result.AppendLine($"{levelSpace}public class {classEntity.Name}");
         result.AppendLine($"{levelSpace}{{");
 
-        if(classEntity == RootClass)
+        if (classEntity == RootClass)
         {
             // インナークラスのクラス文字列作成
             foreach (var classInstance in innerClasses)
