@@ -6,12 +6,12 @@ public class FileOutputCommand
     /// <summary>
     /// ファイル出力のルートパス
     /// </summary>
-    public string RootPath {get; init;}
+    public string RootPath { get; init; }
 
     /// <summary>
     /// 名前空間
     /// </summary>
-    public string NameSpace {get; init;}
+    public string NameSpace { get; init; }
 
     /// <summary>
     /// コンストラクタ
