@@ -11,7 +11,8 @@ public class ConsoleOutputRepository : IConsoleOutputRepository
     public void Output(ClassesEntity classInstance)
     {
         //必須パラメータチェック
-        if(classInstance is null){
+        if (classInstance is null)
+        {
             throw new Exception("classInstanceが設定されていません");
         };
 

@@ -19,7 +19,7 @@ public class JsonRepository : IJsonRepository
 
         // 文字列として読み取り
         var rootClassName = Path.GetFileNameWithoutExtension(filePath);
-        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
+        rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
         return CreateClassEntityFromString(result, rootClassName);
     }
 
@@ -31,7 +31,7 @@ public class JsonRepository : IJsonRepository
     /// <param name="rootClassName">ルートクラス名</param>
     public ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
     {
-        rootClassName = $"{rootClassName.Substring(0,1).ToUpper()}{rootClassName.Substring(1)}";
+        rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
         var classesEntity = ClassesEntity.Create(rootClassName);
 
         // JSON文字列読み込み
@@ -118,7 +118,7 @@ public class JsonRepository : IJsonRepository
             // プロパティ生成
             var createInnerClass = false;
             Property prop;
-            if(string.IsNullOrEmpty(classJson))
+            if (string.IsNullOrEmpty(classJson))
             {
                 prop = Property.Create(element.Name, new PropertyType(propertyType, isList));
             }
@@ -145,7 +145,7 @@ public class JsonRepository : IJsonRepository
             }
         }
 
-        return  classEntity;
+        return classEntity;
     }
 
     /// <summary>
