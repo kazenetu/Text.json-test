@@ -14,8 +14,8 @@ public class FileOutputRepository : IFileOutputRepository
     public bool Output(ClassesEntity classInstance, FileOutputCommand command)
     {
         //必須パラメータチェック
-        if(classInstance is null) return false;
-        if(command.RootPath is null) return false;
+        if (classInstance is null) return false;
+        if (command.RootPath is null) return false;
 
         // フォルダの存在確認とフォルダ作成
         if (!Directory.Exists(command.RootPath))
@@ -28,14 +28,14 @@ public class FileOutputRepository : IFileOutputRepository
         var nameSpaceNone = string.IsNullOrEmpty(command.NameSpace);
         var initialSpaceIndex = 0;
 
-        if(!nameSpaceNone)
+        if (!nameSpaceNone)
         {
             initialSpaceIndex = 1;
             fileData.AppendLine($"namespace {command.NameSpace}");
             fileData.AppendLine("{");
         }
         fileData.Append(classInstance.GetClassString(initialSpaceIndex));
-        if(!nameSpaceNone)
+        if (!nameSpaceNone)
         {
             fileData.AppendLine("}");
         }
