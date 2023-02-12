@@ -5,13 +5,13 @@ using System.Text;
 /// </summary>
 public class SimpleJson
 {
-    public string propString{set; get;} = string.Empty;
-    public decimal propNumber{set; get;}
-    public string propDate{set; get;} = string.Empty;
-    public bool propTrue{set; get;}
-    public bool propFalse{set; get;}
-    public object propNull{set; get;} = string.Empty;
-    public List<decimal>? propArray{set; get;}
+    public string propString { set; get; } = string.Empty;
+    public decimal propNumber { set; get; }
+    public string propDate { set; get; } = string.Empty;
+    public bool propTrue { set; get; }
+    public bool propFalse { set; get; }
+    public object propNull { set; get; } = string.Empty;
+    public List<decimal>? propArray { set; get; }
 
     public override string ToString()
     {
