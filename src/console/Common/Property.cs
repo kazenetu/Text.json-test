@@ -39,6 +39,28 @@ public record Property
     private Property()
     {
     }
+    
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="name">クラス名称</param>
+    /// <param name="propertyType">型クラス インスタンス</param>
+    /// <returns>プロパティValueObject インスタンス</returns>
+    public Property(string name, PropertyType propertyType)
+    {
+        // パラメータチェック
+        if (string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
+
+        // デフォルト値設定
+        if (propertyType.ToString() is "string" or "object")
+        {
+            DefaultValue = "string.Empty";
+        }
+
+        // 名前とプロパティ型の設定
+        Name = name;
+        Type = propertyType;
+    }
 
     /// <summary>
     /// インスタンス生成
