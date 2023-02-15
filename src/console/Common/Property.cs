@@ -68,6 +68,7 @@ public record Property
     /// <param name="name">クラス名称</param>
     /// <param name="propertyType">型クラス インスタンス</param>
     /// <returns>プロパティValueObject インスタンス</returns>
+    [Obsolete]
     public static Property Create(string name, PropertyType propertyType)
     {
         // パラメータチェック
