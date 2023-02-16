@@ -120,11 +120,11 @@ public class JsonRepository : IJsonRepository
             Property prop;
             if (string.IsNullOrEmpty(classJson))
             {
-                prop = Property.Create(element.Name, new PropertyType(propertyType, isList));
+                prop = new Property(element.Name, new PropertyType(propertyType, isList));
             }
             else
             {
-                prop = Property.Create(element.Name, new PropertyType(innerClassNo, isList));
+                prop = new Property(element.Name, new PropertyType(innerClassNo, isList));
                 createInnerClass = true;
             }
 
