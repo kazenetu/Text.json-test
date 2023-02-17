@@ -63,33 +63,6 @@ public record Property
     }
 
     /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="name">クラス名称</param>
-    /// <param name="propertyType">型クラス インスタンス</param>
-    /// <returns>プロパティValueObject インスタンス</returns>
-    [Obsolete]
-    public static Property Create(string name, PropertyType propertyType)
-    {
-        // パラメータチェック
-        if (string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
-
-        // デフォルト値設定
-        var defaultValue = string.Empty;
-        if (propertyType.ToString() is "string" or "object")
-        {
-            defaultValue = "string.Empty";
-        }
-
-        return new Property()
-        {
-            Name = name,
-            Type = propertyType,
-            DefaultValue = defaultValue
-        };
-    }
-
-    /// <summary>
     /// プロパティを返す
     /// </summary>
     /// <returns>C#プロパティ</returns>
