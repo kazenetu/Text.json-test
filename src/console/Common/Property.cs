@@ -34,13 +34,6 @@ public record Property
     private string DefaultValue = string.Empty;
 
     /// <summary>
-    /// 非公開コンストラクタ
-    /// </summary>
-    private Property()
-    {
-    }
-    
-    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name">クラス名称</param>
