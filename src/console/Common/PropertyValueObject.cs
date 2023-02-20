@@ -38,7 +38,6 @@ public record PropertyValueObject
     /// </summary>
     /// <param name="name">クラス名称</param>
     /// <param name="propertyType">型クラス インスタンス</param>
-    /// <returns>プロパティValueObject インスタンス</returns>
     public PropertyValueObject(string name, PropertyType propertyType)
     {
         // パラメータチェック
@@ -56,11 +55,12 @@ public record PropertyValueObject
     }
 
     /// <summary>
-    /// プロパティを返す
+    /// C#プロパティ文字列を返す
     /// </summary>
-    /// <returns>C#プロパティ</returns>
+    /// <returns>C#プロパティ文字列</returns>
     public override string ToString()
     {
+        // デフォルト文字列設定
         var defualt = string.Empty;
         if (DefaultValue is not "")
         {
