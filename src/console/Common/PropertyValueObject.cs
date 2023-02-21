@@ -69,4 +69,14 @@ public record PropertyValueObject
 
         return $"{Type} {Name}{{set; get;}}{defualt}";
     }
+
+    /// <summary>
+    /// 暫定対応プロパティ情報に変換
+    /// </summary>
+    /// <returns><プロパティ情報/returns>
+    [Obsolete("暫定対応のため後ほど削除")]
+    public Property GetProperty()
+    {
+        return new(Name, Type!);
+    }
 }
