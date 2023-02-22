@@ -117,25 +117,25 @@ public class JsonRepository : IJsonRepository
 
             // プロパティ生成
             var createInnerClass = false;
-            Property prop;
+            PropertyValueObject prop;
             if (string.IsNullOrEmpty(classJson))
             {
-                prop = new Property(element.Name, new PropertyType(propertyType, isList));
+                prop = new PropertyValueObject(element.Name, new PropertyType(propertyType, isList));
             }
             else
             {
-                prop = new Property(element.Name, new PropertyType(innerClassNo, isList));
+                prop = new PropertyValueObject(element.Name, new PropertyType(innerClassNo, isList));
                 createInnerClass = true;
             }
 
             // プロパティ追加
             if (className == classesEntity.Name)
             {
-                classesEntity.AddRootProperty(prop);
+                classesEntity.AddRootProperty(prop.GetProperty());
             }
             else
             {
-                classEntity.AddProperty(prop);
+                classEntity.AddProperty(prop.GetProperty());
             }
 
             // インナークラス追加
