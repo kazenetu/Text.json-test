@@ -43,6 +43,19 @@ public class Class
     }
 
     /// <summary>
+    /// プロパティ追加
+    /// </summary>
+    /// <param name="Property">追加対象</param>
+    public void AddProperty(PropertyValueObject Property)
+    {
+        // 入力チェック
+        if (Property is null) throw new ArgumentException($"{nameof(Property)} is null");
+
+        // プロパティリスト追加
+        propertyies.Add(Property!.GetProperty());
+    }
+
+    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="className">クラス名</param>
