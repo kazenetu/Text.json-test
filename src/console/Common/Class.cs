@@ -33,6 +33,8 @@ public class Class
     /// プロパティ追加
     /// </summary>
     /// <param name="Property">追加対象</param>
+
+    [Obsolete]
     public void AddProperty(Property Property)
     {
         // 入力チェック
