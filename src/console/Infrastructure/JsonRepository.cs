@@ -131,11 +131,11 @@ public class JsonRepository : IJsonRepository
             // プロパティ追加
             if (className == classesEntity.Name)
             {
-                classesEntity.AddRootProperty(prop.GetProperty());
+                classesEntity.AddRootProperty(prop);
             }
             else
             {
-                classEntity.AddProperty(prop.GetProperty());
+                classEntity.AddProperty(prop);
             }
 
             // インナークラス追加
