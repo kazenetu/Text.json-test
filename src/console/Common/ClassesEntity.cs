@@ -37,20 +37,6 @@ public class ClassesEntity
     /// ルートクラスのプロパティ追加
     /// </summary>
     /// <param name="Property">追加対象</param>
-    [Obsolete]
-    public void AddRootProperty(Property Property)
-    {
-        // HACK ルートクラス存在チェック
-        if (RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
-
-        // プロパティ追加
-        RootClass?.AddProperty(Property);
-    }
-
-    /// <summary>
-    /// ルートクラスのプロパティ追加
-    /// </summary>
-    /// <param name="Property">追加対象</param>
     public void AddRootProperty(PropertyValueObject Property)
     {
         // HACK ルートクラス存在チェック
