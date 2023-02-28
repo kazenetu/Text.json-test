@@ -143,6 +143,7 @@ public class ClassesEntity
     /// <param name="propertyEntity">プロパティエンティティインスタンス</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>プロパティ文字列</returns>
+    [Obsolete]
     private string GetPropertyString(Property propertyEntity, int indentLevel)
     {
         var result = new StringBuilder();
