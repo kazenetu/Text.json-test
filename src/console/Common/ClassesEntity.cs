@@ -156,6 +156,26 @@ public class ClassesEntity
 
         return result.ToString();
     }
+
+    /// <summary>
+    /// プロパティValueObjectからプロパティ文字列を作成して返す
+    /// </summary>
+    /// <param name="property">プロパティValueObject</param>
+    /// <param name="indentLevel">インデントレベル</param>
+    /// <returns>プロパティ文字列</returns>
+    private string GetPropertyString(PropertyValueObject property, int indentLevel)
+    {
+        var result = new StringBuilder();
+
+        // インデント設定
+        var levelSpace = new string('S', indentLevel).Replace("S", "  ");
+
+        // プロパティ文字列作成
+        result.Append($"{levelSpace}public {property}");
+        result.AppendLine();
+
+        return result.ToString();
+    }
     #endregion
 
 }
