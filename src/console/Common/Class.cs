@@ -13,7 +13,7 @@ public class Class
     /// プロパティリスト
     /// </summary>
     /// <returns>プロパティリスト</returns>
-    public IReadOnlyList<Property> Properties { get { return propertyies; } }
+    public IReadOnlyList<PropertyValueObject> Properties { get { return propertyies; } }
 
     /// <summary>
     /// 非公開コンストラクタ
@@ -27,7 +27,7 @@ public class Class
     /// 非公開プロパティリスト
     /// </summary>
     /// <returns>非公開プロパティリスト</returns>
-    private List<Property> propertyies = new();
+    private List<PropertyValueObject> propertyies = new();
 
     /// <summary>
     /// プロパティ追加
@@ -44,7 +44,7 @@ public class Class
         if (Property is null) throw new ArgumentException($"{nameof(Property)} is null");
 
         // プロパティリスト追加
-        propertyies.Add(Property!.GetProperty());
+        propertyies.Add(Property);
     }
 
     /// <summary>
