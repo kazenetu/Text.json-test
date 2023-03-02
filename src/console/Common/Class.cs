@@ -33,11 +33,6 @@ public class Class
     /// プロパティ追加
     /// </summary>
     /// <param name="Property">追加対象</param>
-
-    /// <summary>
-    /// プロパティ追加
-    /// </summary>
-    /// <param name="Property">追加対象</param>
     public void AddProperty(PropertyValueObject Property)
     {
         // 入力チェック
