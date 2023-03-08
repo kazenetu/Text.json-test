@@ -9,6 +9,18 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
+    private List<ClassEntity> _innerClasses = new();
+
+    /// <summary>
+    /// ルートクラス
+    /// </summary>
+    /// <returns>ルートクラス</returns>
+    private ClassEntity? _RootClass = null;
+
+    /// <summary>
+    /// 非公開インナークラスリスト
+    /// </summary>
+    /// <returns>非公開インナークラスリスト</returns>
     private List<Class> innerClasses = new();
 
     /// <summary>
@@ -46,6 +58,19 @@ public class ClassesEntity
         RootClass?.AddProperty(Property);
     }
 
+    /// <summary>
+    /// ルートクラスのプロパティ追加
+    /// </summary>
+    /// <param name="Property">追加対象</param>
+    public void _AddRootProperty(PropertyValueObject Property)
+    {
+        // HACK ルートクラス存在チェック
+        if (RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
+
+        // プロパティ追加
+        _RootClass?.AddProperty(Property);
+    }
+
 
     /// <summary>
     /// インナークラスの追加
@@ -61,6 +86,19 @@ public class ClassesEntity
     }
 
     /// <summary>
+    /// インナークラスの追加
+    /// </summary>
+    /// <param name="innerClass">追加対象</param>
+    public void AddInnerClass(ClassEntity innerClass)
+    {
+        // 入力チェック
+        if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
+
+        // インナークラスリストに追加
+        _innerClasses.Add(innerClass!);
+    }
+
+    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="rootClassName">ルートクラス名</param>
@@ -73,7 +111,8 @@ public class ClassesEntity
         // インスタンスを返す
         var result = new ClassesEntity()
         {
-            RootClass = Class.Create(rootClassName!)
+            RootClass = Class.Create(rootClassName!),
+            _RootClass = ClassEntity.Create(rootClassName!)
         };
 
         return result;
