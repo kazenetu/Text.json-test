@@ -9,25 +9,13 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
-    private List<ClassEntity> _innerClasses = new();
+    private List<ClassEntity> InnerClasses = new();
 
     /// <summary>
     /// ルートクラス
     /// </summary>
     /// <returns>ルートクラス</returns>
-    private ClassEntity? _RootClass = null;
-
-    /// <summary>
-    /// 非公開インナークラスリスト
-    /// </summary>
-    /// <returns>非公開インナークラスリスト</returns>
-    private List<Class> innerClasses = new();
-
-    /// <summary>
-    /// ルートクラス
-    /// </summary>
-    /// <returns>ルートクラス</returns>
-    private Class? RootClass = null;
+    private ClassEntity? RootClass = null;
 
     /// <summary>
     /// ルートクラスのクラス名を返す
@@ -59,33 +47,6 @@ public class ClassesEntity
     }
 
     /// <summary>
-    /// ルートクラスのプロパティ追加
-    /// </summary>
-    /// <param name="Property">追加対象</param>
-    public void _AddRootProperty(PropertyValueObject Property)
-    {
-        // HACK ルートクラス存在チェック
-        if (RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
-
-        // プロパティ追加
-        _RootClass?.AddProperty(Property);
-    }
-
-
-    /// <summary>
-    /// インナークラスの追加
-    /// </summary>
-    /// <param name="innerClass">追加対象</param>
-    public void AddInnerClass(Class innerClass)
-    {
-        // 入力チェック
-        if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
-
-        // インナークラスリストに追加
-        innerClasses.Add(innerClass!);
-    }
-
-    /// <summary>
     /// インナークラスの追加
     /// </summary>
     /// <param name="innerClass">追加対象</param>
@@ -95,7 +56,7 @@ public class ClassesEntity
         if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
 
         // インナークラスリストに追加
-        _innerClasses.Add(innerClass!);
+        InnerClasses.Add(innerClass!);
     }
 
     /// <summary>
@@ -111,8 +72,7 @@ public class ClassesEntity
         // インスタンスを返す
         var result = new ClassesEntity()
         {
-            RootClass = Class.Create(rootClassName!),
-            _RootClass = ClassEntity.Create(rootClassName!)
+            RootClass = ClassEntity.Create(rootClassName!)
         };
 
         return result;
@@ -147,7 +107,7 @@ public class ClassesEntity
     /// <param name="classEntity">クラスエンティティインスタンス</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>class文字列</returns>
-    private string GetClassString(Class classEntity, int indentLevel = 0)
+    private string GetClassString(ClassEntity classEntity, int indentLevel = 0)
     {
         var result = new StringBuilder();
 
@@ -159,7 +119,7 @@ public class ClassesEntity
         if (classEntity == RootClass)
         {
             // インナークラスのクラス文字列作成
-            foreach (var classInstance in innerClasses)
+            foreach (var classInstance in InnerClasses)
             {
                 result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
             }

@@ -47,7 +47,7 @@ public class JsonRepository : IJsonRepository
     /// <param name="className">クラス名</param>
     /// <param name="classesEntity">集約エンティティ</param>
     /// <returns>クラスエンティティ インスタンス</returns>
-    private Class JsonParse(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
+    private ClassEntity JsonParse(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
         return ProcessJsonDocument(json, className, ref classesEntity, innerClassNo);
     }
@@ -59,10 +59,10 @@ public class JsonRepository : IJsonRepository
     /// <param name="className">クラス名</param>
     /// <param name="classesEntity">集約エンティティ</param>
     /// <param name="innerClassNo">インナークラス番号</param>
-    private Class ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
+    private ClassEntity ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
         // Classインスタンス設定
-        var classEntity = Class.Create(className);
+        var classEntity = ClassEntity.Create(className);
 
         var jsonDocument = JsonDocument.Parse(json);
         var rootElement = jsonDocument.RootElement;
