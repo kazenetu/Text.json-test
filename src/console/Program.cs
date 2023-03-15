@@ -1,5 +1,7 @@
 using System.Text.Json;
 
+namespace ConsoleApp;
+
 internal class Program
 {
     /// <summary>
@@ -48,7 +50,7 @@ internal class Program
         // propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(simpleJson,"roootClass"));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(simpleJson, "roootClass"));
         Console.WriteLine("--------------------");
         //出力結果：
         // public class RootClass
@@ -91,7 +93,7 @@ internal class Program
         // propNumber:10        
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerClassJson,"roootClass"));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerClassJson, "roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -136,7 +138,7 @@ internal class Program
         //   InnerClass...  propObjString:propObjString2
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(arrayJson,"roootClass"));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(arrayJson, "roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -195,7 +197,7 @@ internal class Program
         //     propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerNestJson,"roootClass"));
+        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerNestJson, "roootClass"));
         Console.WriteLine("--------------------");
         // ----Class解析結果----
         // public class RootClass
@@ -216,7 +218,7 @@ internal class Program
         //
         //   public InnerClass? propObjct{set; get;}
         // }
-        
+
         // -----------------------------------------------------
         // Json解析Class解析結果 ファイル出力
         // -----------------------------------------------------
@@ -227,8 +229,8 @@ internal class Program
         var command = new FileOutputCommand(rootPath, nameSpace);
         repository.Output(jsonRepository.CreateClassEntityFromString(simpleJson, "SimpleJsonClass"), command);
         repository.Output(jsonRepository.CreateClassEntityFromString(innerClassJson, "InnerClassJsonClass"), command);
-        repository.Output(jsonRepository.CreateClassEntityFromString(arrayJson, "ArrayJsonClass") ,command);
-        repository.Output(jsonRepository.CreateClassEntityFromString(innerNestJson, "InnerNestJsonClass") ,command);
+        repository.Output(jsonRepository.CreateClassEntityFromString(arrayJson, "ArrayJsonClass"), command);
+        repository.Output(jsonRepository.CreateClassEntityFromString(innerNestJson, "InnerNestJsonClass"), command);
     }
 
     /// <summary>
