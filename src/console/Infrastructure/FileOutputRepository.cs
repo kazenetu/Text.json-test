@@ -1,5 +1,7 @@
 using System.Text;
 
+namespace Infrastructure;
+
 /// <summary>
 /// ファイル出力リポジトリクラス
 /// </summary>

@@ -1,3 +1,5 @@
+namespace Infrastructure;
+
 /// <summary>
 /// コンソール出力リポジトリクラス
 /// </summary>

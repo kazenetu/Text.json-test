@@ -1,5 +1,7 @@
 using System.Text.Json;
 
+namespace Infrastructure;
+
 /// <summary>
 /// JSON読み込みリポジトリ
 /// </summary>
