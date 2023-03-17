@@ -1,3 +1,5 @@
+using Domain.Interfaces;
+
 namespace Infrastructure;
 
 /// <summary>
