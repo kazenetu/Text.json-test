@@ -1,3 +1,5 @@
+namespace Domain.Interfaces;
+
 /// <summary>
 /// ファイル出力リポジトリインターフェース
 /// </summary>
