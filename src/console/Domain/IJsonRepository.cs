@@ -1,3 +1,5 @@
+namespace Domain.Interfaces;
+
 /// <summary>
 /// JSON読み込みリポジトリインターフェース
 /// </summary>
