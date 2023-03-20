@@ -1,4 +1,5 @@
 using System.Text;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Infrastructure;

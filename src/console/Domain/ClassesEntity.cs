@@ -1,4 +1,5 @@
 using System.Text;
+namespace Domain.Entities;
 
 /// <summary>
 /// クラス集約エンティティ
