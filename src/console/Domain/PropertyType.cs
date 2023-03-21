@@ -1,3 +1,5 @@
+namespace Domain.ValueObjects;
+
 /// <summary>
 /// 基底プロパティ型ValueObject
 /// </summary>

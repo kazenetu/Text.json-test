@@ -1,3 +1,5 @@
+using Domain.ValueObjects;
+
 /// <summary>
 /// クラスエンティティ
 /// </summary>

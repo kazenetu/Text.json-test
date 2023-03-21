@@ -1,3 +1,5 @@
+namespace Domain.ValueObjects;
+
 /// <summary>
 /// プロパティValueObject
 /// </summary>

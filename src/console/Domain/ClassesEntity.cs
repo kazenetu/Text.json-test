@@ -1,4 +1,6 @@
 using System.Text;
+using Domain.ValueObjects;
+
 namespace Domain.Entities;
 
 /// <summary>
