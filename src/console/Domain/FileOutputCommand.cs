@@ -1,3 +1,5 @@
+namespace Domain.Commands;
+
 /// <summary>
 /// ファイル出力コマンドクラス
 /// </summary>

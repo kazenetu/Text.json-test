@@ -1,3 +1,4 @@
+using Domain.Commands;
 using Domain.Entities;
 
 namespace Domain.Interfaces;

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Domain.Commands;
 using Domain.Interfaces;
 using Infrastructure;
 
