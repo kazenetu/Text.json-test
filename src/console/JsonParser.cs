@@ -1,6 +1,8 @@
 using System.Text;
 using System.Text.Json;
 
+namespace ConsoleApp;
+
 /// <summary>
 /// Json解析クラス
 /// </summary>    
