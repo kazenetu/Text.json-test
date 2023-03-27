@@ -26,7 +26,7 @@ public interface IJsonProperty
     /// </summary>    
     /// <param name="src">対象インスタンス</param>
     /// <returns>C#の型</returns>
-    protected string GetPropertyType(JsonElement src)
+    protected static string GetPropertyType(JsonElement src)
     {
         return src.ValueKind switch
         {
