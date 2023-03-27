@@ -19,4 +19,22 @@ public interface IJsonProperty
     /// <param name="src">JsonElement</param>
     /// <returns>Jsonプロパティ結果</returns>
     JsonPropertyResult GetJsonPropertyResult(JsonElement src);
+
+    /// <summary>
+    /// プロパティのC#の型を取得する
+    /// </summary>    
+    /// <param name="src">対象インスタンス</param>
+    /// <returns>C#の型</returns>
+    protected string GetPropertyType(JsonElement src)
+    {
+        return src.ValueKind switch
+        {
+            JsonValueKind.String => "string",
+            JsonValueKind.Number => "number",
+            JsonValueKind.True => "true",
+            JsonValueKind.False => "true",
+            JsonValueKind.Null => "null",
+            _ => string.Empty,
+        };
+    }
 }
