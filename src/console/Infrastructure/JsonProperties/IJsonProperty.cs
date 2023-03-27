@@ -16,19 +16,19 @@ public interface IJsonProperty
     /// <summary>
     /// Jsonプロパティ結果の取得
     /// </summary>
-    /// <param name="src">対象インスタンス</param>
+    /// <param name="element">対象インスタンス</param>
     /// <param name="innerClassNo">インナークラス番号</param>
     /// <returns>Jsonプロパティ結果</returns>
-    JsonPropertyResult GetJsonPropertyResult(JsonProperty src, int innerClassNo);
+    JsonPropertyResult GetJsonPropertyResult(JsonProperty element, int innerClassNo);
 
     /// <summary>
     /// プロパティのC#の型を取得する
     /// </summary>    
-    /// <param name="src">対象インスタンス</param>
+    /// <param name="element">対象インスタンス</param>
     /// <returns>C#の型</returns>
-    protected static string GetPropertyType(JsonElement src)
+    protected static string GetPropertyType(JsonElement element)
     {
-        return src.ValueKind switch
+        return element.ValueKind switch
         {
             JsonValueKind.String => "string",
             JsonValueKind.Number => "number",
