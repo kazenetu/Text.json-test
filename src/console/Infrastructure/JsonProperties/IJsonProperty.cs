@@ -16,9 +16,10 @@ public interface IJsonProperty
     /// <summary>
     /// Jsonプロパティ結果の取得
     /// </summary>
-    /// <param name="src">JsonElement</param>
+    /// <param name="src">対象インスタンス</param>
+    /// <param name="innerClassNo">インナークラス番号</param>
     /// <returns>Jsonプロパティ結果</returns>
-    JsonPropertyResult GetJsonPropertyResult(JsonElement src);
+    JsonPropertyResult GetJsonPropertyResult(JsonProperty src, int innerClassNo);
 
     /// <summary>
     /// プロパティのC#の型を取得する
