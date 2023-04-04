@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Domain.Entities;
 using Domain.Interfaces;
-using Domain.ValueObjects;
+using Infrastructure.JsonProperties;
 
 namespace Infrastructure;
 
@@ -10,6 +10,22 @@ namespace Infrastructure;
 /// </summary>
 public class JsonRepository : IJsonRepository
 {
+    /// <summary>
+    /// Jsonプロパティリスト
+    /// </summary>
+    /// <typeparam name="IJsonProperty">Jsonプロパティインターフェイス</typeparam>
+    private static readonly IReadOnlyList<IJsonProperty> JsonProperties = new List<IJsonProperty>()
+    {
+        new JsonPropertyObject(),
+        new JsonPropertyArray(),
+        new JsonPropertyString(),
+        new JsonPropertyNumber(),
+        new JsonPropertyTrue(),
+        new JsonPropertyFalse(),
+        new JsonPropertyNull()
+    };
+
+
     /// <summary>
     /// JSONファイルを読み込んでClass情報を返す
     /// </summary>
@@ -73,114 +89,28 @@ public class JsonRepository : IJsonRepository
         var rootElement = jsonDocument.RootElement;
         foreach (var element in rootElement.EnumerateObject())
         {
-            var classJson = string.Empty;
-            var isList = false;
-
-            // C# 値型を取得する
-            var propertyType = GetPropertyType(element.Value);
-
-            // 追加の処理を入れる
-            switch (element.Value.ValueKind)
-            {
-                case JsonValueKind.Undefined:
-                    // TODO 例外エラー
-                    break;
-
-                case JsonValueKind.Object:
-                    // インナークラス番号をインクリメント
-                    innerClassNo++;
-
-                    // インナークラス用JSON文字列を格納
-                    classJson = element.Value.ToString();
-
-                    break;
-
-                case JsonValueKind.Array:
-                    isList = true;
-
-                    var arrayIndex = 0;
-                    while (arrayIndex < element.Value.GetArrayLength())
-                    {
-                        var ValueKind = element.Value[arrayIndex].ValueKind;
-
-                        // クラス作成
-                        if (ValueKind == JsonValueKind.Object)
-                        {
-                            // インナークラス番号をインクリメント
-                            innerClassNo++;
-
-                            // インナークラス用JSON文字列を格納
-                            classJson = element.Value[arrayIndex].ToString();
-
-                            break;
-                        }
-                        propertyType = GetPropertyType(element.Value[arrayIndex]);
-                        break;
-                    }
-                    break;
-            }
-
-            // プロパティ生成
-            var createInnerClass = false;
-            PropertyValueObject prop;
-            if (string.IsNullOrEmpty(classJson))
-            {
-                prop = new PropertyValueObject(element.Name, new PropertyType(propertyType, isList));
-            }
-            else
-            {
-                prop = new PropertyValueObject(element.Name, new PropertyType(innerClassNo, isList));
-                createInnerClass = true;
-            }
+            var jsonProperty = JsonProperties.Where(item => item.GetKeyName() == element.Value.ValueKind).FirstOrDefault();
+            if(jsonProperty is null) throw new Exception($"{element.Value.ValueKind} is can not use");
 
             // プロパティ追加
+            var jsonPropertyResult = jsonProperty.GetJsonPropertyResult(element, innerClassNo);
             if (className == classesEntity.Name)
             {
-                classesEntity.AddRootProperty(prop);
+                classesEntity.AddRootProperty(jsonPropertyResult.PropertyValueObject);
             }
             else
             {
-                classEntity.AddProperty(prop);
+                classEntity.AddProperty(jsonPropertyResult.PropertyValueObject);
             }
 
             // インナークラス追加
-            if (!string.IsNullOrEmpty(classJson) && createInnerClass)
+            innerClassNo = jsonPropertyResult.innerClasssNo;
+            if (!string.IsNullOrEmpty(jsonPropertyResult.InnerClassJson))
             {
-                classesEntity.AddInnerClass(JsonParse(classJson, prop.PropertyTypeClassName, ref classesEntity, innerClassNo));
+                classesEntity.AddInnerClass(JsonParse(jsonPropertyResult.InnerClassJson, jsonPropertyResult.PropertyValueObject.PropertyTypeClassName, ref classesEntity, innerClassNo));
             }
         }
 
         return classEntity;
     }
-
-    /// <summary>
-    /// プロパティのC#の型を取得する
-    /// </summary>    
-    /// <param name="src">対象インスタンス</param>
-    /// <returns>C#の型</returns>
-    private string GetPropertyType(JsonElement src)
-    {
-        // 型を特定する
-        string result = string.Empty;
-        switch (src.ValueKind)
-        {
-            case JsonValueKind.String:
-                result = "string";
-                break;
-            case JsonValueKind.Number:
-                result = "number";
-                break;
-            case JsonValueKind.True:
-                result = "true";
-                break;
-            case JsonValueKind.False:
-                result = "true";
-                break;
-            case JsonValueKind.Null:
-                result = "null";
-                break;
-        }
-        return result;
-    }
-
 }
