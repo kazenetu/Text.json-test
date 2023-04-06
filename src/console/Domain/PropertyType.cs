@@ -37,6 +37,35 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// インスタンス生成
     /// </summary>
+    /// <param name="type">C#Type</param>
+    /// <param name="isList">配列か否か</param>
+    /// <returns>プロパティ型インスタンス</returns>
+    public PropertyType(Type type, bool isList) : base(isList)
+    {
+        // TODO 型種別設定
+        switch (type.Name)
+        {
+            case "string":
+                Kind = Kinds.String;
+                break;
+            case "number":
+                Kind = Kinds.Decimal;
+                break;
+            case "true":
+                Kind = Kinds.Bool;
+                break;
+            case "false":
+                Kind = Kinds.Bool;
+                break;
+            case "null":
+                Kind = Kinds.Null;
+                break;
+        }
+    }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
     /// <param name="srcTypeName">type名</param>
     /// <param name="isList">配列か否か</param>
     /// <returns>プロパティ型インスタンス</returns>
