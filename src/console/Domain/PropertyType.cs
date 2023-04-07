@@ -24,6 +24,17 @@ public record PropertyType : BasePropertyType
     }
 
     /// <summary>
+    /// C#Typeと値種別のリスト
+    /// </summary>
+    private static readonly List<(Type type, Kinds kind)> TypeKinds = new()
+    {
+        (typeof(string), Kinds.String),
+        (typeof(decimal), Kinds.Decimal),
+        (typeof(bool), Kinds.Bool),
+        (typeof(Nullable), Kinds.Null),
+    };
+
+    /// <summary>
     /// 型種別
     /// </summary>
     private Kinds Kind { get; set; }
@@ -42,25 +53,14 @@ public record PropertyType : BasePropertyType
     /// <returns>プロパティ型インスタンス</returns>
     public PropertyType(Type type, bool isList) : base(isList)
     {
-        // TODO 型種別設定
-        switch (type.Name)
-        {
-            case "string":
-                Kind = Kinds.String;
-                break;
-            case "number":
-                Kind = Kinds.Decimal;
-                break;
-            case "true":
-                Kind = Kinds.Bool;
-                break;
-            case "false":
-                Kind = Kinds.Bool;
-                break;
-            case "null":
-                Kind = Kinds.Null;
-                break;
-        }
+        // 対象抽出
+        var target = TypeKinds.Where(item => item.type == type);
+
+        // パラメータチェック
+        if(!target.Any())  throw new ArgumentException($"{nameof(type)}({type.Name}) is null");
+
+        // 型種別設定
+        Kind = target.First().kind;
     }
 
     /// <summary>
