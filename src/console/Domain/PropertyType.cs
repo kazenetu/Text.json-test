@@ -69,6 +69,7 @@ public record PropertyType : BasePropertyType
     /// <param name="srcTypeName">type名</param>
     /// <param name="isList">配列か否か</param>
     /// <returns>プロパティ型インスタンス</returns>
+    [Obsolete()]
     public PropertyType(string srcTypeName, bool isList) : base(isList)
     {
         // パラメータチェック
