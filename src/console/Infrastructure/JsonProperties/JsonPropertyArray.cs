@@ -26,7 +26,7 @@ public class JsonPropertyArray : IJsonProperty
     public JsonPropertyResult GetJsonPropertyResult(JsonProperty element, int innerClassNo)
     {
         var innerClassJson= string.Empty;
-        var propertyType = string.Empty;
+        Type? propertyType = null;
         var arrayIndex = 0;
         while (arrayIndex < element.Value.GetArrayLength())
         {
@@ -43,7 +43,7 @@ public class JsonPropertyArray : IJsonProperty
 
                 break;
             }
-            propertyType = IJsonProperty.GetPropertyType(element.Value[arrayIndex]);
+            propertyType = GetPropertyType(element.Value[arrayIndex]);
             break;
         }
 
@@ -51,6 +51,9 @@ public class JsonPropertyArray : IJsonProperty
         PropertyValueObject prop;
         if (string.IsNullOrEmpty(innerClassJson))
         {
+            // Typeチェック
+            if(propertyType is null) throw new Exception($"{nameof(propertyType)} is null");
+
             // 値プロパティ
             prop = new PropertyValueObject(element.Name, new PropertyType(propertyType, true));
         }
@@ -61,5 +64,23 @@ public class JsonPropertyArray : IJsonProperty
         }
 
         return new JsonPropertyResult(prop, innerClassJson, innerClassNo);
+    }
+
+    /// <summary>
+    /// プロパティのC#の型を取得する
+    /// </summary>    
+    /// <param name="element">対象インスタンス</param>
+    /// <returns>C#の型</returns>
+    protected static Type GetPropertyType(JsonElement element)
+    {
+        return element.ValueKind switch
+        {
+            JsonValueKind.String => typeof(string),
+            JsonValueKind.Number => typeof(decimal),
+            JsonValueKind.True => typeof(bool),
+            JsonValueKind.False => typeof(bool),
+            JsonValueKind.Null => typeof(Nullable),
+            _ => throw new Exception($"{element.ValueKind} is can not use")
+        };
     }
 }
