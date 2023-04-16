@@ -66,22 +66,6 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// インスタンス生成
     /// </summary>
-    /// <param name="srcTypeName">type名</param>
-    /// <param name="isList">配列か否か</param>
-    /// <returns>プロパティ型インスタンス</returns>
-    [Obsolete()]
-    public PropertyType(string srcTypeName, bool isList) : base(isList)
-    {
-        // パラメータチェック
-        if (string.IsNullOrEmpty(srcTypeName)) throw new ArgumentException($"{nameof(srcTypeName)} is null");
-
-        // 型種別設定
-        Kind = GetKind(srcTypeName, string.Empty);
-    }
-
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
     /// <param name="classNo">クラス名用No</param>
     /// <param name="isList">配列か否か</param>
     /// <returns>プロパティ型インスタンス</returns>

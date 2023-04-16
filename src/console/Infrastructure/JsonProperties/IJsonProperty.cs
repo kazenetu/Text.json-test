@@ -21,22 +21,4 @@ public interface IJsonProperty
     /// <returns>Jsonプロパティ結果</returns>
     JsonPropertyResult GetJsonPropertyResult(JsonProperty element, int innerClassNo);
 
-    /// <summary>
-    /// プロパティのC#の型を取得する
-    /// </summary>    
-    /// <param name="element">対象インスタンス</param>
-    /// <returns>C#の型</returns>
-    [Obsolete]
-    protected static string GetPropertyType(JsonElement element)
-    {
-        return element.ValueKind switch
-        {
-            JsonValueKind.String => "string",
-            JsonValueKind.Number => "number",
-            JsonValueKind.True => "true",
-            JsonValueKind.False => "true",
-            JsonValueKind.Null => "null",
-            _ => string.Empty,
-        };
-    }
 }
