@@ -14,7 +14,7 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// 型種別
     /// </summary>
-    private enum Kinds
+    public enum Kinds
     {
         String,
         Decimal,
@@ -37,7 +37,7 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// 型種別
     /// </summary>
-    private Kinds Kind { get; set; }
+    public Kinds Kind { get; init; }
 
     /// <summary>
     /// クラス名
