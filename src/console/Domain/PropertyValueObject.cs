@@ -21,19 +21,19 @@ public record PropertyValueObject
     /// 名称
     /// </summary>
     /// <value>プロパティ名</value>
-    private string Name = string.Empty;
+    public string Name { get; init; } = string.Empty;
 
     /// <summary>
     /// 型ValueObject
     /// </summary>
     /// <value>型ValueObject</value>
-    private PropertyType? Type;
+    public PropertyType? Type { get; init; } = null;
 
     /// <summary>
     /// 初期値
     /// </summary>
     /// <value>初期値</value>
-    private string DefaultValue = string.Empty;
+    public string DefaultValue { get; init; } = string.Empty;
 
     /// <summary>
     /// コンストラクタ
