@@ -12,13 +12,31 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
-    private List<ClassEntity> InnerClasses = new();
+    public List<ClassEntity> innerClasses = new();
+
+    /// <summary>
+    /// 読み取り用インナークラスリスト
+    /// </summary>
+    /// <returns>読み取り用インナークラスリスト</returns>
+    public IReadOnlyList<ClassEntity> InnerClasses
+    { 
+        get => innerClasses;  
+    }
 
     /// <summary>
     /// ルートクラス
     /// </summary>
     /// <returns>ルートクラス</returns>
-    private ClassEntity? RootClass = null;
+    private ClassEntity? rootClass = null;
+
+    /// <summary>
+    /// 読み取り用ルートクラス
+    /// </summary>
+    /// <returns>読み取り用ルートクラス</returns>
+    public ClassEntity? RootClass 
+    {
+        get => rootClass;
+    }
 
     /// <summary>
     /// ルートクラスのクラス名を返す
@@ -26,7 +44,7 @@ public class ClassesEntity
     /// <returns>ルートクラス</returns>
     public string Name
     {
-        get => RootClass?.Name ?? "RootClass";
+        get => rootClass?.Name ?? "RootClass";
     }
 
     /// <summary>
@@ -42,11 +60,11 @@ public class ClassesEntity
     /// <param name="Property">追加対象</param>
     public void AddRootProperty(PropertyValueObject Property)
     {
-        // HACK ルートクラス存在チェック
-        if (RootClass is null) throw new Exception($"{nameof(RootClass)} is null");
+        // ルートクラス存在チェック
+        if (rootClass is null) throw new Exception($"{nameof(rootClass)} is null");
 
         // プロパティ追加
-        RootClass?.AddProperty(Property);
+        rootClass?.AddProperty(Property);
     }
 
     /// <summary>
@@ -59,7 +77,7 @@ public class ClassesEntity
         if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
 
         // インナークラスリストに追加
-        InnerClasses.Add(innerClass!);
+        innerClasses.Add(innerClass!);
     }
 
     /// <summary>
@@ -75,7 +93,7 @@ public class ClassesEntity
         // インスタンスを返す
         var result = new ClassesEntity()
         {
-            RootClass = ClassEntity.Create(rootClassName!)
+            rootClass = ClassEntity.Create(rootClassName!)
         };
 
         return result;
@@ -91,14 +109,12 @@ public class ClassesEntity
     public string GetClassString(int indentLevel = 0)
     {
         // 必須パラメータチェック
-        if (RootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
+        if (rootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
 
         var result = string.Empty;
 
-        //HACK 名前空間の設定
-
         // ルートクラスを出力
-        result += GetClassString(RootClass, indentLevel);
+        result += GetClassString(rootClass, indentLevel);
 
 
         return result;
@@ -119,10 +135,10 @@ public class ClassesEntity
         result.AppendLine($"{levelSpace}public class {classEntity.Name}");
         result.AppendLine($"{levelSpace}{{");
 
-        if (classEntity == RootClass)
+        if (classEntity == rootClass)
         {
             // インナークラスのクラス文字列作成
-            foreach (var classInstance in InnerClasses)
+            foreach (var classInstance in innerClasses)
             {
                 result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
             }
