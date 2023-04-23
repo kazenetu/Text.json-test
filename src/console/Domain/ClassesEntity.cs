@@ -33,9 +33,16 @@ public class ClassesEntity
     /// 読み取り用ルートクラス
     /// </summary>
     /// <returns>読み取り用ルートクラス</returns>
-    public ClassEntity? RootClass 
+    public ClassEntity RootClass 
     {
-        get => rootClass;
+        get {
+            var newInstance = ClassEntity.Create(rootClass is null ? string.Empty: rootClass.Name);
+            foreach(var prop in rootClass!.Properties)
+            {
+                newInstance.AddProperty(prop);
+            }
+            return newInstance;
+        }
     }
 
     /// <summary>
