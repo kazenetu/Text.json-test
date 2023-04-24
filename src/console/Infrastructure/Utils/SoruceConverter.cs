@@ -1,5 +1,6 @@
 using System.Text;
 using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Infrastructure.Utils;
 
@@ -21,15 +22,12 @@ internal static class SoruceConverter
 
         if (!string.IsNullOrEmpty(namespaceName))
         {
-            indentLevel++;
             result.AppendLine($"namespace {namespaceName}");
             result.AppendLine("{");
         }
 
-        // インデント設定
-        var levelSpace = new string('S', indentLevel).Replace("S", "  ");
-
-        // TODO クラス生成
+        // クラス生成
+        result.AppendLine(GetRootClassString(indentLevel));
 
         if (!string.IsNullOrEmpty(namespaceName))
         {
@@ -37,5 +35,74 @@ internal static class SoruceConverter
         }
 
         return result.ToString();
+
+        /// <summary>
+        /// class文字列生成して返す
+        /// </summary>
+        /// <param name="indentLevel">インデントレベル</param>
+        /// <returns>class文字列</returns>
+        string GetRootClassString(int indentLevel = 0)
+        {
+            // 必須パラメータチェック
+            if (classInstance.RootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
+
+            // ルートクラスを出力
+            return GetClassString(classInstance.RootClass!, indentLevel);
+        }
+
+        /// <summary>
+        /// クラスエンティティからclass文字列生成して返す
+        /// </summary>
+        /// <param name="classEntity">クラスエンティティインスタンス</param>
+        /// <param name="indentLevel">インデントレベル</param>
+        /// <returns>class文字列</returns>
+        string GetClassString(ClassEntity classEntity, int indentLevel = 0)
+        {
+            var result = new StringBuilder();
+
+            // インデント設定
+            var levelSpace = new string('S', indentLevel).Replace("S", "  ");
+            result.AppendLine($"{levelSpace}public class {classEntity.Name}");
+            result.AppendLine($"{levelSpace}{{");
+
+            if (classEntity == classInstance.RootClass)
+            {
+                // インナークラスのクラス文字列作成
+                foreach (var classInstance in classInstance.InnerClasses)
+                {
+                    result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
+                }
+            }
+
+            // プロパティ文字列作成
+            foreach (var property in classEntity.Properties)
+            {
+                result.Append($"{GetPropertyString(property, indentLevel + 1)}");
+            }
+
+            result.AppendLine($"{levelSpace}}}");
+
+            return result.ToString();
+        }
+
+        /// <summary>
+        /// プロパティValueObjectからプロパティ文字列を作成して返す
+        /// </summary>
+        /// <param name="property">プロパティValueObject</param>
+        /// <param name="indentLevel">インデントレベル</param>
+        /// <returns>プロパティ文字列</returns>
+        string GetPropertyString(PropertyValueObject property, int indentLevel)
+        {
+            var result = new StringBuilder();
+
+            // インデント設定
+            var levelSpace = new string('S', indentLevel).Replace("S", "  ");
+
+            // プロパティ文字列作成
+            result.Append($"{levelSpace}public {property}");
+            result.AppendLine();
+
+            return result.ToString();
+        }
     }
 }
