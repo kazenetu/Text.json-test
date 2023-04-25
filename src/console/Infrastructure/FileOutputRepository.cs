@@ -36,14 +36,8 @@ public class FileOutputRepository : IFileOutputRepository
         if (!nameSpaceNone)
         {
             initialSpaceIndex = 1;
-            fileData.AppendLine($"namespace {command.NameSpace}");
-            fileData.AppendLine("{");
         }
-        fileData.Append(classInstance.GetClassString(initialSpaceIndex));
-        if (!nameSpaceNone)
-        {
-            fileData.AppendLine("}");
-        }
+        fileData.Append(Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace));
 
         // ファイル出力
         File.WriteAllText(filePath, fileData.ToString());
