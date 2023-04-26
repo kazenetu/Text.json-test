@@ -18,6 +18,11 @@ internal static class SoruceConverter
     /// <returns>C#コード</returns>
     public static string ToCsCode(ClassesEntity classInstance, int indentLevel = 0, string? namespaceName = null)
     {
+        // 必須パラメータチェック
+        if (classInstance?.RootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
+
+        var rootClass = classInstance.RootClass;
+
         var result = new StringBuilder();
 
         if (!string.IsNullOrEmpty(namespaceName))
@@ -27,11 +32,11 @@ internal static class SoruceConverter
         }
 
         // クラス生成
-        result.AppendLine(GetRootClassString(indentLevel));
+        result.Append(GetRootClassString(indentLevel));
 
         if (!string.IsNullOrEmpty(namespaceName))
         {
-            result.AppendLine("}");
+            result.Append("}");
         }
 
         return result.ToString();
@@ -43,11 +48,8 @@ internal static class SoruceConverter
         /// <returns>class文字列</returns>
         string GetRootClassString(int indentLevel = 0)
         {
-            // 必須パラメータチェック
-            if (classInstance.RootClass is null) throw new NullReferenceException("RootClassが設定されていません"); ;
-
             // ルートクラスを出力
-            return GetClassString(classInstance.RootClass!, indentLevel);
+            return GetClassString(rootClass, indentLevel);
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ internal static class SoruceConverter
             result.AppendLine($"{levelSpace}public class {classEntity.Name}");
             result.AppendLine($"{levelSpace}{{");
 
-            if (classEntity == classInstance.RootClass)
+            if (classEntity == rootClass)
             {
                 // インナークラスのクラス文字列作成
                 foreach (var classInstance in classInstance.InnerClasses)
