@@ -113,6 +113,7 @@ public class ClassesEntity
     /// </summary>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>class文字列</returns>
+    [Obsolete()]
     public string GetClassString(int indentLevel = 0)
     {
         // 必須パラメータチェック
@@ -133,6 +134,7 @@ public class ClassesEntity
     /// <param name="classEntity">クラスエンティティインスタンス</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>class文字列</returns>
+    [Obsolete()]
     private string GetClassString(ClassEntity classEntity, int indentLevel = 0)
     {
         var result = new StringBuilder();
@@ -168,6 +170,7 @@ public class ClassesEntity
     /// <param name="property">プロパティValueObject</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>プロパティ文字列</returns>
+    [Obsolete()]
     private string GetPropertyString(PropertyValueObject property, int indentLevel)
     {
         var result = new StringBuilder();
