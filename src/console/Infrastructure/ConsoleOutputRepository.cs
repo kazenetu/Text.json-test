@@ -22,6 +22,6 @@ public class ConsoleOutputRepository : IConsoleOutputRepository
         };
 
         // コンソール出力
-        Console.WriteLine(classInstance.GetClassString());
+        Console.WriteLine(Utils.SoruceConverter.ToCsCode(classInstance));
     }
 }
