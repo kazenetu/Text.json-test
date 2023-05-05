@@ -5,7 +5,7 @@ namespace Infrastructure.Utils;
 /// <summary>
 /// ソース変換インターフェース
 /// </summary>
-interface IConverter
+public interface IConverter
 {
     /// <summary>
     /// コード変更処理
