@@ -9,9 +9,20 @@ namespace Infrastructure.Utils;
 /// </summary>
 public class CSConverter:IConverter
 {
-    private ClassesEntity ClassInstance;
-    private Dictionary<string,string> Params;
-    private ClassEntity RootClass;
+    /// <summary>
+    /// 集合クラスインスタンス フィールド
+    /// </summary>
+    private readonly ClassesEntity ClassInstance;
+
+    /// <summary>
+    /// パラメータ フィールド
+    /// </summary>
+    private readonly Dictionary<string,string> Params;
+
+    /// <summary>
+    /// ルートクラスインスタンス フィールド
+    /// </summary>
+    private readonly ClassEntity RootClass;
 
     /// <summary>
     /// コンストラクタ
@@ -70,7 +81,7 @@ public class CSConverter:IConverter
 
         if (!string.IsNullOrEmpty(namespaceName))
         {
-            result.Append("}");
+            result.Append('}');
         }
 
         return result.ToString();
