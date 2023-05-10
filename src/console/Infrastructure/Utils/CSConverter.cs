@@ -7,7 +7,7 @@ namespace Infrastructure.Utils;
 /// <summary>
 /// C#ソースコード変換クラス
 /// </summary>
-public class CSConverter:IConverter
+public class CSConverter : IConverter
 {
     /// <summary>
     /// 集合クラスインスタンス フィールド
@@ -17,7 +17,7 @@ public class CSConverter:IConverter
     /// <summary>
     /// パラメータ フィールド
     /// </summary>
-    private readonly Dictionary<string,string> Params;
+    private readonly Dictionary<string, string> Params;
 
     /// <summary>
     /// ルートクラスインスタンス フィールド
@@ -30,7 +30,7 @@ public class CSConverter:IConverter
     /// <param name="classInstance">集約クラス</param>
     /// <param name="param">パラメータ</param>
     /// <returns>インスタンス<returns>
-    public CSConverter(ClassesEntity classInstance, Dictionary<string,string> param)
+    public CSConverter(ClassesEntity classInstance, Dictionary<string, string> param)
     {
         ClassInstance = classInstance;
         Params = param;
@@ -85,7 +85,7 @@ public class CSConverter:IConverter
         }
 
         return result.ToString();
-   }
+    }
 
     /// <summary>
     /// class文字列生成して返す
@@ -152,4 +152,4 @@ public class CSConverter:IConverter
 
         return result.ToString();
     }
- }
+}
