@@ -11,12 +11,16 @@ dotnet run --project src/console/console.csproj
 
 # フォルダ構成
 * src/console
-  * Common  
-    Domain層の試作  
-    EntityとRepositoryのインターフェイス
-    * ClassesEntity.cs
-    * Class.cs
-    * Property.cs
+  * Domain  
+    ValueObject・EntityとRepositoryのインターフェイス
+    * ClassesEntity.cs  
+      集約クラス
+    * ClassEntity.cs  
+      クラスエンティティ
+    * PropertyType.cs  
+      プロパティ型ValueObject
+    * PropertyValueObject.cs  
+      プロパティValueObject
     * IJsonRepository.cs
     * IConsoleOutputRepository.cs
     * IFileOutputRepository.cs
