@@ -14,7 +14,10 @@ dotnet run --project src/console/console.csproj
   * Domain  
     ValueObject・EntityとRepositoryのインターフェイス
     * ClassesEntity.cs  
-      集約クラス
+      集約クラス  
+      * ClassEntityリスト：インナークラスリスト
+      * ルートクラス：メインクラス
+
     * ClassEntity.cs  
       クラスエンティティ
     * PropertyType.cs  
