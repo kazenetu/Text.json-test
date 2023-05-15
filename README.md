@@ -20,10 +20,15 @@ dotnet run --project src/console/console.csproj
 
     * ClassEntity.cs  
       クラスエンティティ
-    * PropertyType.cs  
-      プロパティ型ValueObject
+      * プロパティリスト：クラス内のプロパティリスト
+
     * PropertyValueObject.cs  
       プロパティValueObject
+      * プロパティ型：プロパティの型
+
+    * PropertyType.cs  
+      プロパティ型ValueObject
+
     * IJsonRepository.cs
     * IConsoleOutputRepository.cs
     * IFileOutputRepository.cs
