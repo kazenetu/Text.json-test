@@ -29,9 +29,15 @@ dotnet run --project src/console/console.csproj
     * PropertyType.cs  
       プロパティ型ValueObject
 
-    * IJsonRepository.cs
-    * IConsoleOutputRepository.cs
-    * IFileOutputRepository.cs
+    * IJsonRepository.cs  
+      JSON読み込みリポジトリインターフェース
+
+    * IConsoleOutputRepository.cs  
+      コンソール出力リポジトリインターフェース
+
+    * IFileOutputRepository.cs  
+      ファイル出力リポジトリインターフェース
+
     * FileOutputCommand.cs
   * Infrastructure  
     インフラ層の試作  
