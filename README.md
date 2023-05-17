@@ -38,7 +38,10 @@ dotnet run --project src/console/console.csproj
     * IFileOutputRepository.cs  
       ファイル出力リポジトリインターフェース
 
-    * FileOutputCommand.cs
+    * FileOutputCommand.cs  
+      ファイル出力コマンドクラス  
+      名前空間や出力先などを設定するクラス
+
   * Infrastructure  
     インフラ層の試作  
     * ConsoleOutputRepository.cs
