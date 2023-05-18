@@ -45,7 +45,6 @@ dotnet run --project src/console/console.csproj
   * Infrastructure  
     インフラ層の試作  
     * ConsoleOutputRepository.cs
-    * ConsoleOutputRepository.cs
     * FileOutputRepository.cs
     * JsonRepository.cs
     * JsonProperties
