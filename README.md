@@ -43,10 +43,16 @@ dotnet run --project src/console/console.csproj
       名前空間や出力先などを設定するクラス
 
   * Infrastructure  
-    インフラ層の試作  
-    * ConsoleOutputRepository.cs
-    * FileOutputRepository.cs
-    * JsonRepository.cs
+    インフラ層  
+    * ConsoleOutputRepository.cs  
+      コンソール出力リポジトリクラス
+
+    * FileOutputRepository.cs  
+      ファイル出力リポジトリクラス
+      
+    * JsonRepository.cs  
+      JSON読み込みリポジトリ
+
     * JsonProperties
       * IJsonProperty.cs
       * JsonPropertyArray.cs
