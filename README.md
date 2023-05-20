@@ -45,13 +45,16 @@ dotnet run --project src/console/console.csproj
   * Infrastructure  
     インフラ層  
     * ConsoleOutputRepository.cs  
-      コンソール出力リポジトリクラス
+      コンソール出力リポジトリ  
+      集約クラスの内容をコンソール出力するためのクラス
 
     * FileOutputRepository.cs  
-      ファイル出力リポジトリクラス
+      ファイル出力リポジトリ  
+      集約クラスからC#ソースコードを出力するためのクラス
       
     * JsonRepository.cs  
-      JSON読み込みリポジトリ
+      JSON読み込みリポジトリ  
+      JSON文字列を読み込んでドメイン集約クラス返す
 
     * JsonProperties
       * IJsonProperty.cs
