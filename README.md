@@ -56,7 +56,13 @@ dotnet run --project src/console/console.csproj
       JSON読み込みリポジトリ  
       JSON文字列を読み込んでドメイン集約クラス返す
 
-    * JsonProperties
+    * JsonProperties  
+      ストラテジパターンで実装されており、JsonRepositoryから呼ばれる。
+      JsonValueKindを元にJsonPropertyResultを返す
+
+      * JsonPropertyResult.cs  
+        ドメイン層のPropertyValueObjectとサブクラス情報を内包したクラス
+
       * IJsonProperty.cs
       * JsonPropertyArray.cs
       * JsonPropertyFalse.cs
@@ -64,7 +70,6 @@ dotnet run --project src/console/console.csproj
       * JsonPropertyNull.cs
       * JsonPropertyNumber.cs
       * JsonPropertyObject.cs
-      * JsonPropertyResult.cs
       * JsonPropertyString.cs
 
     * Utils
