@@ -69,13 +69,40 @@ dotnet run --project src/console/console.csproj
       * IJsonProperty.cs  
         Jsonプロパティインターフェイス  
 
-      * JsonPropertyArray.cs
-      * JsonPropertyFalse.cs
-      * JsonPropertyTrue.cs
-      * JsonPropertyNull.cs
-      * JsonPropertyNumber.cs
-      * JsonPropertyObject.cs
-      * JsonPropertyString.cs
+      * JsonPropertyArray.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.Array用  
+        C#の配列型に変換する(配列要素は再起に取得する)
+
+      * JsonPropertyFalse.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.False用  
+        C#のboolに変換する
+        
+      * JsonPropertyTrue.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.True用  
+        C#のboolに変換する
+        
+      * JsonPropertyNull.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.Null用  
+        C#のNullableに変換する
+        
+      * JsonPropertyNumber.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.Number用  
+        C#のdecimalに変換する
+        
+      * JsonPropertyObject.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.Object用  
+        C#のインナークラスに変換する
+        
+      * JsonPropertyString.cs  
+        IJsonPropertyの実装クラス  
+        JsonValueKind.String用  
+        C#のstringに変換する
 
     * Utils
       * IConverter.cs
