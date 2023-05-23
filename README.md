@@ -104,7 +104,8 @@ dotnet run --project src/console/console.csproj
         JsonValueKind.String用  
         C#のstringに変換する
 
-    * Utils
+    * Utils  
+      ソースコード変換ユーティリティ
       * IConverter.cs
       * ParamKeys.cs
       * SoruceConverter.cs
