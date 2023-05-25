@@ -106,10 +106,20 @@ dotnet run --project src/console/console.csproj
 
     * Utils  
       ソースコード変換ユーティリティ
-      * IConverter.cs
-      * ParamKeys.cs
-      * SoruceConverter.cs
-      * CSConverter.cs
+      * IConverter.cs  
+        ソース変換用インターフェース
+
+      * ParamKeys.cs  
+        パラメータキー定数クラス  
+        連想配列のキーの定数
+
+      * SoruceConverter.cs  
+        ソース変換ユーティリティのエントリクラス  
+        各言語用ソースコード変換変換メソッドを実装する予定  
+        現時点はC#用ソースコードのみ
+
+      * CSConverter.cs  
+        C#ソースコード変換クラス  
 
   * DeserializeSamples  
     サンプルJson文字列デシアライズクラス
