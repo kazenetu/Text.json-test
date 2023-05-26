@@ -1,5 +1,7 @@
 # Text.json-test
-System.Text.Jsonを使った解析機能のテスト実装  
+## 目的
+* System.Text.Jsonを使った解析機能のテスト実装  
+* DDDを使った実装テスト
 
 # 実行環境
 * .NET6
