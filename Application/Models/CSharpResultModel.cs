@@ -1,7 +1,7 @@
 namespace Appplication.Models;
 
 /// <summary>
-/// 出力結果：C#ソースコード
+/// ソースコード変換結果
 /// </summary>
-/// <param name="SorceCode"></param>
+/// <param name="SorceCode">変換後のソースコード</param>
 public record CSharpResultModel(string SorceCode);
