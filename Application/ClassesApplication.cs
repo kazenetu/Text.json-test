@@ -26,4 +26,16 @@ public class ClassesApplication
         JsonRepository = jsonRepository;
         FileOutputRepository = fileOutputRepository;
     }
+
+    /// <summary>
+    /// Json文字列をC#ソースコードに変換しファイル作成する
+    /// </summary>
+    /// <param name="json">Json文字列</param>
+    /// <param name="command">C#変換コマンド</param>
+    /// <returns>処理結果</returns>
+    public ConvertResutModel ConvertJsonToCSharp(string json, CSharpCommand command)
+    {
+        // TODO 実装
+        throw new System.Exception("未実装");
+    }
 }
