@@ -37,7 +37,7 @@ public class ClassesApplication
     /// <param name="json">Json文字列</param>
     /// <param name="command">C#変換コマンド</param>
     /// <returns>処理結果</returns>
-    public ConvertResutModel ConvertJsonToCSharp(string json, CSharpCommand command)
+    public ConvertResultModel ConvertJsonToCSharp(string json, CSharpCommand command)
     {
         // パラメータチェック
         if (string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
@@ -53,10 +53,10 @@ public class ClassesApplication
         // ファイル出力
         if (FileOutputRepository.Output(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace)))
         {
-            return new ConvertResutModel(true, fileName);
+            return new ConvertResultModel(true, fileName);
         }
 
         // 変換失敗
-        return new ConvertResutModel(false, fileName);
+        return new ConvertResultModel(false, fileName);
     }
 }
