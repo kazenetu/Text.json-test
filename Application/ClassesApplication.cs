@@ -1,5 +1,7 @@
 using Appplication.Commands;
 using Appplication.Models;
+using Domain.Commands;
+using Domain.Interfaces;
 
 /// <summary>
 /// クラス集約アプリケーション
@@ -35,7 +37,24 @@ public class ClassesApplication
     /// <returns>処理結果</returns>
     public ConvertResutModel ConvertJsonToCSharp(string json, CSharpCommand command)
     {
-        // TODO 実装
-        throw new System.Exception("未実装");
+        // パラメータチェック
+        if(string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
+        if(command is null) throw new Exception($"{nameof(command)} is null");
+        if(string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
+
+        // Json文字列読み込み
+        var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
+
+        // ファイル名
+        var fileName = $"{command.RootClassName}.cs";
+
+        // ファイル出力
+        if(FileOutputRepository.Output(classesEntity, new FileOutputCommand(command.RootPath,command.NameSpace)))
+        {
+            return new ConvertResutModel(true, fileName);
+        }
+
+        // 変換失敗
+        return new ConvertResutModel(false, fileName);
     }
 }
