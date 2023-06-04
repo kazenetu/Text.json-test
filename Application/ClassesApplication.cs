@@ -3,6 +3,8 @@ using Appplication.Models;
 using Domain.Commands;
 using Domain.Interfaces;
 
+namespace Appplication;
+
 /// <summary>
 /// クラス集約アプリケーション
 /// </summary>
@@ -38,9 +40,9 @@ public class ClassesApplication
     public ConvertResutModel ConvertJsonToCSharp(string json, CSharpCommand command)
     {
         // パラメータチェック
-        if(string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
-        if(command is null) throw new Exception($"{nameof(command)} is null");
-        if(string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
+        if (string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
+        if (command is null) throw new Exception($"{nameof(command)} is null");
+        if (string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
 
         // Json文字列読み込み
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
@@ -49,7 +51,7 @@ public class ClassesApplication
         var fileName = $"{command.RootClassName}.cs";
 
         // ファイル出力
-        if(FileOutputRepository.Output(classesEntity, new FileOutputCommand(command.RootPath,command.NameSpace)))
+        if (FileOutputRepository.Output(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace)))
         {
             return new ConvertResutModel(true, fileName);
         }
