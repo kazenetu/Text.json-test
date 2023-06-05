@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Appplication;
 using Domain.Commands;
 using Domain.Interfaces;
 using Infrastructure;
@@ -227,14 +228,34 @@ internal class Program
         // -----------------------------------------------------
         var rootPath = "CSOutputs";
         var nameSpace = "Domain.Entity";
+
+        FileOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
+        FileOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
+        FileOutput(arrayJson, nameSpace, rootPath,  "ArrayJsonClass");
+        FileOutput(innerNestJson, nameSpace, rootPath,  "InnerNestJsonClass");
+    }
+
+    /// <summary>
+    /// ファイル出力
+    /// </summary>
+    /// <param name="json">JSON文字列</param>
+    /// <param name="nameSpace">名前空間</param>
+    /// <param name="rootPath">出力先</param>
+    /// <param name="rootClassName">ルートパスのクラス名/param>
+    private static void FileOutput(string json, string nameSpace, string rootPath, string rootClassName)
+    {
+        // TODO のちほどDI化
         IFileOutputRepository repository = new FileOutputRepository();
         IJsonRepository jsonRepository = new JsonRepository();
-        var command = new FileOutputCommand(rootPath, nameSpace);
-        repository.Output(jsonRepository.CreateClassEntityFromString(simpleJson, "SimpleJsonClass"), command);
-        repository.Output(jsonRepository.CreateClassEntityFromString(innerClassJson, "InnerClassJsonClass"), command);
-        repository.Output(jsonRepository.CreateClassEntityFromString(arrayJson, "ArrayJsonClass"), command);
-        repository.Output(jsonRepository.CreateClassEntityFromString(innerNestJson, "InnerNestJsonClass"), command);
+
+        var csApplication = new ClassesApplication(jsonRepository, repository);
+        var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName));
+
+        // コンソール出力
+        var message = result.success ? "成功" : "失敗";
+        Console.WriteLine($"{result.FileName}...{message}");
     }
+
 
     /// <summary>
     /// 構想解析結果の表示
