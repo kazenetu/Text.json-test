@@ -1,6 +1,7 @@
 using System.Text;
 using Domain.Commands;
 using Domain.Entities;
+using Domain.Results;
 using Domain.Interfaces;
 
 namespace Infrastructure;
@@ -43,5 +44,41 @@ public class FileOutputRepository : IFileOutputRepository
         File.WriteAllText(filePath, fileData.ToString());
 
         return true;
+    }
+
+    /// <summary>
+    /// ファイルを出力する
+    /// </summary>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
+    /// <param name="command">コマンドパラメータ</param>
+    /// <returns>出力結果</returns>
+    public FileOutputResult OutputResult(ClassesEntity classInstance, FileOutputCommand command)
+    {
+        //必須パラメータチェック
+        if (classInstance is null) return new FileOutputResult(false, string.Empty, string.Empty);
+        if (command.RootPath is null) return new FileOutputResult(false, string.Empty, string.Empty);
+
+        // フォルダの存在確認とフォルダ作成
+        if (!Directory.Exists(command.RootPath))
+        {
+            Directory.CreateDirectory(command.RootPath);
+        }
+        var filePath = Path.Combine(command.RootPath, $"{classInstance.Name}.cs");
+
+        var fileData = new StringBuilder();
+        var nameSpaceNone = string.IsNullOrEmpty(command.NameSpace);
+        var initialSpaceIndex = 0;
+
+        if (!nameSpaceNone)
+        {
+            initialSpaceIndex = 1;
+        }
+        var sorceString = Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace);
+        fileData.Append(sorceString);
+
+        // ファイル出力
+        File.WriteAllText(filePath, fileData.ToString());
+
+        return new FileOutputResult(true, filePath, sorceString);
     }
 }
