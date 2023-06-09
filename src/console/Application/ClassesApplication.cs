@@ -47,16 +47,14 @@ public class ClassesApplication
         // Json文字列読み込み
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
 
-        // ファイル名
-        var fileName = $"{command.RootClassName}.cs";
-
         // ファイル出力
-        if (FileOutputRepository.Output(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace)))
+        var result = FileOutputRepository.OutputResult(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace));
+        if (result.Success)
         {
-            return new ConvertResultModel(true, fileName);
+            return new ConvertResultModel(true, result.FileName);
         }
 
         // 変換失敗
-        return new ConvertResultModel(false, fileName);
+        return new ConvertResultModel(false, result.FileName);
     }
 }
