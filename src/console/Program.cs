@@ -252,7 +252,7 @@ internal class Program
         var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName));
 
         // コンソール出力
-        var message = result.success ? "成功" : "失敗";
+        var message = result.Success ? "成功" : "失敗";
         Console.WriteLine($"{result.FileName}...{message}");
     }
 
