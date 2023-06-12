@@ -51,7 +51,7 @@ public class ClassesApplication
         var result = FileOutputRepository.OutputResult(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace));
         if (result.Success)
         {
-            return new ConvertResultModel(true, result.FileName);
+            return new ConvertResultModel(true, result.FileName, result.SourceCode);
         }
 
         // 変換失敗
