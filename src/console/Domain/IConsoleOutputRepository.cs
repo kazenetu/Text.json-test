@@ -5,6 +5,7 @@ namespace Domain.Interfaces;
 /// <summary>
 /// コンソール出力リポジトリインターフェース
 /// </summary>
+[Obsolete]
 public interface IConsoleOutputRepository
 {
     /// <summary>

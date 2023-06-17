@@ -6,6 +6,7 @@ namespace Infrastructure;
 /// <summary>
 /// コンソール出力リポジトリクラス
 /// </summary>
+[Obsolete]
 public class ConsoleOutputRepository : IConsoleOutputRepository
 {
     /// <summary>
