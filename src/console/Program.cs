@@ -229,20 +229,20 @@ internal class Program
         var rootPath = "CSOutputs";
         var nameSpace = "Domain.Entity";
 
-        FileOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
-        FileOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
-        FileOutput(arrayJson, nameSpace, rootPath,  "ArrayJsonClass");
-        FileOutput(innerNestJson, nameSpace, rootPath,  "InnerNestJsonClass");
+        FileOutputAndResutoOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
+        FileOutputAndResutoOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
+        FileOutputAndResutoOutput(arrayJson, nameSpace, rootPath, "ArrayJsonClass");
+        FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass");
     }
 
     /// <summary>
-    /// ファイル出力
+    /// ファイル出力と結果表示
     /// </summary>
     /// <param name="json">JSON文字列</param>
     /// <param name="nameSpace">名前空間</param>
     /// <param name="rootPath">出力先</param>
     /// <param name="rootClassName">ルートパスのクラス名/param>
-    private static void FileOutput(string json, string nameSpace, string rootPath, string rootClassName)
+    private static void FileOutputAndResutoOutput(string json, string nameSpace, string rootPath, string rootClassName)
     {
         // TODO のちほどDI化
         IFileOutputRepository repository = new FileOutputRepository();
