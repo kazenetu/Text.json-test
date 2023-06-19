@@ -13,8 +13,9 @@ internal class Program
     /// </summary>    
     private static void Main(string[] args)
     {
-        // コンソール出力リポジトリを生成
-        IConsoleOutputRepository consoleRepository = new ConsoleOutputRepository();
+        // ファイル出力設定値
+        var rootPath = "CSOutputs";
+        var nameSpace = "Domain.Entity";
 
         // 単純なJSON文字列作成
         var simpleJson = @"{
@@ -54,20 +55,22 @@ internal class Program
         // propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(simpleJson, "roootClass"));
+        FileOutputAndResutoOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
         Console.WriteLine("--------------------");
         //出力結果：
-        // public class RootClass
+        // namespace Domain.Entity
         // {
-        //   public string propString{set; get;} = string.Empty;
-        //   public decimal propNumber{set; get;}
-        //   public string propDate{set; get;} = string.Empty;
-        //   public bool propTrue{set; get;}
-        //   public bool propFalse{set; get;}
-        //   public object propNull{set; get;} = string.Empty;
-        //   public List<decimal>? propArray{set; get;}
+        //   public class SimpleJsonClass
+        //   {
+        //     public string propString{set; get;} = string.Empty;
+        //     public decimal propNumber{set; get;}
+        //     public string propDate{set; get;} = string.Empty;
+        //     public bool propTrue{set; get;}
+        //     public bool propFalse{set; get;}
+        //     public object propNull{set; get;} = string.Empty;
+        //     public List<decimal>? propArray{set; get;}
+        //   }
         // }
-
         // --------------------------------------------------------------
         // Objectが含まれるJSON文字列作成
         var innerClassJson = @"{
@@ -97,17 +100,21 @@ internal class Program
         // propNumber:10        
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerClassJson, "roootClass"));
+        FileOutputAndResutoOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass
+        // namespace Domain.Entity
         // {
-        //   public class InnerClass {
+        //   public class InnerClassJsonClass
+        //   {
+        //     public class InnerClass
+        //     {
         //       public string propObjString{set; get;} = string.Empty;
-        //   }
+        //     }
         //
-        //   public InnerClass? propObjct{set; get;}
-        //   public decimal propNumber{set; get;}
+        //     public InnerClass? propObjct{set; get;}
+        //     public decimal propNumber{set; get;}
+        //   }
         // }
 
         // --------------------------------------------------------------
@@ -142,16 +149,20 @@ internal class Program
         //   InnerClass...  propObjString:propObjString2
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(arrayJson, "roootClass"));
+        FileOutputAndResutoOutput(arrayJson, nameSpace, rootPath, "ArrayJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass
+        // namespace Domain.Entity
         // {
-        //   public class InnerClass {
-        //       public string propObjString{set; get;}
-        //   }
+        //   public class ArrayJsonClass
+        //   {
+        //     public class InnerClass
+        //     {
+        //       public string propObjString{set; get;} = string.Empty;
+        //     }
         //
-        //   public List<InnerClass>? propObjcts{set; get;}
+        //     public List<InnerClass?>? propObjcts{set; get;}
+        //   }
         // }
 
         // --------------------------------------------------------------
@@ -201,12 +212,15 @@ internal class Program
         //     propArray:[1,2,3]
 
         Console.WriteLine("----Class解析結果----");
-        consoleRepository.Output(new JsonRepository().CreateClassEntityFromString(innerNestJson, "roootClass"));
+        FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
-        // public class RootClass
+        // namespace Domain.Entity
         // {
-        //   public class InnerClassA {
+        //   public class InnerNestJsonClass
+        //   {
+        //     public class InnerClassA
+        //     {
         //       public string propString{set; get;} = string.Empty;
         //       public decimal propNumber{set; get;}
         //       public string propDate{set; get;} = string.Empty;
@@ -214,25 +228,16 @@ internal class Program
         //       public bool propFalse{set; get;}
         //       public object propNull{set; get;} = string.Empty;
         //       public List<decimal>? propArray{set; get;}
-        //   }
+        //     }
         //
-        //   public class InnerClass {
+        //     public class InnerClass
+        //     {
         //       public InnerClassA? propSubObjct{set; get;}
-        //   }
+        //     }
         //
-        //   public InnerClass? propObjct{set; get;}
+        //     public InnerClass? propObjct{set; get;}
+        //   }
         // }
-
-        // -----------------------------------------------------
-        // Json解析Class解析結果 ファイル出力
-        // -----------------------------------------------------
-        var rootPath = "CSOutputs";
-        var nameSpace = "Domain.Entity";
-
-        FileOutputAndResutoOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
-        FileOutputAndResutoOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
-        FileOutputAndResutoOutput(arrayJson, nameSpace, rootPath, "ArrayJsonClass");
-        FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass");
     }
 
     /// <summary>
@@ -254,6 +259,10 @@ internal class Program
         // コンソール出力
         var message = result.Success ? "成功" : "失敗";
         Console.WriteLine($"{result.FileName}...{message}");
+        if(result.Success){
+            Console.WriteLine($"---出力結果---");
+            Console.WriteLine(result.SourceCode);
+        }
     }
 
 
