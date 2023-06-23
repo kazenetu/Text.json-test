@@ -150,6 +150,10 @@ public record PropertyType : BasePropertyType
             case Kinds.Null:
                 return "object";
             case Kinds.Class:
+                if(IsList)
+                {
+                    return $"{ClassName}";
+                }
                 return $"{ClassName}?";
         }
         // それ以外は例外エラー
