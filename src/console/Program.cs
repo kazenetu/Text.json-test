@@ -160,7 +160,7 @@ internal class Program
         //       public string propObjString{set; get;} = string.Empty;
         //     }
         //
-        //     public List<InnerClass?>? propObjcts{set; get;}
+        //     public List<InnerClass>? propObjcts{set; get;}
         //   }
         // }
 
