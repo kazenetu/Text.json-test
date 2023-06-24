@@ -137,6 +137,7 @@ public record PropertyType : BasePropertyType
     /// C#の型に変換
     /// </summary>
     /// <returns></returns>
+    [Obsolete]
     private string ToPropertyType()
     {
         switch (Kind)

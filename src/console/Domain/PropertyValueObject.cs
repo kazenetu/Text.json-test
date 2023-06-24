@@ -60,6 +60,7 @@ public record PropertyValueObject
     /// C#プロパティ文字列を返す
     /// </summary>
     /// <returns>C#プロパティ文字列</returns>
+    [Obsolete]
     public override string ToString()
     {
         // デフォルト文字列設定
