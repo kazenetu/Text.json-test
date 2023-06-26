@@ -152,4 +152,55 @@ public class CSConverter : IConverter
 
         return result.ToString();
     }
+
+    /// <summary>
+    /// プロパティValueObjectからプロパティ文字列のベースを作成して返す
+    /// </summary>
+    /// <param name="property">プロパティValueObject</param>
+    /// <returns>プロパティ文字列のベース</returns>
+    string GetPropertyBaseString(PropertyValueObject property)
+    {
+        // デフォルト値
+        var defualtValue = string.Empty;
+
+        // C#型取得
+        var typeName = string.Empty;
+        switch (property.Type.Kind)
+        {
+            case PropertyType.Kinds.String:
+                typeName = "string";
+                defualtValue = "string.Empty";
+                break;
+            case PropertyType.Kinds.Decimal:
+                typeName = "decimal";
+                break;
+            case PropertyType.Kinds.Bool:
+                typeName = "bool";
+                break;
+            case PropertyType.Kinds.Null:
+                typeName = "object";
+                defualtValue = "string.Empty";
+                break;
+            case PropertyType.Kinds.Class:
+                if(property.Type.IsList)
+                {
+                    typeName = $"{property.PropertyTypeClassName}";
+                }
+                typeName = $"{property.PropertyTypeClassName}?";
+                break;
+            default:
+                // それ以外は例外エラー
+                throw new Exception($"{property.Type.Kind} has no type set");
+        }
+
+        // デフォルト文字列設定
+        var defualt = string.Empty;
+        if (defualtValue is not "")
+        {
+            defualt = $" = {defualtValue};";
+        }
+
+        // C#のプロパティを設定
+        return $"{typeName} {property.Name}{{set; get;}}{defualt}";
+     }
 }
