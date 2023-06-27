@@ -92,6 +92,7 @@ public record PropertyType : BasePropertyType
     /// C#型情報を返す
     /// </summary>
     /// <returns>C#型情報</returns>
+    [Obsolete]
     public override string ToString()
     {
         var csTypeName = ToPropertyType();
