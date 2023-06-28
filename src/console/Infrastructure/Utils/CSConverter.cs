@@ -147,7 +147,7 @@ public class CSConverter : IConverter
         var levelSpace = new string('S', indentLevel).Replace("S", "  ");
 
         // プロパティ文字列作成
-        result.Append($"{levelSpace}public {property}");
+        result.Append($"{levelSpace}public {GetPropertyBaseString(property)}");
         result.AppendLine();
 
         return result.ToString();
@@ -186,11 +186,18 @@ public class CSConverter : IConverter
                 {
                     typeName = $"{property.PropertyTypeClassName}";
                 }
-                typeName = $"{property.PropertyTypeClassName}?";
+                else
+                {
+                    typeName = $"{property.PropertyTypeClassName}?";
+                }
                 break;
             default:
                 // それ以外は例外エラー
                 throw new Exception($"{property.Type.Kind} has no type set");
+        }
+        if(property.Type.IsList)
+        {
+            typeName = $"List<{typeName}>?";
         }
 
         // デフォルト文字列設定
