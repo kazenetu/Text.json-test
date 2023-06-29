@@ -165,7 +165,7 @@ public class CSConverter : IConverter
 
         // C#型取得
         var typeName = string.Empty;
-        switch (property.Type.Kind)
+        switch (property.Type?.Kind)
         {
             case PropertyType.Kinds.String:
                 typeName = "string";
@@ -193,7 +193,7 @@ public class CSConverter : IConverter
                 break;
             default:
                 // それ以外は例外エラー
-                throw new Exception($"{property.Type.Kind} has no type set");
+                throw new Exception($"{property.Type?.Kind} has no type set");
         }
         if(property.Type.IsList)
         {
