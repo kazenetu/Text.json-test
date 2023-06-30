@@ -89,21 +89,6 @@ public record PropertyType : BasePropertyType
     }
 
     /// <summary>
-    /// C#型情報を返す
-    /// </summary>
-    /// <returns>C#型情報</returns>
-    [Obsolete]
-    public override string ToString()
-    {
-        var csTypeName = ToPropertyType();
-        if (IsList)
-        {
-            return $"List<{csTypeName}>?";
-        }
-        return csTypeName;
-    }
-
-    /// <summary>
     /// 型種別を取得する
     /// </summary>    
     /// <param name="srcTypeName">type名</param>
@@ -132,33 +117,5 @@ public record PropertyType : BasePropertyType
         }
 
         return Kinds.Class;
-    }
-
-    /// <summary>
-    /// C#の型に変換
-    /// </summary>
-    /// <returns></returns>
-    [Obsolete]
-    private string ToPropertyType()
-    {
-        switch (Kind)
-        {
-            case Kinds.String:
-                return "string";
-            case Kinds.Decimal:
-                return "decimal";
-            case Kinds.Bool:
-                return "bool";
-            case Kinds.Null:
-                return "object";
-            case Kinds.Class:
-                if(IsList)
-                {
-                    return $"{ClassName}";
-                }
-                return $"{ClassName}?";
-        }
-        // それ以外は例外エラー
-        throw new Exception($"{Kind} has no type set");
     }
 }

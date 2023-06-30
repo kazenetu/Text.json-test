@@ -55,21 +55,4 @@ public record PropertyValueObject
         Name = name;
         Type = propertyType;
     }
-
-    /// <summary>
-    /// C#プロパティ文字列を返す
-    /// </summary>
-    /// <returns>C#プロパティ文字列</returns>
-    [Obsolete]
-    public override string ToString()
-    {
-        // デフォルト文字列設定
-        var defualt = string.Empty;
-        if (DefaultValue is not "")
-        {
-            defualt = $" = {DefaultValue};";
-        }
-
-        return $"{Type} {Name}{{set; get;}}{defualt}";
-    }
 }
