@@ -208,6 +208,6 @@ public class CSConverter : IConverter
         }
 
         // C#のプロパティを設定
-        return $"{typeName} {property.Name}{{set; get;}}{defualt}";
+        return $"{typeName} {property.Name} {{ set; get; }}{defualt}";
      }
 }
