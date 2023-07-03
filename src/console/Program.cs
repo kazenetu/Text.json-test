@@ -61,13 +61,13 @@ internal class Program
         // {
         //   public class SimpleJsonClass
         //   {
-        //     public string propString{set; get;} = string.Empty;
-        //     public decimal propNumber{set; get;}
-        //     public string propDate{set; get;} = string.Empty;
-        //     public bool propTrue{set; get;}
-        //     public bool propFalse{set; get;}
-        //     public object propNull{set; get;} = string.Empty;
-        //     public List<decimal>? propArray{set; get;}
+        //     public string propString { set; get; } = string.Empty;
+        //     public decimal propNumber { set; get; }
+        //     public string propDate { set; get; } = string.Empty;
+        //     public bool propTrue { set; get; }
+        //     public bool propFalse { set; get; }
+        //     public object propNull { set; get; } = string.Empty;
+        //     public List<decimal>? propArray { set; get; }
         //   }
         // }
         // --------------------------------------------------------------
@@ -108,11 +108,11 @@ internal class Program
         //   {
         //     public class InnerClass
         //     {
-        //       public string propObjString{set; get;} = string.Empty;
+        //       public string propObjString { set; get; } = string.Empty;
         //     }
         //
-        //     public InnerClass? propObjct{set; get;}
-        //     public decimal propNumber{set; get;}
+        //     public InnerClass? propObjct { set; get; }
+        //     public decimal propNumber { set; get; }
         //   }
         // }
 
@@ -157,10 +157,10 @@ internal class Program
         //   {
         //     public class InnerClass
         //     {
-        //       public string propObjString{set; get;} = string.Empty;
+        //       public string propObjString { set; get; } = string.Empty;
         //     }
         //
-        //     public List<InnerClass>? propObjcts{set; get;}
+        //     public List<InnerClass>? propObjcts { set; get; }
         //   }
         // }
 
@@ -220,21 +220,21 @@ internal class Program
         //   {
         //     public class InnerClassA
         //     {
-        //       public string propString{set; get;} = string.Empty;
-        //       public decimal propNumber{set; get;}
-        //       public string propDate{set; get;} = string.Empty;
-        //       public bool propTrue{set; get;}
-        //       public bool propFalse{set; get;}
-        //       public object propNull{set; get;} = string.Empty;
-        //       public List<decimal>? propArray{set; get;}
+        //       public string propString { set; get; } = string.Empty;
+        //       public decimal propNumber { set; get; }
+        //       public string propDate { set; get; } = string.Empty;
+        //       public bool propTrue { set; get; }
+        //       public bool propFalse { set; get; }
+        //       public object propNull { set; get; } = string.Empty;
+        //       public List<decimal>? propArray { set; get; }
         //     }
         //
         //     public class InnerClass
         //     {
-        //       public InnerClassA? propSubObjct{set; get;}
+        //       public InnerClassA? propSubObjct { set; get; }
         //     }
         //
-        //     public InnerClass? propObjct{set; get;}
+        //     public InnerClass? propObjct { set; get; }
         //   }
         // }
     }
