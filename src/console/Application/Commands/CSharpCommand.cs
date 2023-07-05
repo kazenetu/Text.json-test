@@ -7,4 +7,4 @@ namespace Appplication.Commands;
 /// <param name="RootPath">出力ルートパス</param>
 /// <param name="RootClassName">ルートクラス名(ファイル名)</param>
 /// <param name="indentSpaceCount">インデントスペース数</param>
-public record CSharpCommand(string NameSpace, string RootPath,string RootClassName, int indentSpaceCount);
+public record CSharpCommand(string NameSpace, string RootPath,string RootClassName, int indentSpaceCount = 2);
