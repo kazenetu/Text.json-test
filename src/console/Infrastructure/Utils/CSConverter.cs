@@ -23,6 +23,11 @@ public class CSConverter : IConverter
     /// ルートクラスインスタンス フィールド
     /// </summary>
     private readonly ClassEntity RootClass;
+    
+    /// <summary>
+    /// インデントのスペース数
+    /// </summary>
+    private int IndentSpaceCount = 2;
 
     /// <summary>
     /// コンストラクタ
@@ -38,6 +43,10 @@ public class CSConverter : IConverter
         // 必須パラメータチェック
         if (classInstance?.RootClass is null) throw new NullReferenceException("RootClassが設定されていません");
 
+        // インデントパラメータを設定
+        if (Params.ContainsKey(ParamKeys.IndentSpaceCount)) 
+            IndentSpaceCount = int.Parse(Params[ParamKeys.IndentSpaceCount]);
+        
         // Rootを取得
         RootClass = ClassInstance.RootClass;
     }
@@ -109,7 +118,7 @@ public class CSConverter : IConverter
         var result = new StringBuilder();
 
         // インデント設定
-        var levelSpace = new string('S', indentLevel).Replace("S", "  ");
+        var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
         result.AppendLine($"{levelSpace}public class {classEntity.Name}");
         result.AppendLine($"{levelSpace}{{");
 
@@ -144,7 +153,7 @@ public class CSConverter : IConverter
         var result = new StringBuilder();
 
         // インデント設定
-        var levelSpace = new string('S', indentLevel).Replace("S", "  ");
+        var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
 
         // プロパティ文字列作成
         result.Append($"{levelSpace}public {GetPropertyBaseString(property)}");
