@@ -48,7 +48,7 @@ public class ClassesApplication
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
 
         // ファイル出力
-        var result = FileOutputRepository.OutputResult(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace));
+        var result = FileOutputRepository.OutputResult(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace, command.IndentSpaceCount));
         if (result.Success)
         {
             return new ConvertResultModel(true, result.FileName, result.SourceCode);
