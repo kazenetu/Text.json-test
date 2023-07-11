@@ -38,7 +38,8 @@ public class FileOutputRepository : IFileOutputRepository
         {
             initialSpaceIndex = 1;
         }
-        fileData.Append(Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace));
+
+        fileData.Append(Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace, command.IndentSpaceCount));
 
         // ファイル出力
         File.WriteAllText(filePath, fileData.ToString());
@@ -73,7 +74,7 @@ public class FileOutputRepository : IFileOutputRepository
         {
             initialSpaceIndex = 1;
         }
-        var sorceString = Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace);
+        var sorceString = Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, command.NameSpace, command.IndentSpaceCount);
         fileData.Append(sorceString);
 
         // ファイル出力
