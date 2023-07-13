@@ -252,8 +252,9 @@ internal class Program
         IFileOutputRepository repository = new FileOutputRepository();
         IJsonRepository jsonRepository = new JsonRepository();
 
+        var indentSpaceCount = 4;
         var csApplication = new ClassesApplication(jsonRepository, repository);
-        var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName));
+        var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName, indentSpaceCount));
 
         // コンソール出力
         var message = result.Success ? "成功" : "失敗";
