@@ -1,5 +1,7 @@
 using Domain.ValueObjects;
 
+namespace Domain.Entities;
+
 /// <summary>
 /// クラスエンティティ
 /// </summary>
