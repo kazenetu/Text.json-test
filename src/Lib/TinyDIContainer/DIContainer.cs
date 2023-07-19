@@ -49,5 +49,21 @@ namespace TinyDIContainer
       }
       throw new Exception($"{typeof(U).Name} Is Not Exists");
     }
+
+    /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="interfaceType">インターフェイスのType</type>
+    /// <returns>インターフェイスを継承したobject</returns>
+    public static object CreateInstance(Type interfaceType)
+    {
+      var keyName = interfaceType.FullName;
+      if (Dict.ContainsKey(keyName))
+      {
+        var classType = Dict[keyName];
+        return Activator.CreateInstance(classType);
+      }
+      throw new Exception($"{interfaceType.Name} Is Not Exists");
+    }
   }
 }
