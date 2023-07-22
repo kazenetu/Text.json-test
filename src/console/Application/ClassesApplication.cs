@@ -8,7 +8,7 @@ namespace Appplication;
 /// <summary>
 /// クラス集約アプリケーション
 /// </summary>
-public class ClassesApplication
+public class ClassesApplication : ApplicationBase
 {
     /// <summary>
     /// Json解析リポジトリクラスインスタンス
@@ -25,7 +25,7 @@ public class ClassesApplication
     /// </summary>
     /// <param name="jsonRepository">Json解析リポジトリクラスインスタンス</param>
     /// <param name="fileOutputRepository">ファイル出力リポジトリクラスインスタンス</param>
-    public ClassesApplication(IJsonRepository jsonRepository, IFileOutputRepository fileOutputRepository)
+    public ClassesApplication(IJsonRepository jsonRepository, IFileOutputRepository fileOutputRepository) : base()
     {
         JsonRepository = jsonRepository;
         FileOutputRepository = fileOutputRepository;
