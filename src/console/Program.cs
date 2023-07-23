@@ -2,6 +2,7 @@ using System.Text.Json;
 using Appplication;
 using Domain.Interfaces;
 using Infrastructure;
+using TinyDIContainer;
 
 namespace ConsoleApp;
 
@@ -12,6 +13,10 @@ internal class Program
     /// </summary>    
     private static void Main(string[] args)
     {
+        // DI設定
+        DIContainer.Add<IFileOutputRepository, FileOutputRepository>();
+        DIContainer.Add<IJsonRepository, JsonRepository>();
+
         // ファイル出力設定値
         var rootPath = "CSOutputs";
         var nameSpace = "Domain.Entity";
@@ -248,9 +253,9 @@ internal class Program
     /// <param name="rootClassName">ルートパスのクラス名/param>
     private static void FileOutputAndResutoOutput(string json, string nameSpace, string rootPath, string rootClassName)
     {
-        // TODO のちほどDI化
-        IFileOutputRepository repository = new FileOutputRepository();
-        IJsonRepository jsonRepository = new JsonRepository();
+        // DIでインスタンス生成
+        IFileOutputRepository repository = DIContainer.CreateInstance<IFileOutputRepository>();
+        IJsonRepository jsonRepository = DIContainer.CreateInstance<IJsonRepository>();
 
         var indentSpaceCount = 4;
         var csApplication = new ClassesApplication(jsonRepository, repository);
