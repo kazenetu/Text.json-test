@@ -13,12 +13,12 @@ public class ClassesApplication : ApplicationBase
     /// <summary>
     /// Json解析リポジトリクラスインスタンス
     /// </summary>
-    private IJsonRepository JsonRepository;
+    private IJsonRepository? JsonRepository;
 
     /// <summary>
     /// ファイル出力リポジトリクラスインスタンス
     /// </summary>
-    private IFileOutputRepository FileOutputRepository;
+    private IFileOutputRepository? FileOutputRepository;
 
     /// <summary>
     /// コンストラクタ
@@ -29,6 +29,15 @@ public class ClassesApplication : ApplicationBase
     {
         JsonRepository = jsonRepository;
         FileOutputRepository = fileOutputRepository;
+    }
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="jsonRepository">Json解析リポジトリクラスインスタンス</param>
+    /// <param name="fileOutputRepository">ファイル出力リポジトリクラスインスタンス</param>
+    public ClassesApplication() : base()
+    {
     }
 
     /// <summary>
@@ -43,6 +52,10 @@ public class ClassesApplication : ApplicationBase
         if (string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
         if (command is null) throw new Exception($"{nameof(command)} is null");
         if (string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
+
+        // インターフェイスのnullチェック
+        if(JsonRepository is null) throw new Exception($"{nameof(JsonRepository)} is null");
+        if(FileOutputRepository is null) throw new Exception($"{nameof(FileOutputRepository)} is null");
 
         // Json文字列読み込み
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
