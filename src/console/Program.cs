@@ -253,12 +253,8 @@ internal class Program
     /// <param name="rootClassName">ルートパスのクラス名/param>
     private static void FileOutputAndResutoOutput(string json, string nameSpace, string rootPath, string rootClassName)
     {
-        // DIでインスタンス生成
-        IFileOutputRepository repository = DIContainer.CreateInstance<IFileOutputRepository>();
-        IJsonRepository jsonRepository = DIContainer.CreateInstance<IJsonRepository>();
-
         var indentSpaceCount = 4;
-        var csApplication = new ClassesApplication(jsonRepository, repository);
+        var csApplication = new ClassesApplication();
         var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName, indentSpaceCount));
 
         // コンソール出力
