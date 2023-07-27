@@ -13,6 +13,13 @@ dotnet run --project src/console/console.csproj
 
 ## フォルダ構成
 * src/console
+  * Appplication
+    * Commands
+      * CSharpCommand.cs
+    * Models
+      * ConvertResultModel.cs
+    * ApplicationBase.cs
+    * ClassesApplication.cs
   * Domain  
     ValueObject・EntityとRepositoryのインターフェイス
     * ClassesEntity.cs  
