@@ -14,12 +14,18 @@ dotnet run --project src/console/console.csproj
 ## フォルダ構成
 * src/console
   * Appplication
-    * Commands
+    * Commands  
+      言語変換コマンドクラス
       * CSharpCommand.cs
-    * Models
+    * Models  
+      ソースコード変換結果モデルクラス
       * ConvertResultModel.cs
-    * ApplicationBase.cs
-    * ClassesApplication.cs
+    * ApplicationBase.cs  
+      アプリケーションサービスクラスのスーパークラス  
+      DIコンテナ経由でインターフェイスにインスタンスを設定
+    * ClassesApplication.cs  
+      ソース変換アプリケーションサービスクラス
+
   * Domain  
     ValueObject・EntityとRepositoryのインターフェイス
     * ClassesEntity.cs  
@@ -144,3 +150,7 @@ dotnet run --project src/console/console.csproj
 
   * Program.cs  
     Json文字列とJson解析を実施するエントリクラス
+
+* Lib/TinyDIContainer
+  * DIContainer.cs  
+    拙作「[TinyDIContainer](https://github.com/kazenetu/DIContainer)」を改良した簡易DIコンテナ
