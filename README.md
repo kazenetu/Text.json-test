@@ -28,34 +28,34 @@ dotnet run --project src/console/console.csproj
 
   * Domain  
     ValueObject・EntityとRepositoryのインターフェイス
-    * ClassesEntity.cs  
-      集約クラス  
-      * ClassEntityリスト：インナークラスリスト
-      * ルートクラス：メインクラス
+    * Entities
+      * ClassesEntity.cs  
+        集約クラス  
+        * ClassEntityリスト：インナークラスリスト
+        * ルートクラス：メインクラス
 
-    * ClassEntity.cs  
-      クラスエンティティ
-      * プロパティリスト：クラス内のプロパティリスト
+      * ClassEntity.cs  
+        クラスエンティティ
+        * プロパティリスト：クラス内のプロパティリスト
 
-    * PropertyValueObject.cs  
-      プロパティValueObject
-      * プロパティ型：プロパティの型
+    * ValueObjects
+      * PropertyValueObject.cs  
+        プロパティValueObject
+        * プロパティ型：プロパティの型
 
-    * PropertyType.cs  
-      プロパティ型ValueObject
+      * PropertyType.cs  
+        プロパティ型ValueObject
 
-    * IJsonRepository.cs  
-      JSON読み込みリポジトリインターフェース
+    * Interfaces
+      * IJsonRepository.cs  
+        JSON読み込みリポジトリインターフェース
 
-    * IConsoleOutputRepository.cs  
-      コンソール出力リポジトリインターフェース
-
-    * IFileOutputRepository.cs  
-      ファイル出力リポジトリインターフェース
-
-    * FileOutputCommand.cs  
-      ファイル出力コマンドクラス  
-      名前空間や出力先などを設定するクラス
+      * IFileOutputRepository.cs  
+        ファイル出力リポジトリインターフェース
+    * Results
+      * FileOutputCommand.cs  
+        ファイル出力コマンドクラス  
+        名前空間や出力先などを設定するクラス
 
   * Infrastructure  
     インフラ層  
