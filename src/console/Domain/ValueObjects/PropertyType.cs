@@ -97,25 +97,19 @@ public record PropertyType : BasePropertyType
     private Kinds GetKind(string srcTypeName, string className)
     {
         // 型を特定する
-        switch (srcTypeName.ToLower())
+        return srcTypeName.ToLower() switch
         {
-            case "string":
-                return Kinds.String;
-            case "number":
-                return Kinds.Decimal;
-            case "true":
-                return Kinds.Bool;
-            case "false":
-                return Kinds.Bool;
-            case "null":
-                return Kinds.Null;
-        }
-        // クラス名が存在しない場合は例外エラー
-        if (string.IsNullOrEmpty(className))
-        {
-            throw new Exception($"{srcTypeName} has no type set");
-        }
-
-        return Kinds.Class;
+            "string" => Kinds.String, 
+            "number" => Kinds.Decimal, 
+            "true" => Kinds.Bool, 
+            "false" => Kinds.Bool, 
+            "null" => Kinds.Null, 
+            _ => string.IsNullOrEmpty(className) switch
+            {
+                // クラス名が存在しない場合は例外エラー
+                true => throw new Exception($"{nameof(srcTypeName)} has no type set"),
+                _ =>  Kinds.Class,
+            },
+        };
     }
 }
