@@ -125,34 +125,18 @@ class JsonParser
     private (string kindName, JsonValueKind valueKind) GetPropertyNameAndKind(JsonElement src)
     {
         // 型を特定する
-        var valueKind = "none...";
-        switch (src.ValueKind)
+        var valueKind = src.ValueKind switch
         {
-            case JsonValueKind.String:
-                valueKind = "String";
-                break;
-            case JsonValueKind.Array:
-                valueKind = "Array";
-                break;
-            case JsonValueKind.Number:
-                valueKind = "Number";
-                break;
-            case JsonValueKind.Object:
-                valueKind = "Object";
-                break;
-            case JsonValueKind.Undefined:
-                valueKind = "Undefined";
-                break;
-            case JsonValueKind.True:
-                valueKind = "True";
-                break;
-            case JsonValueKind.False:
-                valueKind = "False";
-                break;
-            case JsonValueKind.Null:
-                valueKind = "Null";
-                break;
-        }
+            JsonValueKind.String => "String",
+            JsonValueKind.Array => "Array",
+            JsonValueKind.Number => "Number",
+            JsonValueKind.Object => "Object",
+            JsonValueKind.Undefined => "Undefined",
+            JsonValueKind.True => "True",
+            JsonValueKind.False => "False",
+            JsonValueKind.Null => "Null",
+            _ => "none..."
+        };
         return (valueKind, src.ValueKind);
     }
 
