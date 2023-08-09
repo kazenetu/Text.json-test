@@ -169,42 +169,28 @@ public class CSConverter : IConverter
     /// <returns>プロパティ文字列のベース</returns>
     string GetPropertyBaseString(PropertyValueObject property)
     {
-        // デフォルト値
-        var defualtValue = string.Empty;
-
         // C#型取得
-        var typeName = string.Empty;
-        switch (property.Type?.Kind)
+        var typeName = property.Type switch
         {
-            case PropertyType.Kinds.String:
-                typeName = "string";
-                defualtValue = "string.Empty";
-                break;
-            case PropertyType.Kinds.Decimal:
-                typeName = "decimal";
-                break;
-            case PropertyType.Kinds.Bool:
-                typeName = "bool";
-                break;
-            case PropertyType.Kinds.Null:
-                typeName = "object";
-                defualtValue = "string.Empty";
-                break;
-            case PropertyType.Kinds.Class:
-                if(property.Type.IsList)
-                {
-                    typeName = $"{property.PropertyTypeClassName}";
-                }
-                else
-                {
-                    typeName = $"{property.PropertyTypeClassName}?";
-                }
-                break;
-            default:
-                // それ以外は例外エラー
-                throw new Exception($"{property.Type?.Kind} has no type set");
-        }
-        if(property.Type.IsList)
+            {Kind: PropertyType.Kinds.String} => "string",
+            {Kind: PropertyType.Kinds.Decimal} => "decimal",
+            {Kind: PropertyType.Kinds.Bool} => "bool",
+            {Kind: PropertyType.Kinds.Null }=> "object",
+            {Kind: PropertyType.Kinds.Class, IsList: true }=> $"{property.PropertyTypeClassName}",
+            {Kind: PropertyType.Kinds.Class, IsList: false }=> $"{property.PropertyTypeClassName}?",
+            _ => throw new Exception($"{nameof(property)} has no type set"),
+        };
+
+        // デフォルト値
+        var defualtValue = property.Type?.Kind switch
+        {
+            PropertyType.Kinds.String => "string.Empty",
+            PropertyType.Kinds.Null => "string.Empty",
+            _ => String.Empty,
+        };
+
+        // Listの場合はNullableにする
+        if(property.Type!.IsList)
         {
             typeName = $"List<{typeName}>?";
         }
