@@ -115,6 +115,66 @@ class JsonParser
             }
             return spaceResult;
         }
+
+        #region JsonValueKindごとの処理
+            (string kindName, JsonValueKind valueKind) JsonValueKindString(JsonElement elementValue, (string kindName, JsonValueKind valueKind) propertyData)
+            {
+                if (DateTime.TryParse(elementValue.ToString(), out var _))
+                {
+                    propertyData.kindName = "DateTime";
+                }
+                return propertyData;
+            }
+
+            (string kindName, JsonValueKind valueKind) JsonValueKindArray(JsonElement elementValue,  (string kindName, JsonValueKind valueKind) propertyData)
+            {
+                var arrayType = string.Empty;
+                var arrayIndex = 0;
+                while (arrayIndex < elementValue.GetArrayLength())
+                {
+                    if (string.IsNullOrEmpty(arrayType) || arrayType == elementValue[arrayIndex].ValueKind.ToString())
+                    {
+                        var (kindName, ValueKind) = GetPropertyNameAndKind(elementValue[arrayIndex]);
+                        arrayType = kindName;
+
+                        if (ValueKind == JsonValueKind.Object)
+                        {
+                            var jsonSrc = elementValue[arrayIndex].ToString();
+                            innerProperties?.Add(new JsonParser(jsonSrc, level + 1).Result);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        arrayType = "etc";
+                    }
+                    arrayIndex++;
+                }
+                if (string.IsNullOrEmpty(arrayType))
+                {
+                    arrayType = "noting...";
+                }
+                propertyData.kindName += $"({arrayType})";
+
+                return propertyData;
+            }
+
+            (string kindName, JsonValueKind valueKind) JsonValueKindObject(JsonElement elementValue, (string kindName, JsonValueKind valueKind) propertyData)
+            {
+                foreach (var objElement in elementValue.EnumerateObject())
+                {
+                    var (kindName, ValueKind) = GetPropertyNameAndKind(objElement.Value);
+                    innerProperties?.Add($"  {kindName} {objElement.Name}{Environment.NewLine}");
+
+                    if (ValueKind == JsonValueKind.Object)
+                    {
+                        innerProperties?.Add(new JsonParser(objElement.Value.ToString(), level + 2).Result);
+                        break;
+                    }
+                }
+                return propertyData;
+            }
+        #endregion
     }
 
     /// <summary>
