@@ -43,57 +43,13 @@ class JsonParser
             var propertyData = GetPropertyNameAndKind(element.Value);
 
             // 追加の処理を入れる
-            switch (propertyData.valueKind)
+            propertyData = propertyData.valueKind switch
             {
-                case JsonValueKind.String:
-                    if (DateTime.TryParse(element.Value.ToString(), out var _))
-                    {
-                        propertyData.kindName = "DateTime";
-                    }
-                    break;
-                case JsonValueKind.Array:
-                    var arrayType = string.Empty;
-                    var arrayIndex = 0;
-                    while (arrayIndex < element.Value.GetArrayLength())
-                    {
-                        if (string.IsNullOrEmpty(arrayType) || arrayType == element.Value[arrayIndex].ValueKind.ToString())
-                        {
-                            var (kindName, ValueKind) = GetPropertyNameAndKind(element.Value[arrayIndex]);
-                            arrayType = kindName;
-
-                            if (ValueKind == JsonValueKind.Object)
-                            {
-                                var jsonSrc = element.Value[arrayIndex].ToString();
-                                innerProperties.Add(new JsonParser(jsonSrc, level + 1).Result);
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            arrayType = "etc";
-                        }
-                        arrayIndex++;
-                    }
-                    if (string.IsNullOrEmpty(arrayType))
-                    {
-                        arrayType = "noting...";
-                    }
-                    propertyData.kindName += $"({arrayType})";
-                    break;
-                case JsonValueKind.Object:
-                    foreach (var objElement in element.Value.EnumerateObject())
-                    {
-                        var (kindName, ValueKind) = GetPropertyNameAndKind(objElement.Value);
-                        innerProperties.Add($"  {kindName} {objElement.Name}{Environment.NewLine}");
-
-                        if (ValueKind == JsonValueKind.Object)
-                        {
-                            innerProperties.Add(new JsonParser(objElement.Value.ToString(), level + 2).Result);
-                            break;
-                        }
-                    }
-                    break;
-            }
+                JsonValueKind.String => JsonValueKindString(element.Value, propertyData),
+                JsonValueKind.Array => JsonValueKindArray(element.Value, propertyData),
+                JsonValueKind.Object => JsonValueKindObject(element.Value, propertyData),
+                _ => propertyData
+            };
             result.AppendLine($"{GetSpace(level)}{propertyData.kindName} {element.Name}");
 
             foreach (var property in innerProperties)
@@ -199,5 +155,4 @@ class JsonParser
         };
         return (valueKind, src.ValueKind);
     }
-
 }
