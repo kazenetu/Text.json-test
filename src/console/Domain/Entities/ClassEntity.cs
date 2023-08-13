@@ -11,7 +11,7 @@ public class ClassEntity
     /// 名称
     /// </summary>
     /// <value>クラス名</value>
-    public string Name { get; init; }
+    public string Name { get; init; } = string.Empty;
 
     /// <summary>
     /// プロパティリスト
@@ -24,7 +24,6 @@ public class ClassEntity
     /// </summary>
     private ClassEntity()
     {
-        Name = string.Empty;
     }
 
     /// <summary>
