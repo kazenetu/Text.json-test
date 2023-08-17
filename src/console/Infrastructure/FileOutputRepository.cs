@@ -82,4 +82,15 @@ public class FileOutputRepository : IFileOutputRepository
 
         return new FileOutputResult(true, filePath, sorceString);
     }
+
+    /// <summary>
+    /// ファイル出力する
+    /// </summary>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
+    /// <param name="command">コマンドパラメータ</param>
+    /// <returns>出力結果</returns>
+    public FileOutputResult OutputResult(ClassesEntity classInstance, FileCommand command)
+    {
+        throw new NotImplementedException();
+    }
 }
