@@ -61,9 +61,16 @@ public class ClassesApplication : ApplicationBase
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
 
         // ファイル出力
-        var result = FileOutputRepository.OutputResult(classesEntity, new FileOutputCommand(command.RootPath, command.NameSpace, command.IndentSpaceCount));
+        var CommandParams = new Dictionary<ParamKeys, string>
+        {
+            {ParamKeys.CS_NameSpace, command.NameSpace},
+        };
+        var fileCommand = new FileCommand(command.RootPath,OutputLanguageType.CS,command.IndentSpaceCount, CommandParams);
+        var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);
+
         if (result.Success)
         {
+            // 変換成功
             return new ConvertResultModel(true, result.FileName, result.SourceCode);
         }
 
