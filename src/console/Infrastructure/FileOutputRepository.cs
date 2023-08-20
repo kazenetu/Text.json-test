@@ -53,6 +53,7 @@ public class FileOutputRepository : IFileOutputRepository
     /// <param name="classInstance">集約エンティティ インスタンス</param>
     /// <param name="command">コマンドパラメータ</param>
     /// <returns>出力結果</returns>
+    [Obsolete]
     public FileOutputResult OutputResult(ClassesEntity classInstance, FileOutputCommand command)
     {
         //必須パラメータチェック
