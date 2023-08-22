@@ -15,21 +15,5 @@ public interface IFileOutputRepository
     /// <param name="classInstance">集約エンティティ インスタンス</param>
     /// <param name="command">コマンドパラメータ</param>
     /// <returns>出力結果</returns>
-    bool Output(ClassesEntity classInstance, FileOutputCommand command);
-
-    /// <summary>
-    /// ファイル出力する
-    /// </summary>
-    /// <param name="classInstance">集約エンティティ インスタンス</param>
-    /// <param name="command">コマンドパラメータ</param>
-    /// <returns>出力結果</returns>
-    FileOutputResult OutputResult(ClassesEntity classInstance, FileOutputCommand command);
-
-    /// <summary>
-    /// ファイル出力する
-    /// </summary>
-    /// <param name="classInstance">集約エンティティ インスタンス</param>
-    /// <param name="command">コマンドパラメータ</param>
-    /// <returns>出力結果</returns>
     FileOutputResult OutputResult(ClassesEntity classInstance, FileCommand command);
 }
