@@ -29,4 +29,4 @@ public enum ParamKeys
 /// <param name="LanguageType">出力言語タイプ</param>
 /// <param name="IndentSpaceCount">インデントスペース数</param>
 /// <param name="Params">追加パラメータ</param>
-public record FileCommand(string RootPath, OutputLanguageType LanguageType, int IndentSpaceCount, Dictionary<ParamKeys, string> Params);
+public record FileOutputCommand(string RootPath, OutputLanguageType LanguageType, int IndentSpaceCount, Dictionary<ParamKeys, string> Params);

@@ -17,7 +17,7 @@ public class FileOutputRepository : IFileOutputRepository
     /// <param name="classInstance">集約エンティティ インスタンス</param>
     /// <param name="command">コマンドパラメータ</param>
     /// <returns>出力結果</returns>
-    public FileOutputResult OutputResult(ClassesEntity classInstance, FileCommand command)
+    public FileOutputResult OutputResult(ClassesEntity classInstance, FileOutputCommand command)
     {
         //必須パラメータチェック
         if (classInstance is null) return new FileOutputResult(false, string.Empty, string.Empty);

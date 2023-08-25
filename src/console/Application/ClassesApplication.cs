@@ -65,7 +65,7 @@ public class ClassesApplication : ApplicationBase
         {
             {ParamKeys.CS_NameSpace, command.NameSpace},
         };
-        var fileCommand = new FileCommand(command.RootPath,OutputLanguageType.CS,command.IndentSpaceCount, CommandParams);
+        var fileCommand = new FileOutputCommand(command.RootPath,OutputLanguageType.CS,command.IndentSpaceCount, CommandParams);
         var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);
 
         if (result.Success)
