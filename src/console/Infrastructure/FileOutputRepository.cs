@@ -42,7 +42,7 @@ public class FileOutputRepository : IFileOutputRepository
         // ソースコードを作成
         var sourceCode = command.LanguageType switch
         {
-            OutputLanguageType.CS => GetCSCode(),
+            OutputLanguageType.CS => GetCSCode(classInstance, command),
             _ => throw new Exception("ext error")
         };
 
@@ -50,26 +50,31 @@ public class FileOutputRepository : IFileOutputRepository
         File.WriteAllText(filePath, sourceCode);
 
         return new FileOutputResult(true, filePath, sourceCode);
+    }
 
-        // C#ソースコードを取得
-        string GetCSCode()
+    /// <summary>
+    /// C# ソースコード生成
+    /// </summary>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
+    /// <param name="command">コマンドパラメータ</param>
+    /// <returns>ソースコード</returns>
+    private static string GetCSCode(ClassesEntity classInstance, FileOutputCommand command)
+    {
+        // 名前空間
+        var nameSpace = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.CS_NameSpace))
         {
-            // 名前空間
-            var nameSpace = string.Empty;
-            if (command.Params.ContainsKey(ParamKeys.CS_NameSpace))
-            {
-                nameSpace = command.Params[ParamKeys.CS_NameSpace];
-            }
-
-            var initialSpaceIndex = 0;
-            // 名前空間が設定していない場合はインデントを調整する
-            if (nameSpace == string.Empty)
-            {
-                initialSpaceIndex = 1;
-            }
-
-            // Entityからソースコードの変換
-            return Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, nameSpace, command.IndentSpaceCount);
+            nameSpace = command.Params[ParamKeys.CS_NameSpace];
         }
+
+        var initialSpaceIndex = 0;
+        // 名前空間が設定していない場合はインデントを調整する
+        if (nameSpace == string.Empty)
+        {
+            initialSpaceIndex = 1;
+        }
+
+        // Entityからソースコードの変換
+        return Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, nameSpace, command.IndentSpaceCount);
     }
 }
