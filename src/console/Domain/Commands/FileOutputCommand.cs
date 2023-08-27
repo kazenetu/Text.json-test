@@ -20,6 +20,11 @@ public enum ParamKeys
     /// C#用名前空間
     /// </summary>
     CS_NameSpace,
+
+    /// <summary>
+    /// インデントスペース数
+    /// </summary>
+    IndentSpaceCount,
 }
 
 /// <summary>
