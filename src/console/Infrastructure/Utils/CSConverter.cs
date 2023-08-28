@@ -1,4 +1,5 @@
 using System.Text;
+using Domain.Commands;
 using Domain.Entities;
 using Domain.ValueObjects;
 
@@ -17,7 +18,7 @@ public class CSConverter : IConverter
     /// <summary>
     /// パラメータ フィールド
     /// </summary>
-    private readonly Dictionary<string, string> Params;
+    private readonly Dictionary<ParamKeys, string> Params;
 
     /// <summary>
     /// ルートクラスインスタンス フィールド
@@ -35,7 +36,7 @@ public class CSConverter : IConverter
     /// <param name="classInstance">集約クラス</param>
     /// <param name="param">パラメータ</param>
     /// <returns>インスタンス<returns>
-    public CSConverter(ClassesEntity classInstance, Dictionary<string, string> param)
+    public CSConverter(ClassesEntity classInstance, Dictionary<ParamKeys, string> param)
     {
         ClassInstance = classInstance;
         Params = param;
@@ -57,7 +58,7 @@ public class CSConverter : IConverter
     /// <param name="classInstance">集約クラス</param>
     /// <param name="param">パラメータ</param>
     /// <returns>インスタンス<returns>
-    public static IConverter Create(ClassesEntity classInstance, Dictionary<string, string> param)
+    public static IConverter Create(ClassesEntity classInstance, Dictionary<ParamKeys, string> param)
     {
 
         return new CSConverter(classInstance, param);
