@@ -1,4 +1,5 @@
 using System.Text;
+using Domain.Commands;
 using Domain.Entities;
 using Domain.ValueObjects;
 
@@ -20,7 +21,7 @@ internal static class SoruceConverter
     public static string ToCsCode(ClassesEntity classInstance, int indentLevel = 0, string? namespaceName = null, int indentSpaceCount = 2)
     {
         // パラメータ設定
-        var param = new Dictionary<string,string>();
+        var param = new Dictionary<ParamKeys,string>();
         if(!string.IsNullOrEmpty(namespaceName))
         {
             param.Add(ParamKeys.CS_NameSpace, namespaceName);
