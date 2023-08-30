@@ -9,6 +9,11 @@ public enum OutputLanguageType
     /// C#
     /// </summary>
     CS, 
+
+    /// <summary>
+    /// Kotlin
+    /// </summary>
+    KT,
 }
 
 /// <summary>
@@ -20,6 +25,11 @@ public enum ParamKeys
     /// C#用名前空間
     /// </summary>
     CS_NameSpace,
+
+    /// <summary>
+    /// Kotlin用パッケージ名
+    /// </summary>
+    KT_Package,
 
     /// <summary>
     /// インデントスペース数
