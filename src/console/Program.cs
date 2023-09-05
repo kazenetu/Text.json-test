@@ -242,6 +242,15 @@ internal class Program
         //     public InnerClass? propObjct { set; get; }
         //   }
         // }
+
+        // Kotlinへの変換
+        var package = "Kotlin.example";
+        var rootPathKotlin = "KTOutputs";
+        FileOutputAndResutoOutputKotlin(simpleJson, package, rootPathKotlin, "SimpleJsonClass");
+        FileOutputAndResutoOutputKotlin(innerClassJson, package, rootPathKotlin, "InnerClassJsonClass");
+        FileOutputAndResutoOutputKotlin(arrayJson, package, rootPathKotlin, "ArrayJsonClass");
+        FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass");
+
     }
 
     /// <summary>
@@ -261,6 +270,28 @@ internal class Program
         var message = result.Success ? "成功" : "失敗";
         Console.WriteLine($"{result.FileName}...{message}");
         if(result.Success){
+            Console.WriteLine($"---出力結果---");
+            Console.WriteLine(result.SourceCode);
+        }
+    }
+
+    /// <summary>
+    /// ファイル出力と結果表示
+    /// </summary>
+    /// <param name="json">JSON文字列</param>
+    /// <param name="packageName">パッケージ名</param>
+    /// <param name="rootPath">出力先</param>
+    /// <param name="rootClassName">ルートパスのクラス名/param>
+    private static void FileOutputAndResutoOutputKotlin(string json, string packageName, string rootPath, string rootClassName)
+    {
+        var csApplication = new ClassesApplication();
+        var result = csApplication.ConvertJsonToKotlin(json, new Appplication.Commands.KotlinCommand(packageName, rootPath, rootClassName));
+
+        // コンソール出力
+        var message = result.Success ? "成功" : "失敗";
+        Console.WriteLine($"{result.FileName}...{message}");
+        if (result.Success)
+        {
             Console.WriteLine($"---出力結果---");
             Console.WriteLine(result.SourceCode);
         }
