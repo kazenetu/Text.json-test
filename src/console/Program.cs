@@ -247,9 +247,48 @@ internal class Program
         var package = "Kotlin.example";
         var rootPathKotlin = "KTOutputs";
         FileOutputAndResutoOutputKotlin(simpleJson, package, rootPathKotlin, "SimpleJsonClass");
+        // KTOutputs/SimpleJsonClass.kt...成功
+        // ---出力結果---
+        // import kotlinx.serialization.Serializable
+        //
+        // @Serializable
+        // data class SimpleJsonClass(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
+
         FileOutputAndResutoOutputKotlin(innerClassJson, package, rootPathKotlin, "InnerClassJsonClass");
+        // KTOutputs/InnerClassJsonClass.kt...成功
+        // ---出力結果---
+        // import kotlinx.serialization.Serializable
+        //
+        // @Serializable
+        // data class InnerClassJsonClass(var propObjct: InnerClass, var propNumber: Double)
+        //
+        // @Serializable
+        // data class InnerClass(var propObjString: String)
+
         FileOutputAndResutoOutputKotlin(arrayJson, package, rootPathKotlin, "ArrayJsonClass");
+        // KTOutputs/ArrayJsonClass.kt...成功
+        // ---出力結果---
+        // import kotlinx.serialization.Serializable
+        //
+        // @Serializable
+        // data class ArrayJsonClass(var propObjcts: Array<InnerClass>)
+        //
+        // @Serializable
+        // data class InnerClass(var propObjString: String)
+
         FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass");
+        // KTOutputs/InnerNestJsonClass.kt...成功
+        // ---出力結果---
+        // import kotlinx.serialization.Serializable
+        //
+        // @Serializable
+        // data class InnerNestJsonClass(var propObjct: InnerClass)
+        //
+        // @Serializable
+        // data class InnerClass(var propSubObjct: InnerClassA)
+        //
+        // @Serializable
+        // data class InnerClassA(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
 
     }
 
