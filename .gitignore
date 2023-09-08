@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Output CS Directory
 CSOutputs/
+
+# Output KT Directory
+KTOutputs/*.kt

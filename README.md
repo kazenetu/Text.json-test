@@ -154,3 +154,28 @@ dotnet run --project src/console/console.csproj
 * Lib/TinyDIContainer
   * DIContainer.cs  
     拙作「[TinyDIContainer](https://github.com/kazenetu/DIContainer)」を改良した簡易DIコンテナ
+
+## 言語生成手順
+言語生成機能を追加することができる。  
+(また、各種DBのDDL文も作成可能)
+1. **Domain.Commands.OutputLanguageType**に```出力言語タイプ```を追記する。  
+  追記場所：Domain/Commands/FileOutputCommand.cs
+
+1. **Domain.Commands.ParamKeys**に```追加パラメータ```を追記する。  
+  追記場所：Domain/Commands/FileOutputCommand.cs
+
+1. **Infrastructure.Utils.*Converter**を追加する。  
+  例) Infrastructure/Utils/KTConverter.cs
+
+1. **Infrastructure.FileOutputRepository**に専用メソッドを追記する。  
+  追記場所：Appplication/ClassesApplication.cs  
+  例) private static string GetKTCode(ClassesEntity classInstance, FileOutputCommand command)
+
+1. **Appplication.Commands.*Command**を追加する。  
+  例) Application/Commands/KotlinCommand.cs
+
+1. **Appplication.ClassesApplication**にメソッドを追記する。  
+  追記場所：Appplication/ClassesApplication.cs  
+  例) public ConvertResultModel ConvertJsonToKotlin(string json, KotlinCommand command)
+
+

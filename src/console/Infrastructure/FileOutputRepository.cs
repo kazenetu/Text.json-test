@@ -33,6 +33,7 @@ public class FileOutputRepository : IFileOutputRepository
         var ext = command.LanguageType switch
         {
             OutputLanguageType.CS => "cs",
+            OutputLanguageType.KT => "kt",
             _ => throw new Exception("ext error")
         };
 
@@ -43,6 +44,7 @@ public class FileOutputRepository : IFileOutputRepository
         var sourceCode = command.LanguageType switch
         {
             OutputLanguageType.CS => GetCSCode(classInstance, command),
+            OutputLanguageType.KT => GetKTCode(classInstance,command),
             _ => throw new Exception("ext error")
         };
 
@@ -76,5 +78,24 @@ public class FileOutputRepository : IFileOutputRepository
 
         // Entityからソースコードの変換
         return Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, nameSpace, command.IndentSpaceCount);
+    }
+
+    /// <summary>
+    /// Kotlin ソースコード生成
+    /// </summary>
+    /// <param name="classInstance">集約エンティティ インスタンス</param>
+    /// <param name="command">コマンドパラメータ</param>
+    /// <returns>ソースコード</returns>
+    private static string GetKTCode(ClassesEntity classInstance, FileOutputCommand command)
+    {
+        // パッケージ名
+        var packageName = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.KT_Package))
+        {
+            packageName = command.Params[ParamKeys.KT_Package];
+        }
+
+        // Entityからソースコードの変換
+        return Utils.SoruceConverter.ToKtCode(classInstance,  packageName, command.IndentSpaceCount);
     }
 }

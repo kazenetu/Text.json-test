@@ -77,4 +77,42 @@ public class ClassesApplication : ApplicationBase
         // 変換失敗
         return new ConvertResultModel(false, result.FileName);
     }
+
+    /// <summary>
+    /// Json文字列をKotlinソースコードに変換しファイル作成する
+    /// </summary>
+    /// <param name="json">Json文字列</param>
+    /// <param name="command">Kotlin変換コマンド</param>
+    /// <returns>処理結果</returns>
+    public ConvertResultModel ConvertJsonToKotlin(string json, KotlinCommand command)
+    {
+        // パラメータチェック
+        if (string.IsNullOrEmpty(json)) throw new Exception($"{nameof(json)} is null or Empty");
+        if (command is null) throw new Exception($"{nameof(command)} is null");
+        if (string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
+
+        // インターフェイスのnullチェック
+        if (JsonRepository is null) throw new Exception($"{nameof(JsonRepository)} is null");
+        if (FileOutputRepository is null) throw new Exception($"{nameof(FileOutputRepository)} is null");
+
+        // Json文字列読み込み
+        var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
+
+        // ファイル出力
+        var CommandParams = new Dictionary<ParamKeys, string>
+        {
+            {ParamKeys.KT_Package, command.PackageName},
+        };
+        var fileCommand = new FileOutputCommand(command.RootPath, OutputLanguageType.KT, 0, CommandParams);
+        var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);
+
+        if (result.Success)
+        {
+            // 変換成功
+            return new ConvertResultModel(true, result.FileName, result.SourceCode);
+        }
+
+        // 変換失敗
+        return new ConvertResultModel(false, result.FileName);
+    }
 }
