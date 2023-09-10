@@ -350,7 +350,7 @@ MigrationBackup/
 .ionide/
 
 # Output CS Directory
-CSOutputs/
+CSOutputs/*.cs
 
 # Output KT Directory
 KTOutputs/*.kt
