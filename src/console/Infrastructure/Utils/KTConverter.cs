@@ -24,7 +24,17 @@ public class KTConverter : IConverter
     /// ルートクラスインスタンス フィールド
     /// </summary>
     private readonly ClassEntity RootClass;
-    
+
+    /// <summary>
+    /// 固定プレフィックス
+    /// </summary>
+    private readonly string Prefix = string.Empty;
+
+    /// <summary>
+    /// 固定サフィックス
+    /// </summary>
+    private readonly string Suffix = string.Empty;
+
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -38,6 +48,15 @@ public class KTConverter : IConverter
 
         // 必須パラメータチェック
         if (classInstance?.RootClass is null) throw new NullReferenceException("RootClassが設定されていません");
+
+        // 固定プレフィックスを設定
+        if (Params.ContainsKey(ParamKeys.Prefix))
+            Prefix = Params[ParamKeys.Prefix];
+
+        // 固定サフィックスを設定
+        if (Params.ContainsKey(ParamKeys.Suffix))
+            Suffix = Params[ParamKeys.Suffix];
+
 
         // Rootを取得
         RootClass = ClassInstance.RootClass;
@@ -114,7 +133,7 @@ public class KTConverter : IConverter
         result.AppendLine("@Serializable");
 
         // データクラス生成
-        result.Append($"data class {classEntity.Name}");
+        result.Append($"data class {Prefix}{classEntity.Name}{Suffix}");
         result.Append('(');
 
         // プロパティ文字列作成
@@ -136,7 +155,7 @@ public class KTConverter : IConverter
     /// </summary>
     /// <param name="property">プロパティValueObject</param>
     /// <returns>プロパティ文字列</returns>
-    static string GetPropertyString(PropertyValueObject property)
+    string GetPropertyString(PropertyValueObject property)
     {
         return GetPropertyBaseString(property);
     }
@@ -146,7 +165,7 @@ public class KTConverter : IConverter
     /// </summary>
     /// <param name="property">プロパティValueObject</param>
     /// <returns>プロパティ文字列のベース</returns>
-    private static string GetPropertyBaseString(PropertyValueObject property)
+    private string GetPropertyBaseString(PropertyValueObject property)
     {
         // Kotlin型取得
         var typeName = property.Type switch
@@ -155,8 +174,8 @@ public class KTConverter : IConverter
             { Kind: PropertyType.Kinds.Decimal } => "Double",
             { Kind: PropertyType.Kinds.Bool } => "Boolean",
             { Kind: PropertyType.Kinds.Null } => "String",
-            { Kind: PropertyType.Kinds.Class, IsList: true } => $"{property.PropertyTypeClassName}",
-            { Kind: PropertyType.Kinds.Class, IsList: false } => $"{property.PropertyTypeClassName}",
+            { Kind: PropertyType.Kinds.Class, IsList: true } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
+            { Kind: PropertyType.Kinds.Class, IsList: false } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
             _ => throw new Exception($"{nameof(property)} has no type set"),
         };
 
