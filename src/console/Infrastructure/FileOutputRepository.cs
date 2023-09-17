@@ -37,8 +37,22 @@ public class FileOutputRepository : IFileOutputRepository
             _ => throw new Exception("ext error")
         };
 
+        // 固定プレフィックス
+        var prefix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Prefix))
+        {
+            prefix = command.Params[ParamKeys.Prefix];
+        }
+
+        // 固定サフィックス
+        var suffix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Suffix))
+        {
+            suffix = command.Params[ParamKeys.Suffix];
+        }
+
         // ファイルパス作成
-        var filePath = Path.Combine(command.RootPath, $"{classInstance.Name}.{ext}");
+        var filePath = Path.Combine(command.RootPath, $"{prefix}{classInstance.Name}{suffix}.{ext}");
 
         // ソースコードを作成
         var sourceCode = command.LanguageType switch
@@ -69,6 +83,20 @@ public class FileOutputRepository : IFileOutputRepository
             nameSpace = command.Params[ParamKeys.CS_NameSpace];
         }
 
+        // 固定プレフィックス
+        var prefix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Prefix))
+        {
+            prefix = command.Params[ParamKeys.Prefix];
+        }
+
+        // 固定サフィックス
+        var suffix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Suffix))
+        {
+            suffix = command.Params[ParamKeys.Suffix];
+        }
+
         var initialSpaceIndex = 0;
         // 名前空間が設定していない場合はインデントを調整する
         if (nameSpace == string.Empty)
@@ -77,7 +105,7 @@ public class FileOutputRepository : IFileOutputRepository
         }
 
         // Entityからソースコードの変換
-        return Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, nameSpace, command.IndentSpaceCount);
+        return Utils.SoruceConverter.ToCsCode(classInstance, initialSpaceIndex, nameSpace, command.IndentSpaceCount, prefix, suffix);
     }
 
     /// <summary>
@@ -95,7 +123,21 @@ public class FileOutputRepository : IFileOutputRepository
             packageName = command.Params[ParamKeys.KT_Package];
         }
 
+        // 固定プレフィックス
+        var prefix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Prefix))
+        {
+            prefix = command.Params[ParamKeys.Prefix];
+        }
+
+        // 固定サフィックス
+        var suffix = string.Empty;
+        if (command.Params.ContainsKey(ParamKeys.Suffix))
+        {
+            suffix = command.Params[ParamKeys.Suffix];
+        }
+
         // Entityからソースコードの変換
-        return Utils.SoruceConverter.ToKtCode(classInstance,  packageName, command.IndentSpaceCount);
+        return Utils.SoruceConverter.ToKtCode(classInstance,  packageName, command.IndentSpaceCount, prefix, suffix);
     }
 }
