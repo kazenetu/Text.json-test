@@ -290,6 +290,9 @@ internal class Program
         // @Serializable
         // data class InnerClassA(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
 
+        Console.WriteLine("--プレフィックス、サフィックス追加--");
+        FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass", "Prefix_", "_Suffix");
+        FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass","Prefix_","_Suffix");
     }
 
     /// <summary>
@@ -299,11 +302,14 @@ internal class Program
     /// <param name="nameSpace">名前空間</param>
     /// <param name="rootPath">出力先</param>
     /// <param name="rootClassName">ルートパスのクラス名/param>
-    private static void FileOutputAndResutoOutput(string json, string nameSpace, string rootPath, string rootClassName)
+    /// <param name="prefix">固定プレフィックス</param>
+    /// <param name="suffix">固定サフィックス</param>
+    private static void FileOutputAndResutoOutput(string json, string nameSpace, string rootPath, string rootClassName, string prefix = "", string suffix = "")
     {
         var indentSpaceCount = 4;
         var csApplication = new ClassesApplication();
-        var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName, indentSpaceCount));
+        var result = csApplication.ConvertJsonToCSharp(json, new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName, indentSpaceCount,
+                                               prefix, suffix));
 
         // コンソール出力
         var message = result.Success ? "成功" : "失敗";
@@ -321,10 +327,13 @@ internal class Program
     /// <param name="packageName">パッケージ名</param>
     /// <param name="rootPath">出力先</param>
     /// <param name="rootClassName">ルートパスのクラス名/param>
-    private static void FileOutputAndResutoOutputKotlin(string json, string packageName, string rootPath, string rootClassName)
+    /// <param name="prefix">固定プレフィックス</param>
+    /// <param name="suffix">固定サフィックス</param>
+    private static void FileOutputAndResutoOutputKotlin(string json, string packageName, string rootPath, string rootClassName, string prefix = "", string suffix = "")
     {
         var csApplication = new ClassesApplication();
-        var result = csApplication.ConvertJsonToKotlin(json, new Appplication.Commands.KotlinCommand(packageName, rootPath, rootClassName));
+        var result = csApplication.ConvertJsonToKotlin(json, new Appplication.Commands.KotlinCommand(packageName, rootPath, rootClassName,
+                                                prefix, suffix));
 
         // コンソール出力
         var message = result.Success ? "成功" : "失敗";
