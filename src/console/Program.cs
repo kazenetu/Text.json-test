@@ -292,7 +292,42 @@ internal class Program
 
         Console.WriteLine("--プレフィックス、サフィックス追加--");
         FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass", "Prefix_", "_Suffix");
+        // namespace Domain.Entity
+        // {
+        //     public class Prefix_InnerNestJsonClass_Suffix
+        //     {
+        //         public class Prefix_InnerClassA_Suffix
+        //         {
+        //             public string propString { set; get; } = string.Empty;
+        //             public decimal propNumber { set; get; }
+        //             public string propDate { set; get; } = string.Empty;
+        //             public bool propTrue { set; get; }
+        //             public bool propFalse { set; get; }
+        //             public object propNull { set; get; } = string.Empty;
+        //             public List<decimal>? propArray { set; get; }
+        //         }
+        //
+        //         public class Prefix_InnerClass_Suffix
+        //         {
+        //             public Prefix_InnerClassA_Suffix? propSubObjct { set; get; }
+        //         }
+        //
+        //         public Prefix_InnerClass_Suffix? propObjct { set; get; }
+        //     }
+        // }
+
         FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass","Prefix_","_Suffix");
+        // import kotlinx.serialization.Serializable
+        //
+        // @Serializable
+        // data class Prefix_InnerNestJsonClass_Suffix(var propObjct: Prefix_InnerClass_Suffix)
+        //
+        // @Serializable
+        // data class Prefix_InnerClass_Suffix(var propSubObjct: Prefix_InnerClassA_Suffix)
+        //
+        // @Serializable
+        // data class Prefix_InnerClassA_Suffix(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
+
     }
 
     /// <summary>
