@@ -64,6 +64,8 @@ public class ClassesApplication : ApplicationBase
         var CommandParams = new Dictionary<ParamKeys, string>
         {
             {ParamKeys.CS_NameSpace, command.NameSpace},
+            {ParamKeys.Prefix, command.Prefix},
+            {ParamKeys.Suffix, command.Suffix},
         };
         var fileCommand = new FileOutputCommand(command.RootPath,OutputLanguageType.CS,command.IndentSpaceCount, CommandParams);
         var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);
@@ -102,6 +104,8 @@ public class ClassesApplication : ApplicationBase
         var CommandParams = new Dictionary<ParamKeys, string>
         {
             {ParamKeys.KT_Package, command.PackageName},
+            {ParamKeys.Prefix, command.Prefix},
+            {ParamKeys.Suffix, command.Suffix},
         };
         var fileCommand = new FileOutputCommand(command.RootPath, OutputLanguageType.KT, 0, CommandParams);
         var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);

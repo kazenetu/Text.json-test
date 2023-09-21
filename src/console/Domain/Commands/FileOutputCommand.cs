@@ -35,6 +35,16 @@ public enum ParamKeys
     /// インデントスペース数
     /// </summary>
     IndentSpaceCount,
+
+    /// <summary>
+    /// 固定プレフィックス
+    /// </summary>
+    Prefix,
+
+    /// <summary>
+    /// 固定サフィックス
+    /// </summary>
+    Suffix,
 }
 
 /// <summary>

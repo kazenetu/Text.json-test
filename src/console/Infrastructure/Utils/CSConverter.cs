@@ -31,6 +31,16 @@ public class CSConverter : IConverter
     private int IndentSpaceCount = 2;
 
     /// <summary>
+    /// 固定プレフィックス
+    /// </summary>
+    private readonly string Prefix = string.Empty;
+
+    /// <summary>
+    /// 固定サフィックス
+    /// </summary>
+    private readonly string Suffix = string.Empty;
+
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="classInstance">集約クラス</param>
@@ -47,7 +57,15 @@ public class CSConverter : IConverter
         // インデントパラメータを設定
         if (Params.ContainsKey(ParamKeys.IndentSpaceCount)) 
             IndentSpaceCount = int.Parse(Params[ParamKeys.IndentSpaceCount]);
-        
+
+        // 固定プレフィックスを設定
+        if (Params.ContainsKey(ParamKeys.Prefix))
+            Prefix = Params[ParamKeys.Prefix];
+
+        // 固定サフィックスを設定
+        if (Params.ContainsKey(ParamKeys.Suffix))
+            Suffix = Params[ParamKeys.Suffix];
+
         // Rootを取得
         RootClass = ClassInstance.RootClass;
     }
@@ -120,7 +138,7 @@ public class CSConverter : IConverter
 
         // インデント設定
         var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
-        result.AppendLine($"{levelSpace}public class {classEntity.Name}");
+        result.AppendLine($"{levelSpace}public class {Prefix}{classEntity.Name}{Suffix}");
         result.AppendLine($"{levelSpace}{{");
 
         if (classEntity == RootClass)
@@ -177,8 +195,8 @@ public class CSConverter : IConverter
             {Kind: PropertyType.Kinds.Decimal} => "decimal",
             {Kind: PropertyType.Kinds.Bool} => "bool",
             {Kind: PropertyType.Kinds.Null }=> "object",
-            {Kind: PropertyType.Kinds.Class, IsList: true }=> $"{property.PropertyTypeClassName}",
-            {Kind: PropertyType.Kinds.Class, IsList: false }=> $"{property.PropertyTypeClassName}?",
+            {Kind: PropertyType.Kinds.Class, IsList: true }=> $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
+            {Kind: PropertyType.Kinds.Class, IsList: false }=> $"{Prefix}{property.PropertyTypeClassName}{Suffix}?",
             _ => throw new Exception($"{nameof(property)} has no type set"),
         };
 
