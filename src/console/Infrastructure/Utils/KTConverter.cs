@@ -82,7 +82,7 @@ public class KTConverter : IConverter
     {
         // パッケージ名取得
         var packageName = string.Empty;
-        if (Params.ContainsKey(ParamKeys.CS_NameSpace)) packageName = Params[ParamKeys.KT_Package];
+        if (Params.ContainsKey(ParamKeys.KT_Package)) packageName = Params[ParamKeys.KT_Package];
 
         var result = new StringBuilder();
 
