@@ -65,7 +65,7 @@ dotnet run --project src/console/console.csproj
 
     * FileOutputRepository.cs  
       ファイル出力リポジトリ  
-      集約クラスからC#ソースコードを出力するためのクラス
+      集約クラスからソースコードを出力するためのクラス
       
     * JsonRepository.cs  
       JSON読み込みリポジトリ  
@@ -87,37 +87,37 @@ dotnet run --project src/console/console.csproj
       * JsonPropertyArray.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.Array用  
-        C#の配列型に変換する(配列要素は再起に取得する)
+        配列型に変換する(配列要素は再起的に取得する)
 
       * JsonPropertyFalse.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.False用  
-        C#のboolに変換する
+        boolに変換する
         
       * JsonPropertyTrue.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.True用  
-        C#のboolに変換する
+        boolに変換する
         
       * JsonPropertyNull.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.Null用  
-        C#のNullableに変換する
+        Nullableに変換する
         
       * JsonPropertyNumber.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.Number用  
-        C#のdecimalに変換する
+        decimalに変換する
         
       * JsonPropertyObject.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.Object用  
-        C#のインナークラスに変換する
+        インナークラスに変換する
         
       * JsonPropertyString.cs  
         IJsonPropertyの実装クラス  
         JsonValueKind.String用  
-        C#のstringに変換する
+        stringに変換する
 
     * Utils  
       ソースコード変換ユーティリティ
@@ -130,8 +130,7 @@ dotnet run --project src/console/console.csproj
 
       * SoruceConverter.cs  
         ソース変換ユーティリティのエントリクラス  
-        各言語用ソースコード変換変換メソッドを実装する予定  
-        現時点はC#用ソースコードのみ
+        各言語用ソースコード変換変換メソッドを実装する  
 
       * CSConverter.cs  
         C#ソースコード変換クラス  
