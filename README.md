@@ -124,10 +124,6 @@ dotnet run --project src/console/console.csproj
       * IConverter.cs  
         ソース変換用インターフェース
 
-      * ParamKeys.cs  
-        パラメータキー定数クラス  
-        連想配列のキーの定数
-
       * SoruceConverter.cs  
         ソース変換ユーティリティのエントリクラス  
         各言語用ソースコード変換変換メソッドを実装する  
