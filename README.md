@@ -17,6 +17,7 @@ dotnet run --project src/console/console.csproj
     * Commands  
       言語変換コマンドクラス
       * CSharpCommand.cs
+      * KotlinCommand.cs ※言語ソースコード出力の追加例
     * Models  
       ソースコード変換結果モデルクラス
       * ConvertResultModel.cs
@@ -130,6 +131,9 @@ dotnet run --project src/console/console.csproj
 
       * CSConverter.cs  
         C#ソースコード変換クラス  
+
+      * KTConverter.cs ※言語ソースコード出力の追加例  
+        Kotlinソースコード変換クラス  
 
   * DeserializeSamples  
     サンプルJson文字列デシアライズクラス
