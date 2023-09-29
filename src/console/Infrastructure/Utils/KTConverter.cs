@@ -182,7 +182,7 @@ public class KTConverter : IConverter
         // Listの場合はNullableにする
         if (property.Type!.IsList)
         {
-            typeName = $"Array<{typeName}>";
+            typeName = $"List<{typeName}>";
         }
 
         // Kotlinのプロパティを設定
