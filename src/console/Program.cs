@@ -23,10 +23,10 @@ internal class Program
 
         // 単純なJSON文字列作成
         var simpleJson = @"{
-            ""propString"" : ""string""
+            ""prop_string"" : ""string""
             , ""propNumber"":10
-            , ""propDate"":""2022/01/01 10:11:12""
-            , ""propTrue"":true
+            , ""prop_Date"":""2022/01/01 10:11:12""
+            , ""PropTrue"":true
             , ""propFalse"":false
             , ""propNull"":null
             , ""propArray"":[1,2,3]
@@ -35,11 +35,10 @@ internal class Program
         Console.WriteLine("--単純なJSON文字列--");
         ShowJsonResult(simpleJson);
         // 出力結果：
-        // --単純なJSON文字列--
-        // String propString
+        // String prop_string
         // Number propNumber
-        // DateTime propDate
-        // True propTrue
+        // DateTime prop_Date
+        // True PropTrue
         // False propFalse
         // Null propNull
         // Array(Number) propArray
@@ -50,10 +49,10 @@ internal class Program
         Console.WriteLine("--------------------");
         //出力結果：
         // ----Deserialize結果----
-        // propString:string
+        // propString:
         // propNumber:10
-        // propDate:2022/01/01 10:11:12
-        // propTrue:True
+        // propDate:
+        // propTrue:False
         // propFalse:False
         // propNull:
         // propArray:[1,2,3]
@@ -64,16 +63,16 @@ internal class Program
         //出力結果：
         // namespace Domain.Entity
         // {
-        //   public class SimpleJsonClass
-        //   {
-        //     public string propString { set; get; } = string.Empty;
-        //     public decimal propNumber { set; get; }
-        //     public string propDate { set; get; } = string.Empty;
-        //     public bool propTrue { set; get; }
-        //     public bool propFalse { set; get; }
-        //     public object propNull { set; get; } = string.Empty;
-        //     public List<decimal>? propArray { set; get; }
-        //   }
+        //     public class SimpleJsonClass
+        //     {
+        //         public string prop_string { set; get; } = string.Empty;
+        //         public decimal propNumber { set; get; }
+        //         public string prop_Date { set; get; } = string.Empty;
+        //         public bool PropTrue { set; get; }
+        //         public bool propFalse { set; get; }
+        //         public object propNull { set; get; } = string.Empty;
+        //         public List<decimal>? propArray { set; get; }
+        //     }
         // }
         // --------------------------------------------------------------
         // Objectが含まれるJSON文字列作成
@@ -249,10 +248,12 @@ internal class Program
         FileOutputAndResutoOutputKotlin(simpleJson, package, rootPathKotlin, "SimpleJsonClass");
         // KTOutputs/SimpleJsonClass.kt...成功
         // ---出力結果---
+        // package Kotlin.example
+        //
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class SimpleJsonClass(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
+        // data class SimpleJsonClass(var prop_string: String, var propNumber: Double, var prop_Date: String, var PropTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: List<Double>)
 
         FileOutputAndResutoOutputKotlin(innerClassJson, package, rootPathKotlin, "InnerClassJsonClass");
         // KTOutputs/InnerClassJsonClass.kt...成功
