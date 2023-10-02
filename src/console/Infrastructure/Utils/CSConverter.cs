@@ -88,11 +88,15 @@ public class CSConverter : IConverter
     /// <returns>ソースコード文字列</returns>
     public string Convert()
     {
+        var result = new StringBuilder();
+        // using設定
+        result.AppendLine("using System.Text;");
+        result.AppendLine("using System.Text.Json.Serialization;");
+        result.AppendLine();
+
         // 名前空間取得
         var namespaceName = string.Empty;
         if (Params.ContainsKey(ParamKeys.CS_NameSpace)) namespaceName = Params[ParamKeys.CS_NameSpace];
-
-        var result = new StringBuilder();
 
         // インデントレベル
         var indentLevel = 0;
@@ -151,9 +155,12 @@ public class CSConverter : IConverter
         }
 
         // プロパティ文字列作成
+        var isNewLine = false;
         foreach (var property in classEntity.Properties)
         {
+            if(isNewLine) result.AppendLine();
             result.Append($"{GetPropertyString(property, indentLevel + 1)}");
+            isNewLine = true;
         }
 
         result.AppendLine($"{levelSpace}}}");
@@ -175,8 +182,12 @@ public class CSConverter : IConverter
         var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
 
         // プロパティ文字列作成
-        result.Append($"{levelSpace}public {GetPropertyBaseString(property)}");
-        result.AppendLine();
+        var (proptyBase, attribute) = GetPropertyBaseString(property);
+        if(!string.IsNullOrEmpty(attribute))
+        {
+           result.Append($"{levelSpace}{attribute}");
+        }
+        result.AppendLine($"{levelSpace}public {proptyBase}");
 
         return result.ToString();
     }
@@ -185,8 +196,8 @@ public class CSConverter : IConverter
     /// プロパティValueObjectからプロパティ文字列のベースを作成して返す
     /// </summary>
     /// <param name="property">プロパティValueObject</param>
-    /// <returns>プロパティ文字列のベース</returns>
-    string GetPropertyBaseString(PropertyValueObject property)
+    /// <returns>プロパティ文字列のベースと属性のタプル</returns>
+    (string propertyBaseString, string attribute) GetPropertyBaseString(PropertyValueObject property)
     {
         // C#型取得
         var typeName = property.Type switch
@@ -222,6 +233,41 @@ public class CSConverter : IConverter
         }
 
         // C#のプロパティを設定
-        return $"{typeName} {property.Name} {{ set; get; }}{defualt}";
-     }
+        var codeProprty = ToFirstUpper(property.Name);
+        if(codeProprty.IndexOf("_") >= 0)
+        {
+            var keywords = new StringBuilder();
+            foreach(var keyword in codeProprty.Split("_"))
+            {
+                keywords.Append(ToFirstUpper(keyword));
+            }
+            codeProprty = keywords.ToString();
+        }
+
+        // 属性追加確認
+        var attribute = string.Empty;
+        if(codeProprty != property.Name)
+        {
+            attribute = $"[JsonPropertyName(\"{property.Name}\")]" + Environment.NewLine;
+        }
+        
+        return ($"{typeName} {codeProprty} {{ set; get; }}{defualt}", attribute);
+    }
+
+    /// <summary>
+    /// 頭文字を大文字に設定
+    /// </summary>
+    /// <param name="src">対象文字列</param>
+    /// <returns>頭文字を大文字にした文字列</returns>
+    string ToFirstUpper(string src)
+    {
+        if(string.IsNullOrEmpty(src))
+            return string.Empty;
+
+        var result = new StringBuilder();
+        result.Append(src.Substring(0,1).ToUpper());
+        if(src.Length > 1) 
+                result.Append(src.Substring(1, src.Length - 1));
+        return result.ToString();
+    }
 }
