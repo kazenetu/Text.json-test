@@ -49,9 +49,9 @@ internal class Program
         Console.WriteLine("--------------------");
         //出力結果：
         // ----Deserialize結果----
-        // propString:
+        // propString:string
         // propNumber:10
-        // propDate:
+        // propDate:2022/01/01 10:11:12
         // propTrue:False
         // propFalse:False
         // propNull:
