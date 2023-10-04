@@ -41,14 +41,14 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix];
+            prefix = ToFirstUppers(command.Params[ParamKeys.Prefix]);
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix];
+            suffix = ToFirstUppers(command.Params[ParamKeys.Suffix]);
         }
 
         // ファイルパス作成
@@ -87,14 +87,14 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix];
+            prefix = ToFirstUppers(command.Params[ParamKeys.Prefix]);
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix];
+            suffix = ToFirstUppers(command.Params[ParamKeys.Suffix]);
         }
 
         var initialSpaceIndex = 0;
@@ -139,5 +139,42 @@ public class FileOutputRepository : IFileOutputRepository
 
         // Entityからソースコードの変換
         return Utils.SoruceConverter.ToKtCode(classInstance,  packageName, command.IndentSpaceCount, prefix, suffix);
+    }
+
+    /// <summary>
+    /// スペース単位で頭文字を大文字に設定
+    /// </summary>
+    /// <param name="src">対象文字列</param>
+    /// <returns>頭文字を大文字にした文字列</returns>
+    private static string ToFirstUppers(string src)
+    {
+        var result = ToFirstUpper(src);
+        if(src.IndexOf("_") >= 0)
+        {
+            var keywords = new StringBuilder();
+            foreach(var keyword in src.Split("_"))
+            {
+                keywords.Append(ToFirstUpper(keyword));
+            }
+            result = keywords.ToString();
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 頭文字を大文字に設定
+    /// </summary>
+    /// <param name="src">対象文字列</param>
+    /// <returns>頭文字を大文字にした文字列</returns>
+    private static string ToFirstUpper(string src)
+    {
+        if(string.IsNullOrEmpty(src))
+            return string.Empty;
+
+        var result = new StringBuilder();
+        result.Append(src.Substring(0,1).ToUpper());
+        if(src.Length > 1) 
+                result.Append(src.Substring(1, src.Length - 1));
+        return result.ToString();
     }
 }
