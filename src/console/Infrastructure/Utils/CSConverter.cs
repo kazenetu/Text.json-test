@@ -2,6 +2,7 @@ using System.Text;
 using Domain.Commands;
 using Domain.Entities;
 using Domain.ValueObjects;
+using Infrastructure.Extensions;
 
 namespace Infrastructure.Utils;
 
@@ -233,16 +234,7 @@ public class CSConverter : IConverter
         }
 
         // C#のプロパティを設定
-        var codeProprty = ToFirstUpper(property.Name);
-        if(codeProprty.IndexOf("_") >= 0)
-        {
-            var keywords = new StringBuilder();
-            foreach(var keyword in codeProprty.Split("_"))
-            {
-                keywords.Append(ToFirstUpper(keyword));
-            }
-            codeProprty = keywords.ToString();
-        }
+        var codeProprty = property.Name.ToCSharpNaming();
 
         // 属性追加確認
         var attribute = string.Empty;
@@ -252,22 +244,5 @@ public class CSConverter : IConverter
         }
         
         return ($"{typeName} {codeProprty} {{ set; get; }}{defualt}", attribute);
-    }
-
-    /// <summary>
-    /// 頭文字を大文字に設定
-    /// </summary>
-    /// <param name="src">対象文字列</param>
-    /// <returns>頭文字を大文字にした文字列</returns>
-    string ToFirstUpper(string src)
-    {
-        if(string.IsNullOrEmpty(src))
-            return string.Empty;
-
-        var result = new StringBuilder();
-        result.Append(src.Substring(0,1).ToUpper());
-        if(src.Length > 1) 
-                result.Append(src.Substring(1, src.Length - 1));
-        return result.ToString();
     }
 }
