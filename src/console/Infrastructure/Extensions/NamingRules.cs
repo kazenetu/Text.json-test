@@ -15,7 +15,7 @@ public static class NamingRules
     public static string ToCSharpNaming(this string src)
     {
         var result = ToUpperCase(src);
-        if(src.IndexOf("_") >= 0)
+        if(src.Contains('_', StringComparison.CurrentCulture))
         {
             var keywords = new StringBuilder();
             foreach(var keyword in src.Split("_"))
@@ -38,9 +38,9 @@ public static class NamingRules
             return string.Empty;
 
         var result = new StringBuilder();
-        result.Append(src.Substring(0,1).ToUpper());
+        result.Append(src[..1].ToUpper());
         if(src.Length > 1) 
-                result.Append(src.Substring(1, src.Length - 1));
+                result.Append(src.AsSpan(1, src.Length - 1));
         return result.ToString();
     }
 }
