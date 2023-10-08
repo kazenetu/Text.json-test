@@ -61,17 +61,32 @@ internal class Program
         FileOutputAndResutoOutput(simpleJson, nameSpace, rootPath, "SimpleJsonClass");
         Console.WriteLine("--------------------");
         //出力結果：
+        // using System.Text;
+        // using System.Text.Json.Serialization;
+        //
         // namespace Domain.Entity
         // {
         //     public class SimpleJsonClass
         //     {
-        //         public string prop_string { set; get; } = string.Empty;
-        //         public decimal propNumber { set; get; }
-        //         public string prop_Date { set; get; } = string.Empty;
+        //         [JsonPropertyName("prop_string")]
+        //         public string PropString { set; get; } = string.Empty;
+        //
+        //         [JsonPropertyName("propNumber")]
+        //         public decimal PropNumber { set; get; }
+        //
+        //         [JsonPropertyName("prop_Date")]
+        //         public string PropDate { set; get; } = string.Empty;
+        //
         //         public bool PropTrue { set; get; }
-        //         public bool propFalse { set; get; }
-        //         public object propNull { set; get; } = string.Empty;
-        //         public List<decimal>? propArray { set; get; }
+        //
+        //         [JsonPropertyName("propFalse")]
+        //         public bool PropFalse { set; get; }
+        //
+        //         [JsonPropertyName("propNull")]
+        //         public object PropNull { set; get; } = string.Empty;
+        //
+        //         [JsonPropertyName("propArray")]
+        //         public List<decimal>? PropArray { set; get; }
         //     }
         // }
         // --------------------------------------------------------------
@@ -106,20 +121,26 @@ internal class Program
         FileOutputAndResutoOutput(innerClassJson, nameSpace, rootPath, "InnerClassJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
+        // using System.Text;
+        // using System.Text.Json.Serialization;
+        //
         // namespace Domain.Entity
         // {
-        //   public class InnerClassJsonClass
-        //   {
-        //     public class InnerClass
+        //     public class InnerClassJsonClass
         //     {
-        //       public string propObjString { set; get; } = string.Empty;
-        //     }
+        //         public class InnerClass
+        //         {
+        //             [JsonPropertyName("propObjString")]
+        //             public string PropObjString { set; get; } = string.Empty;
+        //         }
         //
-        //     public InnerClass? propObjct { set; get; }
-        //     public decimal propNumber { set; get; }
-        //   }
+        //         [JsonPropertyName("propObjct")]
+        //         public InnerClass? PropObjct { set; get; }
+        //
+        //         [JsonPropertyName("propNumber")]
+        //         public decimal PropNumber { set; get; }
+        //     }
         // }
-
         // --------------------------------------------------------------
         // Object配列が含まれるJSON文字列作成
         var arrayJson = @"{
@@ -155,19 +176,23 @@ internal class Program
         FileOutputAndResutoOutput(arrayJson, nameSpace, rootPath, "ArrayJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
+        // using System.Text;
+        // using System.Text.Json.Serialization;
+        //
         // namespace Domain.Entity
         // {
-        //   public class ArrayJsonClass
-        //   {
-        //     public class InnerClass
+        //     public class ArrayJsonClass
         //     {
-        //       public string propObjString { set; get; } = string.Empty;
-        //     }
+        //         public class InnerClass
+        //         {
+        //             [JsonPropertyName("propObjString")]
+        //             public string PropObjString { set; get; } = string.Empty;
+        //         }
         //
-        //     public List<InnerClass>? propObjcts { set; get; }
-        //   }
+        //         [JsonPropertyName("propObjcts")]
+        //         public List<InnerClass>? PropObjcts { set; get; }
+        //     }
         // }
-
         // --------------------------------------------------------------
         // Objectのネストを含むJSON文字列作成
         var innerNestJson = @"{
@@ -218,28 +243,46 @@ internal class Program
         FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass");
         Console.WriteLine("--------------------");
         // ----Class解析結果----
+        // using System.Text;
+        // using System.Text.Json.Serialization;
+        //
         // namespace Domain.Entity
         // {
-        //   public class InnerNestJsonClass
-        //   {
-        //     public class InnerClassA
+        //     public class InnerNestJsonClass
         //     {
-        //       public string propString { set; get; } = string.Empty;
-        //       public decimal propNumber { set; get; }
-        //       public string propDate { set; get; } = string.Empty;
-        //       public bool propTrue { set; get; }
-        //       public bool propFalse { set; get; }
-        //       public object propNull { set; get; } = string.Empty;
-        //       public List<decimal>? propArray { set; get; }
-        //     }
+        //         public class InnerClassA
+        //         {
+        //             [JsonPropertyName("propString")]
+        //             public string PropString { set; get; } = string.Empty;
         //
-        //     public class InnerClass
-        //     {
-        //       public InnerClassA? propSubObjct { set; get; }
-        //     }
+        //             [JsonPropertyName("propNumber")]
+        //             public decimal PropNumber { set; get; }
         //
-        //     public InnerClass? propObjct { set; get; }
-        //   }
+        //             [JsonPropertyName("propDate")]
+        //             public string PropDate { set; get; } = string.Empty;
+        //
+        //             [JsonPropertyName("propTrue")]
+        //             public bool PropTrue { set; get; }
+        //
+        //             [JsonPropertyName("propFalse")]
+        //             public bool PropFalse { set; get; }
+        //
+        //             [JsonPropertyName("propNull")]
+        //             public object PropNull { set; get; } = string.Empty;
+        //
+        //             [JsonPropertyName("propArray")]
+        //             public List<decimal>? PropArray { set; get; }
+        //         }
+        //
+        //         public class InnerClass
+        //         {
+        //             [JsonPropertyName("propSubObjct")]
+        //             public InnerClassA? PropSubObjct { set; get; }
+        //         }
+        //
+        //         [JsonPropertyName("propObjct")]
+        //         public InnerClass? PropObjct { set; get; }
+        //     }
         // }
 
         // Kotlinへの変換
@@ -293,27 +336,46 @@ internal class Program
 
         Console.WriteLine("--プレフィックス、サフィックス追加--");
         FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass", "Prefix_", "_Suffix");
+        //--プレフィックス、サフィックス追加--
+        // using System.Text;
+        // using System.Text.Json.Serialization;
+        //
         // namespace Domain.Entity
         // {
-        //     public class Prefix_InnerNestJsonClass_Suffix
+        //     public class PrefixInnerNestJsonClassSuffix
         //     {
-        //         public class Prefix_InnerClassA_Suffix
+        //         public class PrefixInnerClassASuffix
         //         {
-        //             public string propString { set; get; } = string.Empty;
-        //             public decimal propNumber { set; get; }
-        //             public string propDate { set; get; } = string.Empty;
-        //             public bool propTrue { set; get; }
-        //             public bool propFalse { set; get; }
-        //             public object propNull { set; get; } = string.Empty;
-        //             public List<decimal>? propArray { set; get; }
+        //             [JsonPropertyName("propString")]
+        //             public string PropString { set; get; } = string.Empty;
+        //
+        //             [JsonPropertyName("propNumber")]
+        //             public decimal PropNumber { set; get; }
+        //
+        //             [JsonPropertyName("propDate")]
+        //             public string PropDate { set; get; } = string.Empty;
+        //
+        //             [JsonPropertyName("propTrue")]
+        //             public bool PropTrue { set; get; }
+        //
+        //             [JsonPropertyName("propFalse")]
+        //             public bool PropFalse { set; get; }
+        //
+        //             [JsonPropertyName("propNull")]
+        //             public object PropNull { set; get; } = string.Empty;
+        //
+        //             [JsonPropertyName("propArray")]
+        //             public List<decimal>? PropArray { set; get; }
         //         }
         //
-        //         public class Prefix_InnerClass_Suffix
+        //         public class PrefixInnerClassSuffix
         //         {
-        //             public Prefix_InnerClassA_Suffix? propSubObjct { set; get; }
+        //             [JsonPropertyName("propSubObjct")]
+        //             public PrefixInnerClassASuffix? PropSubObjct { set; get; }
         //         }
         //
-        //         public Prefix_InnerClass_Suffix? propObjct { set; get; }
+        //         [JsonPropertyName("propObjct")]
+        //         public PrefixInnerClassSuffix? PropObjct { set; get; }
         //     }
         // }
 
