@@ -75,6 +75,12 @@ dotnet run --project src/console/console.csproj
         IJsonPropertyのリスト  
         System.Linq.Whereを使って対象のJsonPropertyを選択する
 
+    * Extensions  
+      拡張クラス  
+      * NamingRules.cs  
+        各言語の規約に則ったクラス・プロパティ変換を行う。  
+        リポジトリや各言語用ソースコード変換クラスから呼ばれることを想定
+
     * JsonProperties  
       ストラテジパターンで実装されており、JsonRepositoryから呼ばれる。
       JsonValueKindを元にJsonPropertyResultを返す

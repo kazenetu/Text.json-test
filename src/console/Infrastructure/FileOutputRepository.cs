@@ -3,6 +3,7 @@ using Domain.Commands;
 using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Results;
+using Infrastructure.Extensions;
 
 namespace Infrastructure;
 
@@ -41,18 +42,18 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix];
+            prefix = command.Params[ParamKeys.Prefix].ToCSharpNaming();
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix];
+            suffix = command.Params[ParamKeys.Suffix].ToCSharpNaming();
         }
 
         // ファイルパス作成
-        var filePath = Path.Combine(command.RootPath, $"{prefix}{classInstance.Name}{suffix}.{ext}");
+        var filePath = Path.Combine(command.RootPath, $"{prefix}{classInstance.Name.ToCSharpNaming()}{suffix}.{ext}");
 
         // ソースコードを作成
         var sourceCode = command.LanguageType switch
@@ -87,14 +88,14 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix];
+            prefix = command.Params[ParamKeys.Prefix].ToCSharpNaming();
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix];
+            suffix = command.Params[ParamKeys.Suffix].ToCSharpNaming();
         }
 
         var initialSpaceIndex = 0;
