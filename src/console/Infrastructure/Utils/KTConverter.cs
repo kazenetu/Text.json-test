@@ -2,6 +2,7 @@ using System.Text;
 using Domain.Commands;
 using Domain.Entities;
 using Domain.ValueObjects;
+using Infrastructure.Extensions;
 
 namespace Infrastructure.Utils;
 
@@ -140,7 +141,7 @@ public class KTConverter : IConverter
         var propertyLastIndex = classEntity.Properties.Count-1;
         foreach (var property in classEntity.Properties)
         {
-            result.Append($"var {GetPropertyString(property)}");
+            result.Append(GetPropertyString(property));
             if(classEntity.Properties[index: propertyLastIndex] != property){
                 result.Append(", ");
             }
@@ -186,6 +187,15 @@ public class KTConverter : IConverter
         }
 
         // Kotlinのプロパティを設定
-        return $"{property.Name}: {typeName}";
+        var codeProprty = property.Name.ToKotlinPrppertyNaming();
+
+        // アノテーション追加確認
+        var annotation = string.Empty;
+        if(codeProprty != property.Name)
+        {
+            annotation = $"@SerialName(\"{property.Name}\") ";
+        }
+
+        return $"{annotation}var {codeProprty}: {typeName}";
     }
 }
