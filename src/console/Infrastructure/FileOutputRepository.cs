@@ -42,14 +42,26 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix].ToCSharpNaming();
+            var target = command.Params[ParamKeys.Prefix];
+            prefix = command.LanguageType switch
+            {
+                OutputLanguageType.CS => target.ToCSharpNaming(),
+                OutputLanguageType.KT => target.ToKotlinClassNaming(),
+                _ => throw new Exception("ext error")
+            };
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix].ToCSharpNaming();
+            var target = command.Params[ParamKeys.Suffix];
+            suffix = command.LanguageType switch
+            {
+                OutputLanguageType.CS => target.ToCSharpNaming(),
+                OutputLanguageType.KT => target.ToKotlinClassNaming(),
+                _ => throw new Exception("ext error")
+            };
         }
 
         // ファイルパス作成
@@ -128,14 +140,14 @@ public class FileOutputRepository : IFileOutputRepository
         var prefix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Prefix))
         {
-            prefix = command.Params[ParamKeys.Prefix];
+            prefix = command.Params[ParamKeys.Prefix].ToKotlinClassNaming();
         }
 
         // 固定サフィックス
         var suffix = string.Empty;
         if (command.Params.ContainsKey(ParamKeys.Suffix))
         {
-            suffix = command.Params[ParamKeys.Suffix];
+            suffix = command.Params[ParamKeys.Suffix].ToKotlinClassNaming();
         }
 
         // Entityからソースコードの変換
