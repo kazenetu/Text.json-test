@@ -296,7 +296,15 @@ internal class Program
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class SimpleJsonClass(var prop_string: String, var propNumber: Double, var prop_Date: String, var PropTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: List<Double>)
+        // data class SimpleJsonClass ( 
+        //     @SerialName("prop_string") var propString: String, 
+        //     var propNumber: Double, 
+        //     @SerialName("prop_Date") var propDate: String, 
+        //     @SerialName("PropTrue") var propTrue: Boolean, 
+        //     var propFalse: Boolean, 
+        //     var propNull: String, 
+        //     var propArray: List<Double> 
+        // )
 
         FileOutputAndResutoOutputKotlin(innerClassJson, package, rootPathKotlin, "InnerClassJsonClass");
         // KTOutputs/InnerClassJsonClass.kt...成功
@@ -312,31 +320,45 @@ internal class Program
         FileOutputAndResutoOutputKotlin(arrayJson, package, rootPathKotlin, "ArrayJsonClass");
         // KTOutputs/ArrayJsonClass.kt...成功
         // ---出力結果---
+        // package Kotlin.example
+        //
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class ArrayJsonClass(var propObjcts: Array<InnerClass>)
+        // data class InnerClassJsonClass (var propObjct: InnerClass,var propNumber: Double)
         //
         // @Serializable
-        // data class InnerClass(var propObjString: String)
+        // data class InnerClass (var propObjString: String)
 
         FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass");
         // KTOutputs/InnerNestJsonClass.kt...成功
         // ---出力結果---
+        // package Kotlin.example
+        //
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class InnerNestJsonClass(var propObjct: InnerClass)
+        // data class InnerNestJsonClass (var propObjct: InnerClass)
         //
         // @Serializable
-        // data class InnerClass(var propSubObjct: InnerClassA)
+        // data class InnerClass (var propSubObjct: InnerClassA)
         //
         // @Serializable
-        // data class InnerClassA(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
+        // data class InnerClassA ( 
+        //     var propString: String, 
+        //     var propNumber: Double, 
+        //     var propDate: String, 
+        //     var propTrue: Boolean, 
+        //     var propFalse: Boolean, 
+        //     var propNull: String, 
+        //     var propArray: List<Double> 
+        // )
 
         Console.WriteLine("--プレフィックス、サフィックス追加--");
         FileOutputAndResutoOutput(innerNestJson, nameSpace, rootPath, "InnerNestJsonClass", "Prefix_", "_Suffix");
         //--プレフィックス、サフィックス追加--
+        // CSOutputs/PrefixInnerNestJsonClassSuffix.cs...成功
+        // ---出力結果---
         // using System.Text;
         // using System.Text.Json.Serialization;
         //
@@ -380,16 +402,28 @@ internal class Program
         // }
 
         FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass","Prefix_","_Suffix");
+        // KTOutputs / PrefixInnerNestJsonClassSuffix.kt...成功
+        // -- - 出力結果-- -
+        // package Kotlin.example
+        //
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class Prefix_InnerNestJsonClass_Suffix(var propObjct: Prefix_InnerClass_Suffix)
+        // data class PrefixInnerNestJsonClassSuffix(var propObjct: PrefixInnerClassSuffix)
         //
         // @Serializable
-        // data class Prefix_InnerClass_Suffix(var propSubObjct: Prefix_InnerClassA_Suffix)
+        // data class PrefixInnerClassSuffix(var propSubObjct: PrefixInnerClassASuffix)
         //
         // @Serializable
-        // data class Prefix_InnerClassA_Suffix(var propString: String, var propNumber: Double, var propDate: String, var propTrue: Boolean, var propFalse: Boolean, var propNull: String, var propArray: Array<Double>)
+        // data class PrefixInnerClassASuffix(
+        //     var propString: String,
+        //     var propNumber: Double, 
+        //     var propDate: String, 
+        //     var propTrue: Boolean, 
+        //     var propFalse: Boolean, 
+        //     var propNull: String, 
+        //     var propArray: List<Double> 
+        // )
 
     }
 

@@ -2,6 +2,7 @@ using System.Text;
 using Domain.Commands;
 using Domain.Entities;
 using Domain.ValueObjects;
+using Infrastructure.Extensions;
 
 namespace Infrastructure.Utils;
 
@@ -98,7 +99,8 @@ public class KTConverter : IConverter
 
         // メイン データクラス生成
         result.Append(GetRootClassString());
-        result.AppendLine();
+        if(ClassInstance.InnerClasses.Any())
+            result.AppendLine();
 
         // インナークラスに相当する データクラス生成
         foreach (var classInstance in ClassInstance.InnerClasses.Reverse())
@@ -129,21 +131,28 @@ public class KTConverter : IConverter
     {
         var result = new StringBuilder();
 
+        // パラメータマルチライン設定
+        var isMultiLineParams = classEntity.Properties.Count > 2;
+
         // アノテーション追加
         result.AppendLine("@Serializable");
 
         // データクラス生成
         result.Append($"data class {Prefix}{classEntity.Name}{Suffix}");
-        result.Append('(');
+        result.Append($" (");
+        if (isMultiLineParams) result.Append($" {Environment.NewLine}");
 
         // プロパティ文字列作成
-        var propertyLastIndex = classEntity.Properties.Count-1;
+        var propertyLastIndex = classEntity.Properties.Count - 1;
         foreach (var property in classEntity.Properties)
         {
-            result.Append($"var {GetPropertyString(property)}");
-            if(classEntity.Properties[index: propertyLastIndex] != property){
-                result.Append(", ");
+            if (isMultiLineParams) result.Append("    ");
+            result.Append(GetPropertyString(property));
+            if (classEntity.Properties[index: propertyLastIndex] != property)
+            {
+                result.Append(',');
             }
+            if (isMultiLineParams) result.Append($" {Environment.NewLine}");
         }
         result.Append(')');
 
@@ -186,6 +195,15 @@ public class KTConverter : IConverter
         }
 
         // Kotlinのプロパティを設定
-        return $"{property.Name}: {typeName}";
+        var codeProprty = property.Name.ToKotlinPrppertyNaming();
+
+        // アノテーション追加確認
+        var annotation = string.Empty;
+        if(codeProprty != property.Name)
+        {
+            annotation = $"@SerialName(\"{property.Name}\") ";
+        }
+
+        return $"{annotation}var {codeProprty}: {typeName}";
     }
 }
