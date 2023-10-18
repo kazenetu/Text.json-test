@@ -204,6 +204,6 @@ public class KTConverter : IConverter
             annotation = $"@SerialName(\"{property.Name}\") ";
         }
 
-        return $"{annotation}var {codeProprty}: {typeName}";
+        return $"{annotation}val {codeProprty}: {typeName}";
     }
 }
