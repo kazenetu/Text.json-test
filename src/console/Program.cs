@@ -297,13 +297,13 @@ internal class Program
         //
         // @Serializable
         // data class SimpleJsonClass ( 
-        //     @SerialName("prop_string") var propString: String, 
-        //     var propNumber: Double, 
-        //     @SerialName("prop_Date") var propDate: String, 
-        //     @SerialName("PropTrue") var propTrue: Boolean, 
-        //     var propFalse: Boolean, 
-        //     var propNull: String, 
-        //     var propArray: List<Double> 
+        //     @SerialName("prop_string") val propString: String, 
+        //     val propNumber: Double, 
+        //     @SerialName("prop_Date") val propDate: String, 
+        //     @SerialName("PropTrue") val propTrue: Boolean, 
+        //     val propFalse: Boolean, 
+        //     val propNull: String, 
+        //     val propArray: List<Double> 
         // )
 
         FileOutputAndResutoOutputKotlin(innerClassJson, package, rootPathKotlin, "InnerClassJsonClass");
@@ -312,10 +312,10 @@ internal class Program
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class InnerClassJsonClass(var propObjct: InnerClass, var propNumber: Double)
+        // data class InnerClassJsonClass(val propObjct: InnerClass, val propNumber: Double)
         //
         // @Serializable
-        // data class InnerClass(var propObjString: String)
+        // data class InnerClass(val propObjString: String)
 
         FileOutputAndResutoOutputKotlin(arrayJson, package, rootPathKotlin, "ArrayJsonClass");
         // KTOutputs/ArrayJsonClass.kt...成功
@@ -325,10 +325,10 @@ internal class Program
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class InnerClassJsonClass (var propObjct: InnerClass,var propNumber: Double)
+        // data class InnerClassJsonClass (val propObjct: InnerClass,val propNumber: Double)
         //
         // @Serializable
-        // data class InnerClass (var propObjString: String)
+        // data class InnerClass (val propObjString: String)
 
         FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass");
         // KTOutputs/InnerNestJsonClass.kt...成功
@@ -338,20 +338,20 @@ internal class Program
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class InnerNestJsonClass (var propObjct: InnerClass)
+        // data class InnerNestJsonClass (val propObjct: InnerClass)
         //
         // @Serializable
-        // data class InnerClass (var propSubObjct: InnerClassA)
+        // data class InnerClass (val propSubObjct: InnerClassA)
         //
         // @Serializable
         // data class InnerClassA ( 
-        //     var propString: String, 
-        //     var propNumber: Double, 
-        //     var propDate: String, 
-        //     var propTrue: Boolean, 
-        //     var propFalse: Boolean, 
-        //     var propNull: String, 
-        //     var propArray: List<Double> 
+        //     val propString: String, 
+        //     val propNumber: Double, 
+        //     val propDate: String, 
+        //     val propTrue: Boolean, 
+        //     val propFalse: Boolean, 
+        //     val propNull: String, 
+        //     val propArray: List<Double> 
         // )
 
         Console.WriteLine("--プレフィックス、サフィックス追加--");
@@ -409,20 +409,20 @@ internal class Program
         // import kotlinx.serialization.Serializable
         //
         // @Serializable
-        // data class PrefixInnerNestJsonClassSuffix(var propObjct: PrefixInnerClassSuffix)
+        // data class PrefixInnerNestJsonClassSuffix(val propObjct: PrefixInnerClassSuffix)
         //
         // @Serializable
-        // data class PrefixInnerClassSuffix(var propSubObjct: PrefixInnerClassASuffix)
+        // data class PrefixInnerClassSuffix(val propSubObjct: PrefixInnerClassASuffix)
         //
         // @Serializable
         // data class PrefixInnerClassASuffix(
-        //     var propString: String,
-        //     var propNumber: Double, 
-        //     var propDate: String, 
-        //     var propTrue: Boolean, 
-        //     var propFalse: Boolean, 
-        //     var propNull: String, 
-        //     var propArray: List<Double> 
+        //     val propString: String,
+        //     val propNumber: Double, 
+        //     val propDate: String, 
+        //     val propTrue: Boolean, 
+        //     val propFalse: Boolean, 
+        //     val propNull: String, 
+        //     val propArray: List<Double> 
         // )
 
     }
