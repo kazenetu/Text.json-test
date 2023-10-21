@@ -18,8 +18,8 @@ public class ClassesEntity
     /// </summary>
     /// <returns>読み取り用インナークラスリスト</returns>
     public IReadOnlyList<ClassEntity> InnerClasses
-    { 
-        get => innerClasses;  
+    {
+        get => innerClasses;
     }
 
     /// <summary>
@@ -32,11 +32,12 @@ public class ClassesEntity
     /// 読み取り用ルートクラス
     /// </summary>
     /// <returns>読み取り用ルートクラス</returns>
-    public ClassEntity RootClass 
+    public ClassEntity RootClass
     {
-        get {
-            var newInstance = ClassEntity.Create(rootClass is null ? string.Empty: rootClass.Name);
-            foreach(var prop in rootClass!.Properties)
+        get
+        {
+            var newInstance = ClassEntity.Create(rootClass is null ? string.Empty : rootClass.Name);
+            foreach (var prop in rootClass!.Properties)
             {
                 newInstance.AddProperty(prop);
             }

@@ -8,7 +8,7 @@ public enum OutputLanguageType
     /// <summary>
     /// C#
     /// </summary>
-    CS, 
+    CS,
 
     /// <summary>
     /// Kotlin

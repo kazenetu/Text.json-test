@@ -57,7 +57,7 @@ public record PropertyType : BasePropertyType
         var target = TypeKinds.Where(item => item.type == type);
 
         // パラメータチェック
-        if(!target.Any())  throw new ArgumentException($"{nameof(type)}({type.Name}) is null");
+        if (!target.Any()) throw new ArgumentException($"{nameof(type)}({type.Name}) is null");
 
         // 型種別設定
         Kind = target.First().kind;
@@ -99,16 +99,16 @@ public record PropertyType : BasePropertyType
         // 型を特定する
         return srcTypeName.ToLower() switch
         {
-            "string" => Kinds.String, 
-            "number" => Kinds.Decimal, 
-            "true" => Kinds.Bool, 
-            "false" => Kinds.Bool, 
-            "null" => Kinds.Null, 
+            "string" => Kinds.String,
+            "number" => Kinds.Decimal,
+            "true" => Kinds.Bool,
+            "false" => Kinds.Bool,
+            "null" => Kinds.Null,
             _ => string.IsNullOrEmpty(className) switch
             {
                 // クラス名が存在しない場合は例外エラー
                 true => throw new Exception($"{nameof(srcTypeName)} has no type set"),
-                _ =>  Kinds.Class,
+                _ => Kinds.Class,
             },
         };
     }
