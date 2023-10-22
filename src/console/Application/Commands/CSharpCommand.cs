@@ -9,4 +9,4 @@ namespace Appplication.Commands;
 /// <param name="IndentSpaceCount">インデントスペース数</param>
 /// <param name="Prefix">固定プレフィックス</param>
 /// <param name="Suffix">固定サフィックス</param>
-public record CSharpCommand(string NameSpace, string RootPath,string RootClassName, int IndentSpaceCount = 2, string Prefix = "", string Suffix = "") :CommonCommand(Prefix, Suffix);
+public record CSharpCommand(string NameSpace, string RootPath, string RootClassName, int IndentSpaceCount = 2, string Prefix = "", string Suffix = "") : CommonCommand(Prefix, Suffix);

@@ -54,8 +54,8 @@ public class ClassesApplication : ApplicationBase
         if (string.IsNullOrEmpty(command?.RootClassName)) throw new Exception($"{nameof(command.RootClassName)} is null");
 
         // インターフェイスのnullチェック
-        if(JsonRepository is null) throw new Exception($"{nameof(JsonRepository)} is null");
-        if(FileOutputRepository is null) throw new Exception($"{nameof(FileOutputRepository)} is null");
+        if (JsonRepository is null) throw new Exception($"{nameof(JsonRepository)} is null");
+        if (FileOutputRepository is null) throw new Exception($"{nameof(FileOutputRepository)} is null");
 
         // Json文字列読み込み
         var classesEntity = JsonRepository.CreateClassEntityFromString(json, command.RootClassName);
@@ -67,7 +67,7 @@ public class ClassesApplication : ApplicationBase
             {ParamKeys.Prefix, command.Prefix},
             {ParamKeys.Suffix, command.Suffix},
         };
-        var fileCommand = new FileOutputCommand(command.RootPath,OutputLanguageType.CS,command.IndentSpaceCount, CommandParams);
+        var fileCommand = new FileOutputCommand(command.RootPath, OutputLanguageType.CS, command.IndentSpaceCount, CommandParams);
         var result = FileOutputRepository.OutputResult(classesEntity, fileCommand);
 
         if (result.Success)
