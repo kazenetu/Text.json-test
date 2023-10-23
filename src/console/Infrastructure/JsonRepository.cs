@@ -90,7 +90,7 @@ public class JsonRepository : IJsonRepository
         foreach (var element in rootElement.EnumerateObject())
         {
             var jsonProperty = JsonProperties.Where(item => item.GetKeyName() == element.Value.ValueKind).FirstOrDefault();
-            if(jsonProperty is null) throw new Exception($"{element.Value.ValueKind} is can not use");
+            if (jsonProperty is null) throw new Exception($"{element.Value.ValueKind} is can not use");
 
             // プロパティ追加
             var jsonPropertyResult = jsonProperty.GetJsonPropertyResult(element, innerClassNo);

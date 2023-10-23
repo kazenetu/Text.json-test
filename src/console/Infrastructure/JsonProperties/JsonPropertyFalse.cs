@@ -27,7 +27,7 @@ public class JsonPropertyFalse : IJsonProperty
     {
         // プロパティ生成
         var propertyType = typeof(bool);
-        var prop =  new PropertyValueObject(element.Name, new PropertyType(propertyType, false));
+        var prop = new PropertyValueObject(element.Name, new PropertyType(propertyType, false));
         return new JsonPropertyResult(prop, string.Empty, innerClassNo);
     }
 }

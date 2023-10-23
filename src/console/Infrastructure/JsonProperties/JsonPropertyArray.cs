@@ -25,7 +25,7 @@ public class JsonPropertyArray : IJsonProperty
     /// <returns>Jsonプロパティ結果</returns>
     public JsonPropertyResult GetJsonPropertyResult(JsonProperty element, int innerClassNo)
     {
-        var innerClassJson= string.Empty;
+        var innerClassJson = string.Empty;
         Type? propertyType = null;
         var arrayIndex = 0;
         while (arrayIndex < element.Value.GetArrayLength())
@@ -52,7 +52,7 @@ public class JsonPropertyArray : IJsonProperty
         if (string.IsNullOrEmpty(innerClassJson))
         {
             // Typeチェック
-            if(propertyType is null) throw new Exception($"{nameof(propertyType)} is null");
+            if (propertyType is null) throw new Exception($"{nameof(propertyType)} is null");
 
             // 値プロパティ
             prop = new PropertyValueObject(element.Name, new PropertyType(propertyType, true));
