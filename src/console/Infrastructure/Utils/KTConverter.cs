@@ -99,7 +99,7 @@ public class KTConverter : IConverter
 
         // メイン データクラス生成
         result.Append(GetRootClassString());
-        if(ClassInstance.InnerClasses.Any())
+        if (ClassInstance.InnerClasses.Any())
             result.AppendLine();
 
         // インナークラスに相当する データクラス生成
@@ -199,7 +199,7 @@ public class KTConverter : IConverter
 
         // アノテーション追加確認
         var annotation = string.Empty;
-        if(codeProprty != property.Name)
+        if (codeProprty != property.Name)
         {
             annotation = $"@SerialName(\"{property.Name}\") ";
         }

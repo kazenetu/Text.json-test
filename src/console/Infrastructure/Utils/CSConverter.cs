@@ -25,7 +25,7 @@ public class CSConverter : IConverter
     /// ルートクラスインスタンス フィールド
     /// </summary>
     private readonly ClassEntity RootClass;
-    
+
     /// <summary>
     /// インデントのスペース数
     /// </summary>
@@ -56,7 +56,7 @@ public class CSConverter : IConverter
         if (classInstance?.RootClass is null) throw new NullReferenceException("RootClassが設定されていません");
 
         // インデントパラメータを設定
-        if (Params.ContainsKey(ParamKeys.IndentSpaceCount)) 
+        if (Params.ContainsKey(ParamKeys.IndentSpaceCount))
             IndentSpaceCount = int.Parse(Params[ParamKeys.IndentSpaceCount]);
 
         // 固定プレフィックスを設定
@@ -159,7 +159,7 @@ public class CSConverter : IConverter
         var isNewLine = false;
         foreach (var property in classEntity.Properties)
         {
-            if(isNewLine) result.AppendLine();
+            if (isNewLine) result.AppendLine();
             result.Append($"{GetPropertyString(property, indentLevel + 1)}");
             isNewLine = true;
         }
@@ -184,9 +184,9 @@ public class CSConverter : IConverter
 
         // プロパティ文字列作成
         var (proptyBase, attribute) = GetPropertyBaseString(property);
-        if(!string.IsNullOrEmpty(attribute))
+        if (!string.IsNullOrEmpty(attribute))
         {
-           result.Append($"{levelSpace}{attribute}");
+            result.Append($"{levelSpace}{attribute}");
         }
         result.AppendLine($"{levelSpace}public {proptyBase}");
 
@@ -203,12 +203,12 @@ public class CSConverter : IConverter
         // C#型取得
         var typeName = property.Type switch
         {
-            {Kind: PropertyType.Kinds.String} => "string",
-            {Kind: PropertyType.Kinds.Decimal} => "decimal",
-            {Kind: PropertyType.Kinds.Bool} => "bool",
-            {Kind: PropertyType.Kinds.Null }=> "object",
-            {Kind: PropertyType.Kinds.Class, IsList: true }=> $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
-            {Kind: PropertyType.Kinds.Class, IsList: false }=> $"{Prefix}{property.PropertyTypeClassName}{Suffix}?",
+            { Kind: PropertyType.Kinds.String } => "string",
+            { Kind: PropertyType.Kinds.Decimal } => "decimal",
+            { Kind: PropertyType.Kinds.Bool } => "bool",
+            { Kind: PropertyType.Kinds.Null } => "object",
+            { Kind: PropertyType.Kinds.Class, IsList: true } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
+            { Kind: PropertyType.Kinds.Class, IsList: false } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}?",
             _ => throw new Exception($"{nameof(property)} has no type set"),
         };
 
@@ -221,7 +221,7 @@ public class CSConverter : IConverter
         };
 
         // Listの場合はNullableにする
-        if(property.Type!.IsList)
+        if (property.Type!.IsList)
         {
             typeName = $"List<{typeName}>?";
         }
@@ -238,11 +238,11 @@ public class CSConverter : IConverter
 
         // 属性追加確認
         var attribute = string.Empty;
-        if(codeProprty != property.Name)
+        if (codeProprty != property.Name)
         {
             attribute = $"[JsonPropertyName(\"{property.Name}\")]" + Environment.NewLine;
         }
-        
+
         return ($"{typeName} {codeProprty} {{ set; get; }}{defualt}", attribute);
     }
 }

@@ -60,7 +60,7 @@ public static class NamingRules
             var keywords = new StringBuilder();
             foreach (var keyword in src.Split("_"))
             {
-                if(keywords.Length <= 0)
+                if (keywords.Length <= 0)
                     keywords.Append(ToLowerCase(keyword));
                 else
                     keywords.Append(ToUpperCase(keyword));
