@@ -401,7 +401,7 @@ internal class Program
         //     }
         // }
 
-        FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass","Prefix_","_Suffix");
+        FileOutputAndResutoOutputKotlin(innerNestJson, package, rootPathKotlin, "InnerNestJsonClass", "Prefix_", "_Suffix");
         // KTOutputs / PrefixInnerNestJsonClassSuffix.kt...成功
         // -- - 出力結果-- -
         // package Kotlin.example
@@ -446,7 +446,8 @@ internal class Program
         // コンソール出力
         var message = result.Success ? "成功" : "失敗";
         Console.WriteLine($"{result.FileName}...{message}");
-        if(result.Success){
+        if (result.Success)
+        {
             Console.WriteLine($"---出力結果---");
             Console.WriteLine(result.SourceCode);
         }
