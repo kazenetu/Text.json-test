@@ -21,8 +21,8 @@ internal static class SoruceConverter
     public static string ToCsCode(ClassesEntity classInstance, int indentLevel = 0, string? namespaceName = null, int indentSpaceCount = 2, string Prefix = "", string Suffix = "")
     {
         // パラメータ設定
-        var param = new Dictionary<ParamKeys,string>();
-        if(!string.IsNullOrEmpty(namespaceName))
+        var param = new Dictionary<ParamKeys, string>();
+        if (!string.IsNullOrEmpty(namespaceName))
         {
             param.Add(ParamKeys.CS_NameSpace, namespaceName);
         }
