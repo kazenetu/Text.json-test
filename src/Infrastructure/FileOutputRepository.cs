@@ -70,7 +70,7 @@ public class FileOutputRepository : IFileOutputRepository
         var sourceCode = command.LanguageType switch
         {
             OutputLanguageType.CS => GetCSCode(classInstance, command),
-            OutputLanguageType.KT => GetKTCode(classInstance,command),
+            OutputLanguageType.KT => GetKTCode(classInstance, command),
             _ => throw new Exception("ext error")
         };
 
@@ -150,6 +150,6 @@ public class FileOutputRepository : IFileOutputRepository
         }
 
         // Entityからソースコードの変換
-        return Utils.SoruceConverter.ToKtCode(classInstance,  packageName, command.IndentSpaceCount, prefix, suffix);
+        return Utils.SoruceConverter.ToKtCode(classInstance, packageName, command.IndentSpaceCount, prefix, suffix);
     }
 }
