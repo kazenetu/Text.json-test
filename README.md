@@ -16,12 +16,6 @@
   1. ```Text.json-test.sln```を開く
   1. 実行
 
-* Visual Studio Code  
-  拡張機能「C#」「C#Dev Kit」をインストールする
-  1. ルートフォルダを開く
-  1. 実行
-
-
 ## フォルダ構成
 * src/console
   * Appplication
